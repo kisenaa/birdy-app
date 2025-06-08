@@ -7,7 +7,7 @@ argon2-cffi
 python-dotenv
 uvloop; platform_system != "Windows"
 winloop; platform_system != "Linux"
-ulid
+python-ulid[pydantic]
 pytest
 pytest-asyncio
 pytest-cov

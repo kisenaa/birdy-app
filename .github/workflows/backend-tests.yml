@@ -26,6 +26,10 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r Application/Backend/requirements.txt
+    
+    - name: Prepare environment file
+      working-directory: Application/Backend
+      run: mv .env.sample .env
 
     - name: Run tests with coverage
       working-directory: Application/Backend
@@ -37,5 +41,5 @@ jobs:
       if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.head_ref != github.base_ref)
       uses: codecov/codecov-action@v3
       with:
-        files: ./coverage.xml
+        files: Application/Backend/coverage.xml
         fail_ci_if_error: true
