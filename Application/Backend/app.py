@@ -12,7 +12,7 @@ from tortoise import Tortoise, connections
 from config import TORTOISE_ORM
 
 def create_app():
-    # Configure Databases
+    # Configure Databasess
     @asynccontextmanager
     async def db_lifespan(app: FastAPI):
         await Tortoise.init(config=TORTOISE_ORM)
