@@ -5,7 +5,8 @@ tortoise-orm[asyncpg]
 aerich 
 argon2-cffi 
 python-dotenv
-winloop
+uvloop; platform_system != "Windows"
+winloop; platform_system != "Linux"
 ulid
 pytest
 pytest-asyncio
