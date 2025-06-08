@@ -1,0 +1,2 @@
+[ignore]
+directories = ["venv", "__pycache__", "node_modules", "static"]

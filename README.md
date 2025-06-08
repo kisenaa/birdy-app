@@ -1,0 +1,117 @@
+# Birdy Application
+
+This project consists of a **Backend API** (FastAPI + PostgreSQL) and a **Mobile App**.  
+Below are setup instructions for the backend
+
+---
+## 📚 Table Of Contents
+
+- [Backend Setup](#backend-setup)
+- [Mobile App Setup](#mobile-app-setup)
+
+## Backend Setup
+
+### 1. Prerequisites
+
+- Python 3.12+ installed
+- PostgreSQL installed and running
+
+### 2. Clone the Repository and install the py package
+
+```sh
+git clone <yorepo-url>
+pip install -r Application/Backend/requirements.txt
+pre-commit install
+cd ./Application/Backend
+```
+
+### 3. Environment Variables
+
+Copy the sample environment file and edit it with your credentials:
+
+```sh
+cp .env.sample .env
+```
+
+Edit `.env` and set:
+- `DB_USERNAME`, `DB_PASSWORD`, `DB_IP`, `DB_PORT`, `DB_NAME`
+- `JWT_SECRET_KEY`, `JWT_REFRESH_SECRET_KEY` (use `openssl rand -hex 32` to generate)
+
+### 4. Install Dependencies
+
+```sh
+pip install -r requirements.txt
+```
+
+### 5. Database Migration
+
+Initialize and migrate the database using [Aerich](https://tortoise-orm.readthedocs.io/en/latest/migration.html):
+
+```sh
+# First time setup . 
+cd Application/Backend
+aerich upgrade
+# After modifying models .
+aerich migrate --name {description}
+python ./database/patch_migration.py ./migrations/models/
+aerich upgrade
+```
+
+If you change field types, run the patch script before upgrading:
+```sh
+python database/patch_migration.py migrations/models/
+```
+
+### 6. Run the Backend Server
+
+```sh
+python main.py
+```
+
+The API will be available at:  
+`http://localhost:8085` (or as configured)
+
+### 7. Running Tests
+
+```sh
+pytest
+```
+
+---
+
+## Project Structure
+
+```
+Application/
+├── Backend/
+│   ├── app.py
+│   ├── main.py
+│   ├── config.py
+│   ├── routes/
+│   ├── models/
+│   ├── database/
+│   ├── migrations/
+│   ├── tests/
+│   └── ...
+└── Mobile App/
+```
+---
+
+## Useful Commands
+
+- **Start server:** `python main.py`
+- **Start Dev Server(Auto Reload)**: `fastapi dev .\Application\Backend\app.py --port 8085`
+- **Run tests:** `pytest`
+- **Migrate DB:** `aerich migrate --name <desc> && aerich upgrade`
+- **Patch migration files:** `python database/patch_migration.py migrations/models/`
+---
+
+## API Documentation
+
+Once running, visit:  
+`http://localhost:8085/docs` for Swagger UI.
+
+---
+
+## Mobile App Setup
+In Progress

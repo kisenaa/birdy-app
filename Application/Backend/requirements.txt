@@ -1,0 +1,14 @@
+fastapi[standard]
+hypercorn[h3]
+python-jose[cryptography]
+tortoise-orm[asyncpg] 
+aerich 
+argon2-cffi 
+python-dotenv
+winloop
+ulid
+pytest
+pytest-asyncio
+pytest-cov
+pytest-mock
+pre-commit

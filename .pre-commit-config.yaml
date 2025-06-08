@@ -1,0 +1,8 @@
+repos:
+  - repo: local
+    hooks:
+      - id: backend-tests
+        name: Run pytest if Application/Backend changed
+        entry: bash -c 'git diff --cached --name-only | grep -q "^Application/Backend/" && pytest || echo "No backend changes, skipping tests."'
+        language: system
+        pass_filenames: false
