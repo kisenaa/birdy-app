@@ -3,10 +3,10 @@ name: Backend Tests and Coverage
 on:
   push:
     paths:
-      - 'app/backend/**'
+      - 'Application/Backend/**'
   pull_request:
     paths:
-      - 'app/backend/**'
+      - 'Application/Backend/**'
     branches:
       - main
 
