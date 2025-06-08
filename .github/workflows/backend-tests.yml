@@ -4,6 +4,8 @@ on:
   push:
     paths:
       - 'Application/Backend/**'
+    branches:
+      - main
   pull_request:
     paths:
       - 'Application/Backend/**'
@@ -38,7 +40,7 @@ jobs:
         pytest --cov --cov-branch --cov-report=xml --junitxml=junit.xml -o junit_family=legacy
 
     - name: Upload coverage to Codecov
-      if: ${{ !cancelled() }}
+      if: ${{ !cancelled() }} && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.head_ref != github.base_ref))
       uses: codecov/codecov-action@v5
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
@@ -46,7 +48,7 @@ jobs:
         fail_ci_if_error: true
 
     - name: Upload test results to Codecov
-      if: ${{ !cancelled() }}
+      if: ${{ !cancelled() }} && (github.event_name == 'push' || (github.event_name == 'pull_request' && github.head_ref != github.base_ref))
       uses: codecov/test-results-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
