@@ -1,4 +1,4 @@
-# Welcome to your new ignited app!
+# Welcome to your new igniteds app!
 
 > The latest and greatest boilerplate for Infinite Red opinions
 
