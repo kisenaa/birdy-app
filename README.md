@@ -13,10 +13,15 @@ pre-commit install # make sure to run this
 
 ## 📚 Table Of Contents
 
-- [Backend Setup](#backend-setup)
-- [Mobile App Setup](#mobile-app-setup)
+- [Backend Setup](#a-backend-setup)
+  
+  [![codecov](https://codecov.io/gh/kisenaa/birdy-app/branch/main/graph/badge.svg?token=rWk5kTs21x)](https://codecov.io/gh/kisenaa/birdy-app)
+  [![Backend Tests and Coverage](https://github.com/kisenaa/birdy-app/actions/workflows/backend-tests.yml/badge.svg)](https://github.com/kisenaa/birdy-app/actions/workflows/backend-tests.yml)
 
-## Backend Setup
+- [Mobile App Setup](#b-mobile-app-setup)
+---
+
+## A. Backend Setup
 
 Refer to the following documentation for backend development and API usage:
 - [FastAPI Tutorial](https://fastapi.tiangolo.com/tutorial/)
@@ -123,7 +128,7 @@ Once running, visit:
 
 ---
 
-## Mobile App Setup
+## B. Mobile App Setup
 Refer to the following resources for guidance on setting up and developing the mobile app:
 
 - [Ignite CLI Guide](https://docs.infinite.red/ignite-cli/Guide/)
