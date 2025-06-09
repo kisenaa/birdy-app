@@ -1,9 +1,17 @@
 # Birdy Application
 
-This project consists of a **Backend API** (FastAPI + PostgreSQL) and a **Mobile App**.  
+This project consists of : 
+- a Mobile Application (React Native)
+- a **Backend API** (FastAPI + PostgreSQL)
 Below are setup instructions for the backend
-
 ---
+
+please do the following to set up the app : 
+```sh
+git clone https://github.com/kisenaa/birdy-app.git
+pre-commit install # make sure to run this
+```
+
 ## 📚 Table Of Contents
 
 - [Backend Setup](#backend-setup)
@@ -21,12 +29,10 @@ Refer to the following documentation for backend development and API usage:
 - Python 3.12+ installed
 - PostgreSQL installed and running
 
-### 2. Clone the Repository and install the py package
+### 2. install the py package
 
 ```sh
-git clone <yorepo-url>
 pip install -r Application/Backend/requirements.txt
-pre-commit install
 cd ./Application/Backend
 ```
 
