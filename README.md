@@ -3,10 +3,9 @@
 This project consists of : 
 - a Mobile Application (React Native)
 - a **Backend API** (FastAPI + PostgreSQL)
-Below are setup instructions for the backend
 ---
 
-please do the following to set up the app : 
+## Please do the following before setting up the app : 
 ```sh
 git clone https://github.com/kisenaa/birdy-app.git
 pre-commit install # make sure to run this
