@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite"
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
-import { Button, Text, Screen } from "@/components"
-import { isRTL } from "@/i18n"
+import { Button, Text, Screen, Checkbox } from "@/components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import { $styles, type ThemedStyle } from "@/theme"
@@ -10,8 +9,7 @@ import { useHeader } from "../utils/useHeader"
 import { useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { useAppTheme } from "@/utils/useAppTheme"
 
-const welcomeLogo = require("../../assets/images/logo.png")
-const welcomeFace = require("../../assets/images/welcome-face.png")
+const welcomeLogo = require("../../assets/images/intro-logo.png")
 
 interface WelcomeScreenProps extends AppStackScreenProps<"Welcome"> {}
 
@@ -26,6 +24,8 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   function goNext() {
     navigation.navigate("Dashboard", { screen: "Home" })
   }
+
+  const [accepted, setAccepted] = useState(false)
 
   useHeader(
     {
@@ -47,19 +47,27 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
           tx="welcomeScreen:readyForLaunch"
           preset="heading"
         />
-        <Text tx="welcomeScreen:exciting" preset="subheading" />
-        <Image
-          style={$welcomeFace}
-          source={welcomeFace}
-          resizeMode="contain"
-          tintColor={theme.colors.palette.neutral900}
-        />
       </View>
 
       <View style={themed([$bottomContainer, $bottomContainerInsets])}>
-        <Text tx="welcomeScreen:postscript" size="md" />
-
+        <View style={{ gap: theme.spacing.md }}>
+          <Text size="md">
+            Please read the following terms carefully before using the app. By accessing or using
+            any part of the service, you agree to be bound by these{" "}
+            <Text size="md" style={themed($link)} text="Terms of Service" />
+          </Text>
+          <Checkbox
+            label="I accept the Terms of Service"
+            value={accepted}
+            onValueChange={() => setAccepted(!accepted)}
+            containerStyle={themed($checkboxContainer)}
+          />
+        </View>
         <Button
+          disabled={!accepted}
+          disabledStyle={themed($customButtonDisabledStyle)}
+          pressedStyle={themed($customButtonPressedStyle)}
+          pressedTextStyle={themed($customButtonPressedTextStyle)}
           testID="next-screen-button"
           preset="reversed"
           tx="welcomeScreen:letsGo"
@@ -89,21 +97,32 @@ const $bottomContainer: ThemedStyle<ViewStyle> = ({ colors, spacing }) => ({
   justifyContent: "space-around",
 })
 
-const $welcomeLogo: ThemedStyle<ImageStyle> = ({ spacing }) => ({
-  height: 88,
+const $welcomeLogo: ThemedStyle<ImageStyle> = () => ({
+  height: 300,
   width: "100%",
-  marginBottom: spacing.xxl,
 })
-
-const $welcomeFace: ImageStyle = {
-  height: 169,
-  width: 269,
-  position: "absolute",
-  bottom: -47,
-  right: -80,
-  transform: [{ scaleX: isRTL ? -1 : 1 }],
-}
 
 const $welcomeHeading: ThemedStyle<TextStyle> = ({ spacing }) => ({
   marginBottom: spacing.md,
+})
+
+const $link: ThemedStyle<TextStyle> = () => ({
+  color: "#007AFF",
+  textDecorationLine: "underline",
+})
+
+const $checkboxContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  marginVertical: spacing.md,
+})
+
+const $customButtonPressedStyle: ThemedStyle<ViewStyle> = ({ colors }) => ({
+  backgroundColor: colors.error,
+})
+
+const $customButtonPressedTextStyle: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.palette.neutral100,
+})
+
+const $customButtonDisabledStyle: ThemedStyle<ViewStyle> = () => ({
+  opacity: 0.5,
 })

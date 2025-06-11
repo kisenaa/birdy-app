@@ -69,6 +69,7 @@ const AppStack = observer(function AppStack() {
         contentStyle: {
           backgroundColor: colors.background,
         },
+        animation: "fade_from_bottom",
       }}
       initialRouteName={isAuthenticated ? "Welcome" : "Intro"}
     >

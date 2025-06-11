@@ -21,6 +21,7 @@ export const Home: FC<DashboardTabScreenProps<"Home">> = function Home(_props) {
     navigation.setOptions({
       tabBarStyle: tabBarVisible ? themed([$tabBar, { height: bottom + 70 }]) : { display: "none" },
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tabBarVisible])
 
   const mediaTypes: ImagePicker.MediaType[] = ["images", "videos", "livePhotos"]
