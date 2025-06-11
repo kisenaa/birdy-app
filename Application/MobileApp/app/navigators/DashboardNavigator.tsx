@@ -56,6 +56,7 @@ export function DashboardNavigator() {
         tabBarInactiveTintColor: colors.text,
         tabBarLabelStyle: themed($tabBarLabel),
         tabBarItemStyle: themed($tabBarItem),
+        animation: "shift",
       }}
     >
       <Tab.Screen

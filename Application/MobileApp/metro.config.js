@@ -1,6 +1,7 @@
 /* eslint-env node */
 // Learn more https://docs.expo.io/guides/customizing-metro
 const { getDefaultConfig } = require("expo/metro-config")
+const { wrapWithReanimatedMetroConfig } = require("react-native-reanimated/metro-config")
 
 /** @type {import('expo/metro-config').MetroConfig} */
 const config = getDefaultConfig(__dirname)
@@ -20,4 +21,4 @@ config.transformer.getTransformOptions = async () => ({
 // such as Firebase that use the extension cjs.
 config.resolver.sourceExts.push("cjs")
 
-module.exports = config
+module.exports = wrapWithReanimatedMetroConfig(config)

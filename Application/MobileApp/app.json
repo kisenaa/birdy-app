@@ -24,16 +24,25 @@
         "foregroundImage": "./assets/images/app-icon-android-adaptive-foreground.png",
         "backgroundImage": "./assets/images/app-icon-android-adaptive-background.png"
       },
-      "allowBackup": false
+      "allowBackup": false,
+      "splash": {
+        "backgroundColor": "#191015"
+      }
     },
     "ios": {
       "icon": "./assets/images/app-icon-ios.png",
       "supportsTablet": true,
-      "bundleIdentifier": "com.birdyapp"
+      "bundleIdentifier": "com.birdyapp",
+      "splash": {
+        "backgroundColor": "#191015"
+      }
     },
     "web": {
       "favicon": "./assets/images/app-icon-web-favicon.png",
-      "bundler": "metro"
+      "bundler": "metro",
+      "splash": {
+        "backgroundColor": "#191015"
+      }
     },
     "plugins": [
       "expo-localization",
@@ -50,6 +59,9 @@
     ],
     "experiments": {
       "tsconfigPaths": true
+    },
+    "splash": {
+      "backgroundColor": "#191015"
     }
   },
   "ignite": {
