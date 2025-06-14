@@ -1,3 +1,4 @@
+import { AutoImage } from "../components"
 import { observer } from "mobx-react-lite"
 import { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
 // eslint-disable-next-line no-restricted-imports
@@ -14,15 +15,20 @@ import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import type { ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
+import { View, ImageStyle } from "react-native"
 
 interface RegisterScreenProps extends AppStackScreenProps<"Register"> {}
 
 export const RegisterScreen: FC<RegisterScreenProps> = observer(function RegisterScreen(_props) {
   const authPasswordInput = useRef<TextInput>(null)
+  const confirmPasswordInput = useRef<TextInput>(null)
   const { navigation } = _props
 
+  const [username, setUsername] = useState("")
   const [authPassword, setAuthPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
+  const [isConfirmPasswordHidden, setIsConfirmPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [attemptsCount, setAttemptsCount] = useState(0)
   const {
@@ -35,15 +41,15 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
   } = useAppTheme()
 
   useEffect(() => {
-    // Here is where you could fetch credentials from keychain or storage
-    // and pre-fill the form fields.
-    setAuthEmail("ignite@infinite.red")
-    setAuthPassword("ign1teIsAwes0m3")
-
-    // Return a "cleanup" function that React will run when the component unmounts
+    setAuthEmail("")
+    setAuthPassword("")
+    setUsername("")
+    setConfirmPassword("")
     return () => {
       setAuthPassword("")
       setAuthEmail("")
+      setUsername("")
+      setConfirmPassword("")
     }
   }, [setAuthEmail])
 
@@ -52,11 +58,8 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
   function register() {
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
-
     if (validationError) return
-
-    // Make a request to your server to get an authentication token.
-    // If successful, reset the fields and set the token.
+    // Add your registration logic here
     navigation.navigate("Login")
   }
 
@@ -76,75 +79,138 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
     [isAuthPasswordHidden, colors.palette.neutral800],
   )
 
+  const ConfirmPasswordRightAccessory: ComponentType<TextFieldAccessoryProps> = useMemo(
+    () =>
+      function ConfirmPasswordRightAccessory(props: TextFieldAccessoryProps) {
+        return (
+          <PressableIcon
+            icon={isConfirmPasswordHidden ? "view" : "hidden"}
+            color={colors.palette.neutral800}
+            containerStyle={props.style}
+            size={20}
+            onPress={() => setIsConfirmPasswordHidden(!isConfirmPasswordHidden)}
+          />
+        )
+      },
+    [isConfirmPasswordHidden, colors.palette.neutral800],
+  )
+
   return (
     <Screen
       preset="auto"
       contentContainerStyle={themed($screenContentContainer)}
-      safeAreaEdges={["top", "bottom"]}
+      safeAreaEdges={["bottom"]}
     >
+      <AutoImage
+        source={require("../../assets/images/intro-logo.png")}
+        maxWidth={320}
+        maxHeight={220}
+        style={themed($logoStyle)}
+      />
       <Text
-        testID="login-heading"
+        testID="register-heading"
         text="Register an account"
         preset="heading"
         style={themed($logIn)}
       />
-      <Text tx="loginScreen:enterDetails" preset="subheading" style={themed($enterDetails)} />
+      {/* Add space below heading */}
+      <View style={{ height: themed(({ spacing }) => spacing.lg) }} />
       {attemptsCount > 2 && (
         <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />
       )}
-
-      <TextField
-        value={authEmail}
-        onChangeText={setAuthEmail}
-        containerStyle={themed($textField)}
-        autoCapitalize="none"
-        autoComplete="email"
-        autoCorrect={false}
-        keyboardType="email-address"
-        labelTx="loginScreen:emailFieldLabel"
-        placeholderTx="loginScreen:emailFieldPlaceholder"
-        helper={error}
-        status={error ? "error" : undefined}
-        onSubmitEditing={() => authPasswordInput.current?.focus()}
-      />
-
-      <TextField
-        ref={authPasswordInput}
-        value={authPassword}
-        onChangeText={setAuthPassword}
-        containerStyle={themed($textField)}
-        autoCapitalize="none"
-        autoComplete="password"
-        autoCorrect={false}
-        secureTextEntry={isAuthPasswordHidden}
-        labelTx="loginScreen:passwordFieldLabel"
-        placeholderTx="loginScreen:passwordFieldPlaceholder"
-        onSubmitEditing={register}
-        RightAccessory={PasswordRightAccessory}
-      />
-
-      <Button
-        testID="login-button"
-        text="Tap to register !"
-        style={themed($tapButton)}
-        preset="reversed"
-        onPress={register}
-      />
+      <View style={themed($fieldsContainer)}>
+        <TextField
+          value={username}
+          onChangeText={setUsername}
+          containerStyle={themed($textField)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          label="Username"
+          placeholder="Enter your username"
+          onSubmitEditing={() => authPasswordInput.current?.focus()}
+        />
+        <TextField
+          value={authEmail}
+          onChangeText={setAuthEmail}
+          containerStyle={themed($textField)}
+          autoCapitalize="none"
+          autoComplete="email"
+          autoCorrect={false}
+          keyboardType="email-address"
+          labelTx="loginScreen:emailFieldLabel"
+          placeholderTx="loginScreen:emailFieldPlaceholder"
+          helper={error}
+          status={error ? "error" : undefined}
+          onSubmitEditing={() => authPasswordInput.current?.focus()}
+        />
+        <TextField
+          ref={authPasswordInput}
+          value={authPassword}
+          onChangeText={setAuthPassword}
+          containerStyle={themed($textField)}
+          autoCapitalize="none"
+          autoComplete="password"
+          autoCorrect={false}
+          secureTextEntry={isAuthPasswordHidden}
+          labelTx="loginScreen:passwordFieldLabel"
+          placeholderTx="loginScreen:passwordFieldPlaceholder"
+          onSubmitEditing={() => confirmPasswordInput.current?.focus()}
+          RightAccessory={PasswordRightAccessory}
+        />
+        <TextField
+          ref={confirmPasswordInput}
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
+          containerStyle={themed($textField)}
+          autoCapitalize="none"
+          autoComplete="password"
+          autoCorrect={false}
+          secureTextEntry={isConfirmPasswordHidden}
+          label="Confirm Password"
+          placeholder="Re-enter your password"
+          onSubmitEditing={register}
+          RightAccessory={ConfirmPasswordRightAccessory}
+        />
+        <Button
+          testID="register-button"
+          text="Tap to register !"
+          style={themed($tapButton)}
+          preset="reversed"
+          onPress={register}
+        />
+      </View>
+      <View style={themed($loginPromptContainer)}>
+        <Text style={themed($loginPromptText)}>
+          Already have an account?{' '}
+          <Text
+            style={themed($loginPromptLink)}
+            onPress={() => navigation.navigate('Login')}
+            weight="bold"
+          >
+            Log in!
+          </Text>
+        </Text>
+      </View>
     </Screen>
   )
 })
 
 const $screenContentContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  flex: 1,
+  justifyContent: "center",
+  alignItems: "center",
   paddingVertical: spacing.xxl,
-  paddingHorizontal: spacing.lg,
+})
+
+const $logoStyle: ThemedStyle<ImageStyle> = ({ spacing }) => ({
+  alignSelf: "center",
+  marginTop: spacing.md,
+  width: 220,
+  height: 140,
 })
 
 const $logIn: ThemedStyle<TextStyle> = ({ spacing }) => ({
   marginBottom: spacing.sm,
-})
-
-const $enterDetails: ThemedStyle<TextStyle> = ({ spacing }) => ({
-  marginBottom: spacing.lg,
 })
 
 const $hint: ThemedStyle<TextStyle> = ({ colors, spacing }) => ({
@@ -153,9 +219,33 @@ const $hint: ThemedStyle<TextStyle> = ({ colors, spacing }) => ({
 })
 
 const $textField: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginBottom: spacing.lg,
+  marginBottom: spacing.sm,
 })
 
 const $tapButton: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  marginTop: spacing.xs,
+  marginTop: spacing.lg,
+})
+
+const $fieldsContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  width: 320,
+  maxWidth: "90%",
+  alignSelf: "center",
+})
+
+const $loginPromptContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  marginTop: spacing.lg,
+  alignItems: 'center',
+  justifyContent: 'flex-end',
+  flex: 0,
+})
+
+const $loginPromptText: ThemedStyle<TextStyle> = ({ colors, spacing }) => ({
+  color: colors.text,
+  fontSize: 15,
+  textAlign: 'center',
+})
+
+const $loginPromptLink: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.palette.primary500,
+  textDecorationLine: 'underline',
 })
