@@ -62,13 +62,7 @@ export const Text = forwardRef(function Text(props: TextProps, ref: ForwardedRef
   const content = i18nText || text || children
 
   const preset: Presets = props.preset ?? "default"
-  const $styles: StyleProp<TextStyle> = [
-    $rtlStyle,
-    themed($presets[preset]),
-    weight && $fontWeightStyles[weight],
-    size && $sizeStyles[size],
-    $styleOverride,
-  ]
+  const $styles: StyleProp<TextStyle> = [$rtlStyle, themed($presets[preset]), weight && $fontWeightStyles[weight], size && $sizeStyles[size], $styleOverride]
 
   return (
     <RNText {...rest} style={$styles} ref={ref}>

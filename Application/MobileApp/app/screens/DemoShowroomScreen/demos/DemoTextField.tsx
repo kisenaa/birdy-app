@@ -44,10 +44,7 @@ export const DemoTextField: Demo = {
   name: "TextField",
   description: "demoTextField:description",
   data: ({ themed }) => [
-    <DemoUseCase
-      name="demoTextField:useCase.statuses.name"
-      description="demoTextField:useCase.statuses.description"
-    >
+    <DemoUseCase name="demoTextField:useCase.statuses.name" description="demoTextField:useCase.statuses.description">
       <TextField
         value="Labore occaecat in id eu commodo aliquip occaecat veniam officia pariatur."
         labelTx="demoTextField:useCase.statuses.noStatus.label"
@@ -85,10 +82,7 @@ export const DemoTextField: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoTextField:useCase.passingContent.name"
-      description="demoTextField:useCase.passingContent.description"
-    >
+    <DemoUseCase name="demoTextField:useCase.passingContent.name" description="demoTextField:useCase.passingContent.description">
       <TextField
         labelTx="demoTextField:useCase.passingContent.viaLabel.labelTx"
         labelTxOptions={{ prop: "label" }}
@@ -144,10 +138,7 @@ export const DemoTextField: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoTextField:useCase.styling.name"
-      description="demoTextField:useCase.styling.description"
-    >
+    <DemoUseCase name="demoTextField:useCase.styling.name" description="demoTextField:useCase.styling.description">
       <TextField
         labelTx="demoTextField:useCase.styling.styleInput.label"
         labelTxOptions={{ prop: "label" }}
@@ -206,22 +197,8 @@ export const DemoTextField: Demo = {
         helperTxOptions={{ prop: "helper" }}
         value="Aute nisi dolore fugiat anim mollit nulla ex minim ipsum ex elit."
         style={themed($customInputWithAbsoluteAccessoriesStyle)}
-        LeftAccessory={() => (
-          <Icon
-            icon="ladybug"
-            containerStyle={themed($customLeftAccessoryStyle)}
-            color="white"
-            size={41}
-          />
-        )}
-        RightAccessory={() => (
-          <Icon
-            icon="ladybug"
-            containerStyle={themed($customRightAccessoryStyle)}
-            color="white"
-            size={41}
-          />
-        )}
+        LeftAccessory={() => <Icon icon="ladybug" containerStyle={themed($customLeftAccessoryStyle)} color="white" size={41} />}
+        RightAccessory={() => <Icon icon="ladybug" containerStyle={themed($customRightAccessoryStyle)} color="white" size={41} />}
       />
     </DemoUseCase>,
   ],

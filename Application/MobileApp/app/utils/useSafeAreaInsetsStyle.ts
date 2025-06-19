@@ -16,10 +16,7 @@ const edgeInsetMap: Record<string, Edge> = {
   end: "right",
 }
 
-export type SafeAreaInsetsStyle<
-  Property extends "padding" | "margin" = "padding",
-  Edges extends Array<ExtendedEdge> = Array<ExtendedEdge>,
-> = {
+export type SafeAreaInsetsStyle<Property extends "padding" | "margin" = "padding", Edges extends Array<ExtendedEdge> = Array<ExtendedEdge>> = {
   [K in Edges[number] as `${Property}${Capitalize<K>}`]: number
 }
 
@@ -30,10 +27,7 @@ export type SafeAreaInsetsStyle<
  * @param {"padding" | "margin"} property - The property to apply the safe area insets to.
  * @returns {SafeAreaInsetsStyle<Property, Edges>} - The style object with the safe area insets applied.
  */
-export function useSafeAreaInsetsStyle<
-  Property extends "padding" | "margin" = "padding",
-  Edges extends Array<ExtendedEdge> = [],
->(
+export function useSafeAreaInsetsStyle<Property extends "padding" | "margin" = "padding", Edges extends Array<ExtendedEdge> = []>(
   safeAreaEdges: Edges = [] as unknown as Edges,
   property: Property = "padding" as Property,
 ): SafeAreaInsetsStyle<Property, Edges> {

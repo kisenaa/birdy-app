@@ -1,0 +1,15 @@
+diff --git a/node_modules/axios/package.json b/node_modules/axios/package copy.json
+index 521a676..9f1d282 100644
+--- package.json
++++ package.json	
+@@ -13,6 +13,10 @@
+         "require": "./dist/browser/axios.cjs",
+         "default": "./index.js"
+       },
++      "react-native": {
++        "require": "./dist/browser/axios.cjs",
++        "default": "./dist/esm/axios.js"
++      },
+       "default": {
+         "require": "./dist/node/axios.cjs",
+         "default": "./index.js"

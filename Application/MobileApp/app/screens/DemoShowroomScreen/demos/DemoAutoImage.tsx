@@ -59,17 +59,9 @@ export const DemoAutoImage: Demo = {
       </View>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoAutoImage:useCase.scaledToFitDimensions.name"
-      description="demoAutoImage:useCase.scaledToFitDimensions.description"
-    >
+    <DemoUseCase name="demoAutoImage:useCase.scaledToFitDimensions.name" description="demoAutoImage:useCase.scaledToFitDimensions.description">
       <View style={[$styles.row, $aspectRatioWidthExampleContainer]}>
-        <Text
-          text="<View />"
-          size="xxs"
-          weight="bold"
-          style={{ flexBasis: "33.3333%", color: theme.colors.palette.secondary400 }}
-        />
+        <Text text="<View />" size="xxs" weight="bold" style={{ flexBasis: "33.3333%", color: theme.colors.palette.secondary400 }} />
         <Text
           text="<Image />"
           size="xxs"
@@ -120,29 +112,12 @@ export const DemoAutoImage: Demo = {
 
       <View style={$styles.row}>
         <View style={$aspectRatioHeightExampleContainer}>
-          <Text
-            text="<View />"
-            size="xxs"
-            weight="bold"
-            style={{ color: theme.colors.palette.secondary400 }}
-          />
-          <Text
-            text="<Image />"
-            size="xxs"
-            weight="bold"
-            style={{ color: theme.colors.palette.secondary400 }}
-          />
-          <Text
-            text="<AutoImage />"
-            size="xxs"
-            weight="bold"
-            style={{ color: theme.colors.palette.secondary400 }}
-          />
+          <Text text="<View />" size="xxs" weight="bold" style={{ color: theme.colors.palette.secondary400 }} />
+          <Text text="<Image />" size="xxs" weight="bold" style={{ color: theme.colors.palette.secondary400 }} />
+          <Text text="<AutoImage />" size="xxs" weight="bold" style={{ color: theme.colors.palette.secondary400 }} />
         </View>
 
-        <View
-          style={[$aspectRatioHeightExampleContainer, { flex: 1, marginStart: theme.spacing.sm }]}
-        >
+        <View style={[$aspectRatioHeightExampleContainer, { flex: 1, marginStart: theme.spacing.sm }]}>
           <View style={themed([$aspectRatioBox, { height: 32 }])} />
           <Image
             source={{
@@ -168,12 +143,7 @@ export const DemoAutoImage: Demo = {
       <DemoDivider size={40} />
 
       <View style={[$styles.row, $aspectRatioWidthExampleContainer]}>
-        <Text
-          text="<View />"
-          size="xxs"
-          weight="bold"
-          style={{ flexBasis: "33.3333%", color: theme.colors.palette.secondary400 }}
-        />
+        <Text text="<View />" size="xxs" weight="bold" style={{ flexBasis: "33.3333%", color: theme.colors.palette.secondary400 }} />
         <Text
           text="<Image />"
           size="xxs"

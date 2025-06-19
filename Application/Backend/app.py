@@ -7,7 +7,7 @@ import logging
 from typing import Union
 from fastapi import FastAPI
 from pydantic import BaseModel
-from routes import auth, account
+from routes import auth, account, core
 from tortoise import Tortoise, connections
 from config import TORTOISE_ORM
 
@@ -33,6 +33,7 @@ def create_app():
 
     app.include_router(auth.router)
     app.include_router(account.router)
+    app.include_router(core.router)
 
     return app
 

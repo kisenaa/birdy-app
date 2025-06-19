@@ -9,10 +9,7 @@ import { Platform } from "react-native"
  * @param {HeaderProps} headerProps - The props for the `Header` component.
  * @param {any[]} deps - The dependencies to watch for changes to update the header.
  */
-export function useHeader(
-  headerProps: HeaderProps,
-  deps: Parameters<typeof useLayoutEffect>[1] = [],
-) {
+export function useHeader(headerProps: HeaderProps, deps: Parameters<typeof useLayoutEffect>[1] = []) {
   const navigation = useNavigation()
 
   /**
