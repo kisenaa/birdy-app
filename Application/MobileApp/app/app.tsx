@@ -31,6 +31,8 @@ import { customFontsToLoad } from "./theme"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { loadDateFnsLocale } from "./utils/formatDate"
 import { ActionSheetProvider } from "@expo/react-native-action-sheet"
+import { createInferenceSession, initSkia as classificationInitSkia } from "./services/onnx/ClassificationInference"
+import { createInferenceSession as CreateDetectioninferenceSession, createTFLiteInferenceSession, initSkia as detectionInitSkia } from "./services/onnx/DetectionInference"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -55,26 +57,96 @@ const config = {
   },
 }
 
+/* Polifill For Buffer*/
+import { Buffer } from "buffer"
+import { Platform } from "react-native"
+global.Buffer = Buffer
+
 /**
  * This is the root component of our app.
  * @param {AppProps} props - The props for the `App` component.
  * @returns {JSX.Element} The rendered `App` component.
  */
 export function App() {
-  const {
-    initialNavigationState,
-    onNavigationStateChange,
-    isRestored: isNavigationStateRestored,
-  } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
+  const { initialNavigationState, onNavigationStateChange, isRestored: isNavigationStateRestored } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
   const [isI18nInitialized, setIsI18nInitialized] = useState(false)
+  const [isSessionInitialized, setIsSessionInitialized] = useState(false)
+  const [isDetectedSessionInitialized, setIsDetectedSessionInitialized] = useState(false)
+  const [isSkiaLoaded, setIsSkiaLoaded] = useState(false)
+  const [isDetectTFLiteInitialized, setIsDetectTFLiteInitialized] = useState(false)
 
   useEffect(() => {
     initI18n()
       .then(() => setIsI18nInitialized(true))
       .then(() => loadDateFnsLocale())
+    // This is a good place to load any initial data or perform setup tasks.
   }, [])
+
+  useEffect(() => {
+    if (isSessionInitialized) return
+    createInferenceSession()
+      .then(() => setIsSessionInitialized(true))
+      .catch((e) => {
+        console.error("Error creating inference session:", e)
+        setIsSessionInitialized(false)
+      })
+  }, [isSessionInitialized])
+
+  useEffect(() => {
+    if (isDetectedSessionInitialized) return
+    CreateDetectioninferenceSession()
+      .then(() => {
+        setIsDetectedSessionInitialized(true)
+        console.log("Detection inference session created successfully.")
+      })
+      .catch((e) => {
+        setIsDetectedSessionInitialized(false)
+        console.error("Error creating detection inference session:", e)
+      })
+  }, [isDetectedSessionInitialized])
+
+  useEffect(() => {
+    if (isSkiaLoaded) return
+    if (Platform.OS === "web") {
+      import("@shopify/react-native-skia/lib/module/web").then((mod) => {
+        if (mod.LoadSkiaWeb) {
+          mod
+            .LoadSkiaWeb()
+            .then(() => {
+              setIsSkiaLoaded(true)
+              console.log("Skia Web loaded successfully.")
+              classificationInitSkia()
+              detectionInitSkia()
+            })
+            .catch((e) => {
+              setIsSkiaLoaded(false)
+              console.error("Error loading Skia Web:", e)
+            })
+        }
+      })
+    } else {
+      import("@/services/onnx/offScreenCanvas").then(() => {
+        setIsSkiaLoaded(true)
+        detectionInitSkia()
+        classificationInitSkia()
+      })
+    }
+  }, [isSkiaLoaded])
+
+  useEffect(() => {
+    if (isDetectTFLiteInitialized) return
+    createTFLiteInferenceSession()
+      .then(() => {
+        setIsDetectTFLiteInitialized(true)
+        console.log("TFLite inference session created successfully.")
+      })
+      .catch((e) => {
+        setIsDetectTFLiteInitialized(true)
+        console.error("Error creating TFLite inference session:", e)
+      })
+  }, [isDetectTFLiteInitialized])
 
   const { rehydrated } = useInitialRootStore(() => {
     // This runs after the root store has been initialized and rehydrated.
@@ -94,7 +166,11 @@ export function App() {
     !rehydrated ||
     !isNavigationStateRestored ||
     !isI18nInitialized ||
-    (!areFontsLoaded && !fontLoadError)
+    (!areFontsLoaded && !fontLoadError) ||
+    !isSessionInitialized ||
+    !isDetectedSessionInitialized ||
+    !isSkiaLoaded ||
+    !isDetectTFLiteInitialized
   ) {
     return null
   }
@@ -109,11 +185,7 @@ export function App() {
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <KeyboardProvider>
         <ActionSheetProvider>
-          <AppNavigator
-            linking={linking}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
+          <AppNavigator linking={linking} initialState={initialNavigationState} onStateChange={onNavigationStateChange} />
         </ActionSheetProvider>
       </KeyboardProvider>
     </SafeAreaProvider>

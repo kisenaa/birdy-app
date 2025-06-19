@@ -1,0 +1,12 @@
+import csv
+
+with open("label_mapping.csv", newline='', encoding='utf-8') as f:
+    reader = csv.DictReader(f)
+    class_names = [row["original_label"] for row in reader]
+
+js_array = "const classNames = [\n" + ",\n".join(f'  "{name}"' for name in class_names) + "\n];"
+
+with open("labels.js", "w", encoding='utf-8') as out:
+    out.write(js_array)
+
+print("✅ JavaScript array saved to labels.js")

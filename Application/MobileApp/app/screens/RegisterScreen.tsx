@@ -2,14 +2,7 @@ import { observer } from "mobx-react-lite"
 import { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
 // eslint-disable-next-line no-restricted-imports
 import { TextInput, TextStyle, ViewStyle } from "react-native"
-import {
-  Button,
-  PressableIcon,
-  Screen,
-  Text,
-  TextField,
-  TextFieldAccessoryProps,
-} from "../components"
+import { Button, PressableIcon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import type { ThemedStyle } from "@/theme"
@@ -77,21 +70,10 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
   )
 
   return (
-    <Screen
-      preset="auto"
-      contentContainerStyle={themed($screenContentContainer)}
-      safeAreaEdges={["top", "bottom"]}
-    >
-      <Text
-        testID="login-heading"
-        text="Register an account"
-        preset="heading"
-        style={themed($logIn)}
-      />
+    <Screen preset="auto" contentContainerStyle={themed($screenContentContainer)} safeAreaEdges={["top", "bottom"]}>
+      <Text testID="login-heading" text="Register an account" preset="heading" style={themed($logIn)} />
       <Text tx="loginScreen:enterDetails" preset="subheading" style={themed($enterDetails)} />
-      {attemptsCount > 2 && (
-        <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />
-      )}
+      {attemptsCount > 2 && <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />}
 
       <TextField
         value={authEmail}
@@ -123,13 +105,7 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
         RightAccessory={PasswordRightAccessory}
       />
 
-      <Button
-        testID="login-button"
-        text="Tap to register !"
-        style={themed($tapButton)}
-        preset="reversed"
-        onPress={register}
-      />
+      <Button testID="login-button" text="Tap to register !" style={themed($tapButton)} preset="reversed" onPress={register} />
     </Screen>
   )
 })

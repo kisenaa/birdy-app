@@ -14,9 +14,7 @@
     },
     "newArchEnabled": true,
     "jsEngine": "hermes",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "android": {
       "icon": "./assets/images/app-icon-android-legacy.png",
       "package": "com.birdyapp",
@@ -55,10 +53,46 @@
           "resizeMode": "contain",
           "backgroundColor": "#191015"
         }
-      ]
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "build": {
+              "architectures": ["armeabi-v7a", "x86_64"]
+            }
+          }
+        }
+      ],
+      [
+        "react-native-vision-camera",
+        {
+          "enableFrameProcessors": true,
+          "cameraPermissionText": "Allow $(PRODUCT_NAME) to access your camera"
+        }
+      ],
+      [
+        "react-native-edge-to-edge",
+        {
+          "android": {
+            "parentTheme": "Light",
+            "enforceNavigationBarContrast": false
+          }
+        }
+      ],
+      [
+        "expo-asset",
+        {
+          "assets": ["assets/model/"],
+          "assetExts": ["onnx", "ort"]
+        }
+      ],
+      "onnxruntime-react-native",
+      "./plugins/withAndroidGPULibrary.ts"
     ],
     "experiments": {
-      "tsconfigPaths": true
+      "tsconfigPaths": true,
+      "reactCanary": true
     },
     "splash": {
       "backgroundColor": "#191015"

@@ -6,7 +6,7 @@ import torch.nn.functional as F
 from model import CustomDinoV2ClassifierWithReg
 from config import BASE_MODEL_NAME, NUM_CLASSES , HIDDEN_DIM
 
-checkpoint_path = "./backup/results/checkpoint-602"
+checkpoint_path = "./configs/"
 
 # Load processor and fine-tuned DinoV2
 processor = AutoImageProcessor.from_pretrained(BASE_MODEL_NAME, cache_dir="./cache", use_fast=True)
@@ -35,6 +35,8 @@ model.to(device) # type: ignore
 # Test an image
 image = Image.open(r".\Dataset\Acridotheres javanicus\Javan Myna_Acridotheres javanicus_1.jpg").convert("RGB")
 inputs = processor(images=image, return_tensors="pt").to(device)
+print(f"{inputs['pixel_values'].shape, inputs['pixel_values'].dtype}")
+print(inputs.keys())
 
 with torch.no_grad():
     outputs = model(**inputs)

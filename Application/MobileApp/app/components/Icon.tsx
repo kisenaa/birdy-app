@@ -1,13 +1,4 @@
-import {
-  Image,
-  ImageStyle,
-  StyleProp,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View,
-  ViewProps,
-  ViewStyle,
-} from "react-native"
+import { Image, ImageStyle, StyleProp, TouchableOpacity, TouchableOpacityProps, View, ViewProps, ViewStyle } from "react-native"
 import { useAppTheme } from "@/utils/useAppTheme"
 
 export type IconTypes = keyof typeof iconRegistry
@@ -50,23 +41,11 @@ type IconProps = Omit<ViewProps, "style"> & BaseIconProps
  * @returns {JSX.Element} The rendered `PressableIcon` component.
  */
 export function PressableIcon(props: PressableIconProps) {
-  const {
-    icon,
-    color,
-    size,
-    style: $imageStyleOverride,
-    containerStyle: $containerStyleOverride,
-    ...pressableProps
-  } = props
+  const { icon, color, size, style: $imageStyleOverride, containerStyle: $containerStyleOverride, ...pressableProps } = props
 
   const { theme } = useAppTheme()
 
-  const $imageStyle: StyleProp<ImageStyle> = [
-    $imageStyleBase,
-    { tintColor: color ?? theme.colors.text },
-    size !== undefined && { width: size, height: size },
-    $imageStyleOverride,
-  ]
+  const $imageStyle: StyleProp<ImageStyle> = [$imageStyleBase, { tintColor: color ?? theme.colors.text }, size !== undefined && { width: size, height: size }, $imageStyleOverride]
 
   return (
     <TouchableOpacity {...pressableProps} style={$containerStyleOverride}>
@@ -83,23 +62,11 @@ export function PressableIcon(props: PressableIconProps) {
  * @returns {JSX.Element} The rendered `Icon` component.
  */
 export function Icon(props: IconProps) {
-  const {
-    icon,
-    color,
-    size,
-    style: $imageStyleOverride,
-    containerStyle: $containerStyleOverride,
-    ...viewProps
-  } = props
+  const { icon, color, size, style: $imageStyleOverride, containerStyle: $containerStyleOverride, ...viewProps } = props
 
   const { theme } = useAppTheme()
 
-  const $imageStyle: StyleProp<ImageStyle> = [
-    $imageStyleBase,
-    { tintColor: color ?? theme.colors.text },
-    size !== undefined && { width: size, height: size },
-    $imageStyleOverride,
-  ]
+  const $imageStyle: StyleProp<ImageStyle> = [$imageStyleBase, { tintColor: color ?? theme.colors.text }, size !== undefined && { width: size, height: size }, $imageStyleOverride]
 
   return (
     <View {...viewProps} style={$containerStyleOverride}>

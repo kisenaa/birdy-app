@@ -1,10 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { BackHandler, Linking, Platform } from "react-native"
-import {
-  NavigationState,
-  PartialState,
-  createNavigationContainerRef,
-} from "@react-navigation/native"
+import { NavigationState, PartialState, createNavigationContainerRef } from "@react-navigation/native"
 import Config from "../config"
 import type { PersistNavigationConfig } from "../config/config.base"
 import { useIsMounted } from "../utils/useIsMounted"
@@ -86,10 +82,10 @@ export function useBackButtonHandler(canExit: (routeName: string) => boolean) {
     }
 
     // Subscribe when we come to life
-    BackHandler.addEventListener("hardwareBackPress", onBackPress)
+    const subscription = BackHandler.addEventListener("hardwareBackPress", onBackPress)
 
     // Unsubscribe when we're done
-    return () => BackHandler.removeEventListener("hardwareBackPress", onBackPress)
+    return () => subscription.remove()
   }, [])
 }
 
@@ -115,14 +111,13 @@ function navigationRestoredDefaultState(persistNavigation: PersistNavigationConf
  * @returns {object} - The navigation state and persistence functions.
  */
 export function useNavigationPersistence(storage: Storage, persistenceKey: string) {
-  const [initialNavigationState, setInitialNavigationState] =
-    useState<NavigationProps["initialState"]>()
+  const [initialNavigationState, setInitialNavigationState] = useState<NavigationProps["initialState"]>()
   const isMounted = useIsMounted()
 
   const initNavState = navigationRestoredDefaultState(Config.persistNavigation)
   const [isRestored, setIsRestored] = useState(initNavState)
 
-  const routeNameRef = useRef<keyof AppStackParamList | undefined>()
+  const routeNameRef = useRef<keyof AppStackParamList | undefined>(undefined)
 
   const onNavigationStateChange = (state: NavigationState | undefined) => {
     const previousRouteName = routeNameRef.current
@@ -198,9 +193,7 @@ export function goBack() {
  * @param {Parameters<typeof navigationRef.resetRoot>[0]} state - The state to reset the root to.
  * @returns {void}
  */
-export function resetRoot(
-  state: Parameters<typeof navigationRef.resetRoot>[0] = { index: 0, routes: [] },
-) {
+export function resetRoot(state: Parameters<typeof navigationRef.resetRoot>[0] = { index: 0, routes: [] }) {
   if (navigationRef.isReady()) {
     navigationRef.resetRoot(state)
   }

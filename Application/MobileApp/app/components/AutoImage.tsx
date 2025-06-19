@@ -52,10 +52,7 @@ export function useAutoImage(
 
   if (maxWidth && maxHeight) {
     const aspectRatio = Math.min(maxWidth / remoteWidth, maxHeight / remoteHeight)
-    return [
-      PixelRatio.roundToNearestPixel(remoteWidth * aspectRatio),
-      PixelRatio.roundToNearestPixel(remoteHeight * aspectRatio),
-    ]
+    return [PixelRatio.roundToNearestPixel(remoteWidth * aspectRatio), PixelRatio.roundToNearestPixel(remoteHeight * aspectRatio)]
   } else if (maxWidth) {
     return [maxWidth, PixelRatio.roundToNearestPixel(maxWidth / remoteAspectRatio)]
   } else if (maxHeight) {

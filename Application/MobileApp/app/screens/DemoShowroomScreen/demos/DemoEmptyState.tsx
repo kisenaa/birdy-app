@@ -8,17 +8,11 @@ export const DemoEmptyState: Demo = {
   name: "EmptyState",
   description: "demoEmptyState:description",
   data: ({ theme }) => [
-    <DemoUseCase
-      name="demoEmptyState:useCase.presets.name"
-      description="demoEmptyState:useCase.presets.description"
-    >
+    <DemoUseCase name="demoEmptyState:useCase.presets.name" description="demoEmptyState:useCase.presets.description">
       <EmptyState preset="generic" />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoEmptyState:useCase.passingContent.name"
-      description="demoEmptyState:useCase.passingContent.description"
-    >
+    <DemoUseCase name="demoEmptyState:useCase.passingContent.name" description="demoEmptyState:useCase.passingContent.description">
       <EmptyState
         imageSource={require("../../../../assets/images/logo.png")}
         headingTx="demoEmptyState:useCase.passingContent.customizeImageHeading"
@@ -45,10 +39,7 @@ export const DemoEmptyState: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoEmptyState:useCase.styling.name"
-      description="demoEmptyState:useCase.styling.description"
-    >
+    <DemoUseCase name="demoEmptyState:useCase.styling.name" description="demoEmptyState:useCase.styling.description">
       <EmptyState
         preset="generic"
         style={{ backgroundColor: theme.colors.error, paddingVertical: 20 }}

@@ -187,3 +187,7 @@ datasets.zip
 *.pt
 run/
 cache/
+*.onnx
+*.zip
+best_saved_model
+bird_datasets/

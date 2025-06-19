@@ -21,32 +21,15 @@ type SectionListWithKeyboardAwareScrollViewProps<ItemType> = SectionListProps<It
 }
 
 function SectionListWithKeyboardAwareScrollView<ItemType = any>(
-  {
-    renderScrollComponent,
-    bottomOffset = DEFAULT_BOTTOM_OFFSET,
-    contentContainerStyle,
-    ...props
-  }: SectionListWithKeyboardAwareScrollViewProps<ItemType>,
+  { renderScrollComponent, bottomOffset = DEFAULT_BOTTOM_OFFSET, contentContainerStyle, ...props }: SectionListWithKeyboardAwareScrollViewProps<ItemType>,
   ref: React.Ref<SectionList<ItemType>>,
 ): ReactElement {
   const defaultRenderScrollComponent = useCallback(
-    (props: ScrollViewProps) => (
-      <KeyboardAwareScrollView
-        contentContainerStyle={contentContainerStyle}
-        bottomOffset={bottomOffset}
-        {...props}
-      />
-    ),
+    (props: ScrollViewProps) => <KeyboardAwareScrollView contentContainerStyle={contentContainerStyle} bottomOffset={bottomOffset} {...props} />,
     [contentContainerStyle, bottomOffset],
   )
 
-  return (
-    <SectionList
-      {...props}
-      ref={ref}
-      renderScrollComponent={renderScrollComponent ?? defaultRenderScrollComponent}
-    />
-  )
+  return <SectionList {...props} ref={ref} renderScrollComponent={renderScrollComponent ?? defaultRenderScrollComponent} />
 }
 
 export default forwardRef(SectionListWithKeyboardAwareScrollView) as <ItemType = any>(
