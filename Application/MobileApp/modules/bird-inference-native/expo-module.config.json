@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["BirdInferenceNativeModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.birdinferencenative.BirdInferenceNativeModule"]
+  }
+}

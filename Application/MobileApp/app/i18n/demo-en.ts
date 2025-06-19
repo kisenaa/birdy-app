@@ -1,7 +1,6 @@
 export const demoEn = {
   demoIcon: {
-    description:
-      "A component to render a registered icon. It is wrapped in a <TouchableOpacity /> if `onPress` is provided, otherwise a <View />.",
+    description: "A component to render a registered icon. It is wrapped in a <TouchableOpacity /> if `onPress` is provided, otherwise a <View />.",
     useCase: {
       icons: {
         name: "Icons",
@@ -26,8 +25,7 @@ export const demoEn = {
     useCase: {
       statuses: {
         name: "Statuses",
-        description:
-          "There is a status prop - similar to `preset` in other components, but affects component functionality as well.",
+        description: "There is a status prop - similar to `preset` in other components, but affects component functionality as well.",
         noStatus: {
           label: "No Status",
           helper: "This is the default status",
@@ -97,8 +95,7 @@ export const demoEn = {
     useCase: {
       variants: {
         name: "Variants",
-        description:
-          "The component supports a few different variants. If heavy customization of a specific variant is needed, it can be easily refactored. The default is `checkbox`.",
+        description: "The component supports a few different variants. If heavy customization of a specific variant is needed, it can be easily refactored. The default is `checkbox`.",
         checkbox: {
           label: "`checkbox` variant",
           helper: "This can be used for a single on/off input.",
@@ -114,8 +111,7 @@ export const demoEn = {
       },
       statuses: {
         name: "Statuses",
-        description:
-          "There is a status prop - similar to `preset` in other components, but affects component functionality as well.",
+        description: "There is a status prop - similar to `preset` in other components, but affects component functionality as well.",
         noStatus: "No status - this is the default",
         errorStatus: "Error status - use when there is an error",
         disabledStatus: "Disabled status - disables the editability and mutes input",
@@ -139,8 +135,7 @@ export const demoEn = {
           },
           switch: {
             label: "Switches can be read as text",
-            helper:
-              "By default, this option doesn't use `Text` since depending on the font, the on/off characters might look weird. Customize as needed.",
+            helper: "By default, this option doesn't use `Text` since depending on the font, the on/off characters might look weird. Customize as needed.",
           },
           switchAid: {
             label: "Or aided with an icon",
@@ -159,8 +154,7 @@ export const demoEn = {
     },
   },
   demoButton: {
-    description:
-      "A component that allows users to take actions and make choices. Wraps the Text component with a Pressable component.",
+    description: "A component that allows users to take actions and make choices. Wraps the Text component with a Pressable component.",
     useCase: {
       presets: {
         name: "Presets",
@@ -176,8 +170,7 @@ export const demoEn = {
         nestedChildren: "Nested children - proident veniam.",
         nestedChildren2: "Ullamco cupidatat officia exercitation velit non ullamco nisi..",
         nestedChildren3: "Occaecat aliqua irure proident veniam.",
-        multiLine:
-          "Multiline - consequat veniam veniam reprehenderit. Fugiat id nisi quis duis sunt proident mollit dolor mollit adipisicing proident deserunt.",
+        multiLine: "Multiline - consequat veniam veniam reprehenderit. Fugiat id nisi quis duis sunt proident mollit dolor mollit adipisicing proident deserunt.",
       },
       styling: {
         name: "Styling",
@@ -189,8 +182,7 @@ export const demoEn = {
       },
       disabling: {
         name: "Disabling",
-        description:
-          "The component can be disabled, and styled based on that. Press behavior will be disabled.",
+        description: "The component can be disabled, and styled based on that. Press behavior will be disabled.",
         standard: "Disabled - standard",
         filled: "Disabled - filled",
         reversed: "Disabled - reversed",
@@ -207,10 +199,8 @@ export const demoEn = {
         description: "The row can be different heights.",
         defaultHeight: "Default height (56px)",
         customHeight: "Custom height via `height` prop",
-        textHeight:
-          "Height determined by text content - Reprehenderit incididunt deserunt do do ea labore.",
-        longText:
-          "Limit long text to one line - Reprehenderit incididunt deserunt do do ea labore.",
+        textHeight: "Height determined by text content - Reprehenderit incididunt deserunt do do ea labore.",
+        longText: "Limit long text to one line - Reprehenderit incididunt deserunt do do ea labore.",
       },
       separators: {
         name: "Separators",
@@ -254,8 +244,7 @@ export const demoEn = {
     },
   },
   demoCard: {
-    description:
-      "Cards are useful for displaying related information in a contained way. If a ListItem displays content horizontally, a Card can be used to display content vertically.",
+    description: "Cards are useful for displaying related information in a contained way. If a ListItem displays content horizontally, a Card can be used to display content vertically.",
     useCase: {
       presets: {
         name: "Presets",
@@ -273,8 +262,7 @@ export const demoEn = {
       },
       verticalAlignment: {
         name: "Vertical Alignment",
-        description:
-          "Depending on what's required, the card comes preconfigured with different alignment strategies.",
+        description: "Depending on what's required, the card comes preconfigured with different alignment strategies.",
         top: {
           heading: "Top (default)",
           content: "All content is automatically aligned to the top.",
@@ -305,8 +293,7 @@ export const demoEn = {
       },
       customComponent: {
         name: "Custom Components",
-        description:
-          "Any of the preconfigured components can be replaced with your own. You can also add additional ones.",
+        description: "Any of the preconfigured components can be replaced with your own. You can also add additional ones.",
         rightComponent: "RightComponent",
         leftComponent: "LeftComponent",
       },
@@ -335,14 +322,12 @@ export const demoEn = {
     },
   },
   demoText: {
-    description:
-      "For your text displaying needs. This component is a HOC over the built-in React Native one.",
+    description: "For your text displaying needs. This component is a HOC over the built-in React Native one.",
     useCase: {
       presets: {
         name: "Presets",
         description: "There are a few presets that are preconfigured.",
-        default:
-          "default preset - Cillum eu laboris in labore. Excepteur mollit tempor reprehenderit fugiat elit et eu consequat laborum.",
+        default: "default preset - Cillum eu laboris in labore. Excepteur mollit tempor reprehenderit fugiat elit et eu consequat laborum.",
         bold: "bold preset - Tempor et ullamco cupidatat in officia. Nulla ea duis elit id sunt ipsum cillum duis deserunt nostrud ut nostrud id.",
         subheading: "subheading preset - In Cupidatat Cillum.",
         heading: "heading preset - Voluptate Adipis.",
@@ -360,10 +345,8 @@ export const demoEn = {
       weights: {
         name: "Weights",
         description: "There's a weight prop.",
-        light:
-          "light - Nulla magna incididunt excepteur est occaecat duis culpa dolore cupidatat enim et.",
-        normal:
-          "normal - Magna incididunt dolor ut veniam veniam laboris aliqua velit ea incididunt.",
+        light: "light - Nulla magna incididunt excepteur est occaecat duis culpa dolore cupidatat enim et.",
+        normal: "normal - Magna incididunt dolor ut veniam veniam laboris aliqua velit ea incididunt.",
         medium: "medium - Non duis laborum quis laboris occaecat culpa cillum.",
         semibold: "semiBold - Exercitation magna nostrud pariatur laborum occaecat aliqua.",
         bold: "bold - Eiusmod ullamco magna exercitation est excepteur.",
@@ -371,8 +354,7 @@ export const demoEn = {
       passingContent: {
         name: "Passing Content",
         description: "There are a few different ways to pass content.",
-        viaText:
-          "via `text` prop - Billum in aute fugiat proident nisi pariatur est. Cupidatat anim cillum eiusmod ad. Officia eu magna aliquip labore dolore consequat.",
+        viaText: "via `text` prop - Billum in aute fugiat proident nisi pariatur est. Cupidatat anim cillum eiusmod ad. Officia eu magna aliquip labore dolore consequat.",
         viaTx: "via `tx` prop -",
         children: "children - Aliqua velit irure reprehenderit eu qui amet veniam consectetur.",
         nestedChildren: "Nested children -",
@@ -384,16 +366,13 @@ export const demoEn = {
         name: "Styling",
         description: "The component can be styled easily.",
         text: "Consequat ullamco veniam velit mollit proident excepteur aliquip id culpa ipsum velit sint nostrud.",
-        text2:
-          "Eiusmod occaecat laboris eu ex veniam ipsum adipisicing consectetur. Magna ullamco adipisicing tempor adipisicing.",
-        text3:
-          "Eiusmod occaecat laboris eu ex veniam ipsum adipisicing consectetur. Magna ullamco adipisicing tempor adipisicing.",
+        text2: "Eiusmod occaecat laboris eu ex veniam ipsum adipisicing consectetur. Magna ullamco adipisicing tempor adipisicing.",
+        text3: "Eiusmod occaecat laboris eu ex veniam ipsum adipisicing consectetur. Magna ullamco adipisicing tempor adipisicing.",
       },
     },
   },
   demoHeader: {
-    description:
-      "Component that appears on many screens. Will hold navigation buttons and screen title.",
+    description: "Component that appears on many screens. Will hold navigation buttons and screen title.",
     useCase: {
       actionIcons: {
         name: "Action Icons",
@@ -410,14 +389,12 @@ export const demoEn = {
       },
       customActionComponents: {
         name: "Custom Action Components",
-        description:
-          "If the icon or text options are not enough, you can pass in your own custom action component.",
+        description: "If the icon or text options are not enough, you can pass in your own custom action component.",
         customLeftActionTitle: "Custom Left Action",
       },
       titleModes: {
         name: "Title Modes",
-        description:
-          "Title can be forced to stay in center (default) but may be cut off if it's too long. You can optionally make it adjust to the action buttons.",
+        description: "Title can be forced to stay in center (default) but may be cut off if it's too long. You can optionally make it adjust to the action buttons.",
         centeredTitle: "Centered Title",
         flexTitle: "Flex Title",
       },
@@ -431,13 +408,11 @@ export const demoEn = {
     },
   },
   demoEmptyState: {
-    description:
-      "A component to use when there is no data to display. It can be utilized to direct the user what to do next",
+    description: "A component to use when there is no data to display. It can be utilized to direct the user what to do next",
     useCase: {
       presets: {
         name: "Presets",
-        description:
-          "You can create different text/image sets. One is predefined called `generic`. Note, there's no default in case you want to have a completely custom EmptyState.",
+        description: "You can create different text/image sets. One is predefined called `generic`. Note, there's no default in case you want to have a completely custom EmptyState.",
       },
       passingContent: {
         name: "Passing Content",

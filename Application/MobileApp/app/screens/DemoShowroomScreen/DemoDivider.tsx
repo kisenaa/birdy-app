@@ -19,14 +19,7 @@ export function DemoDivider(props: DemoDividerProps) {
   const { themed } = useAppTheme()
 
   return (
-    <View
-      style={[
-        $divider,
-        type === "horizontal" && { height: size },
-        type === "vertical" && { width: size },
-        $styleOverride,
-      ]}
-    >
+    <View style={[$divider, type === "horizontal" && { height: size }, type === "vertical" && { width: size }, $styleOverride]}>
       {line && (
         <View
           style={[

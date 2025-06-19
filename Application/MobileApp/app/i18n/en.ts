@@ -8,8 +8,7 @@ const en = {
     logOut: "Log Out",
   },
   welcomeScreen: {
-    postscript:
-      "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
+    postscript: "psst  — This probably isn't what your app looks like. (Unless your designer handed you these screens, and in that case, ship it!)",
     readyForLaunch: "Your app, almost ready for launch!",
     exciting: "(ohh, this is exciting!)",
     letsGo: "Let's go!",
@@ -34,8 +33,7 @@ const en = {
   },
   loginScreen: {
     logIn: "Log In",
-    enterDetails:
-      "Enter your details below to unlock top secret info. You'll never guess what we've got waiting. Or maybe you will; it's not rocket science here.",
+    enterDetails: "Enter your details below to unlock top secret info. You'll never guess what we've got waiting. Or maybe you will; it's not rocket science here.",
     emailFieldLabel: "Email",
     passwordFieldLabel: "Password",
     emailFieldPlaceholder: "Enter your email address",
@@ -51,8 +49,7 @@ const en = {
   },
   demoCommunityScreen: {
     title: "Connect with the community",
-    tagLine:
-      "Plug in to Infinite Red's community of React Native engineers and level up your app development with us!",
+    tagLine: "Plug in to Infinite Red's community of React Native engineers and level up your app development with us!",
     joinUsOnSlackTitle: "Join us on Slack",
     joinUsOnSlack:
       "Wish there was a place to connect with React Native engineers around the world? Join the conversation in the Infinite Red Community Slack! Our growing community is a safe space to ask questions, learn from others, and grow your network.",
@@ -68,14 +65,12 @@ const en = {
     reactNativeLiveLink: "React Native Live",
     chainReactConferenceLink: "Chain React Conference",
     hireUsTitle: "Hire Infinite Red for your next project",
-    hireUs:
-      "Whether it's running a full project or getting teams up to speed with our hands-on training, Infinite Red can help with just about any React Native project.",
+    hireUs: "Whether it's running a full project or getting teams up to speed with our hands-on training, Infinite Red can help with just about any React Native project.",
     hireUsLink: "Send us a message",
   },
   demoShowroomScreen: {
     jumpStart: "Components to jump start your project!",
-    lorem2Sentences:
-      "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",
+    lorem2Sentences: "Nulla cupidatat deserunt amet quis aliquip nostrud do adipisicing. Adipisicing excepteur elit laborum Lorem adipisicing do duis.",
     demoHeaderTxExample: "Yay",
     demoViaTxProp: "Via `tx` Prop",
     demoViaSpecifiedTxProp: "Via `{{prop}}Tx` Prop",
@@ -83,22 +78,16 @@ const en = {
   demoDebugScreen: {
     howTo: "HOW TO",
     title: "Debug",
-    tagLine:
-      "Congratulations, you've got a very advanced React Native app template here.  Take advantage of this boilerplate!",
+    tagLine: "Congratulations, you've got a very advanced React Native app template here.  Take advantage of this boilerplate!",
     reactotron: "Send to Reactotron",
     reportBugs: "Report Bugs",
     demoList: "Demo List",
     demoPodcastList: "Demo Podcast List",
-    androidReactotronHint:
-      "If this doesn't work, ensure the Reactotron desktop app is running, run adb reverse tcp:9090 tcp:9090 from your terminal, and reload the app.",
-    iosReactotronHint:
-      "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
-    macosReactotronHint:
-      "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
-    webReactotronHint:
-      "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
-    windowsReactotronHint:
-      "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+    androidReactotronHint: "If this doesn't work, ensure the Reactotron desktop app is running, run adb reverse tcp:9090 tcp:9090 from your terminal, and reload the app.",
+    iosReactotronHint: "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+    macosReactotronHint: "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+    webReactotronHint: "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
+    windowsReactotronHint: "If this doesn't work, ensure the Reactotron desktop app is running and reload app.",
   },
   demoPodcastListScreen: {
     title: "React Native Radio episodes",
@@ -106,8 +95,7 @@ const en = {
     favoriteButton: "Favorite",
     unfavoriteButton: "Unfavorite",
     accessibility: {
-      cardHint:
-        "Double tap to listen to the episode. Double tap and hold to {{action}} this episode.",
+      cardHint: "Double tap to listen to the episode. Double tap and hold to {{action}} this episode.",
       switch: "Switch on to only show favorites",
       favoriteAction: "Toggle Favorite",
       favoriteIcon: "Episode not favorited",
@@ -117,8 +105,7 @@ const en = {
     },
     noFavoritesEmptyState: {
       heading: "This looks a bit empty",
-      content:
-        "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
+      content: "No favorites have been added yet. Tap the heart on an episode to add it to your favorites!",
     },
   },
 

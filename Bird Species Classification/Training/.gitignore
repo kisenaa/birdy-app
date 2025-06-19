@@ -182,3 +182,5 @@ results/
 configs/
 backup/
 cache/
+*.onnx
+*.onnx.data

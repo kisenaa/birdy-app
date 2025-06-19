@@ -9,10 +9,7 @@ export const DemoText: Demo = {
   name: "Text",
   description: "demoText:description",
   data: ({ theme }) => [
-    <DemoUseCase
-      name="demoText:useCase.presets.name"
-      description="demoText:useCase.presets.description"
-    >
+    <DemoUseCase name="demoText:useCase.presets.name" description="demoText:useCase.presets.description">
       <Text>{translate("demoText:useCase.presets.default")}</Text>
 
       <DemoDivider />
@@ -28,10 +25,7 @@ export const DemoText: Demo = {
       <Text preset="heading">{translate("demoText:useCase.presets.heading")}</Text>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoText:useCase.sizes.name"
-      description="demoText:useCase.sizes.description"
-    >
+    <DemoUseCase name="demoText:useCase.sizes.name" description="demoText:useCase.sizes.description">
       <Text size="xs">{translate("demoText:useCase.sizes.xs")}</Text>
 
       <DemoDivider />
@@ -55,10 +49,7 @@ export const DemoText: Demo = {
       <Text size="xxl">{translate("demoText:useCase.sizes.xxl")}</Text>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoText:useCase.weights.name"
-      description="demoText:useCase.weights.description"
-    >
+    <DemoUseCase name="demoText:useCase.weights.name" description="demoText:useCase.weights.description">
       <Text weight="light">{translate("demoText:useCase.weights.light")}</Text>
 
       <DemoDivider />
@@ -78,10 +69,7 @@ export const DemoText: Demo = {
       <Text weight="bold">{translate("demoText:useCase.weights.bold")}</Text>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoText:useCase.passingContent.name"
-      description="demoText:useCase.passingContent.description"
-    >
+    <DemoUseCase name="demoText:useCase.passingContent.name" description="demoText:useCase.passingContent.description">
       <Text text={translate("demoText:useCase.passingContent.viaText")} />
 
       <DemoDivider />
@@ -107,14 +95,9 @@ export const DemoText: Demo = {
       </Text>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoText:useCase.styling.name"
-      description="demoText:useCase.styling.description"
-    >
+    <DemoUseCase name="demoText:useCase.styling.name" description="demoText:useCase.styling.description">
       <Text>
-        <Text style={{ color: theme.colors.error }}>
-          {translate("demoText:useCase.styling.text")}
-        </Text>
+        <Text style={{ color: theme.colors.error }}>{translate("demoText:useCase.styling.text")}</Text>
         {` `}
         <Text
           style={{

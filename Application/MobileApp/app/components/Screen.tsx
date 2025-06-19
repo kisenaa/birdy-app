@@ -1,17 +1,7 @@
 import { useScrollToTop } from "@react-navigation/native"
-import { StatusBar, StatusBarProps, StatusBarStyle } from "expo-status-bar"
+import { SystemBars, SystemBarsProps, SystemBarStyle } from "react-native-edge-to-edge"
 import { ReactNode, useRef, useState } from "react"
-import {
-  KeyboardAvoidingView,
-  KeyboardAvoidingViewProps,
-  LayoutChangeEvent,
-  Platform,
-  ScrollView,
-  ScrollViewProps,
-  StyleProp,
-  View,
-  ViewStyle,
-} from "react-native"
+import { KeyboardAvoidingView, KeyboardAvoidingViewProps, LayoutChangeEvent, Platform, ScrollView, ScrollViewProps, StyleProp, View, ViewStyle } from "react-native"
 import { $styles } from "../theme"
 import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
@@ -41,9 +31,9 @@ interface BaseScreenProps {
    */
   backgroundColor?: string
   /**
-   * Status bar setting. Defaults to dark.
+   * system bar setting. Defaults to dark.
    */
-  statusBarStyle?: StatusBarStyle
+  systemBarStyle?: SystemBarStyle
   /**
    * By how much should we offset the keyboard? Defaults to 0.
    */
@@ -53,9 +43,9 @@ interface BaseScreenProps {
    */
   keyboardBottomOffset?: number
   /**
-   * Pass any additional props directly to the StatusBar component.
+   * Pass any additional props directly to the SystemBars component.
    */
-  StatusBarProps?: StatusBarProps
+  systemBarsProps?: SystemBarsProps
   /**
    * Pass any additional props directly to the KeyboardAvoidingView component.
    */
@@ -87,7 +77,9 @@ interface AutoScreenProps extends Omit<ScrollScreenProps, "preset"> {
   scrollEnabledToggleThreshold?: { percent?: number; point?: number }
 }
 
-export type ScreenProps = ScrollScreenProps | FixedScreenProps | AutoScreenProps
+export type ScreenProps = (ScrollScreenProps | FixedScreenProps | AutoScreenProps) & {
+  scrollRef?: React.RefObject<ScrollView>
+}
 
 const isIos = Platform.OS === "ios"
 
@@ -175,9 +167,7 @@ function ScreenWithoutScrolling(props: ScreenProps) {
   const { style, contentContainerStyle, children, preset } = props
   return (
     <View style={[$outerStyle, style]}>
-      <View style={[$innerStyle, preset === "fixed" && $justifyFlexEnd, contentContainerStyle]}>
-        {children}
-      </View>
+      <View style={[$innerStyle, preset === "fixed" && $justifyFlexEnd, contentContainerStyle]}>{children}</View>
     </View>
   )
 }
@@ -187,16 +177,10 @@ function ScreenWithoutScrolling(props: ScreenProps) {
  * @returns {JSX.Element} - The rendered `ScreenWithScrolling` component.
  */
 function ScreenWithScrolling(props: ScreenProps) {
-  const {
-    children,
-    keyboardShouldPersistTaps = "handled",
-    keyboardBottomOffset = DEFAULT_BOTTOM_OFFSET,
-    contentContainerStyle,
-    ScrollViewProps,
-    style,
-  } = props as ScrollScreenProps
+  const { children, keyboardShouldPersistTaps = "handled", keyboardBottomOffset = DEFAULT_BOTTOM_OFFSET, contentContainerStyle, ScrollViewProps, style } = props as ScrollScreenProps
 
-  const ref = useRef<ScrollView>(null)
+  const localRef = useRef<ScrollView>(null)
+  const ref = props.scrollRef ?? localRef
 
   const { scrollEnabled, onContentSizeChange, onLayout } = useAutoPreset(props as AutoScreenProps)
 
@@ -218,11 +202,7 @@ function ScreenWithScrolling(props: ScreenProps) {
         ScrollViewProps?.onContentSizeChange?.(w, h)
       }}
       style={[$outerStyle, ScrollViewProps?.style, style]}
-      contentContainerStyle={[
-        $innerStyle,
-        ScrollViewProps?.contentContainerStyle,
-        contentContainerStyle,
-      ]}
+      contentContainerStyle={[$innerStyle, ScrollViewProps?.contentContainerStyle, contentContainerStyle]}
     >
       {children}
     </KeyboardAwareScrollView>
@@ -242,41 +222,16 @@ export function Screen(props: ScreenProps) {
     theme: { colors },
     themeContext,
   } = useAppTheme()
-  const {
-    backgroundColor,
-    KeyboardAvoidingViewProps,
-    keyboardOffset = 0,
-    safeAreaEdges,
-    StatusBarProps,
-    statusBarStyle,
-  } = props
+  const { backgroundColor, KeyboardAvoidingViewProps, keyboardOffset = 0, safeAreaEdges, systemBarsProps, systemBarStyle } = props
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
 
   return (
-    <View
-      style={[
-        $containerStyle,
-        { backgroundColor: backgroundColor || colors.background },
-        $containerInsets,
-      ]}
-    >
-      <StatusBar
-        style={statusBarStyle || (themeContext === "dark" ? "light" : "dark")}
-        {...StatusBarProps}
-      />
+    <View style={[$containerStyle, { backgroundColor: backgroundColor || colors.background }, $containerInsets]}>
+      <SystemBars style={systemBarStyle || (themeContext === "dark" ? "light" : "dark")} {...systemBarsProps} />
 
-      <KeyboardAvoidingView
-        behavior={isIos ? "padding" : "height"}
-        keyboardVerticalOffset={keyboardOffset}
-        {...KeyboardAvoidingViewProps}
-        style={[$styles.flex1, KeyboardAvoidingViewProps?.style]}
-      >
-        {isNonScrolling(props.preset) ? (
-          <ScreenWithoutScrolling {...props} />
-        ) : (
-          <ScreenWithScrolling {...props} />
-        )}
+      <KeyboardAvoidingView behavior={isIos ? "padding" : "height"} keyboardVerticalOffset={keyboardOffset} {...KeyboardAvoidingViewProps} style={[$styles.flex1, KeyboardAvoidingViewProps?.style]}>
+        {isNonScrolling(props.preset) ? <ScreenWithoutScrolling {...props} /> : <ScreenWithScrolling {...props} />}
       </KeyboardAvoidingView>
     </View>
   )

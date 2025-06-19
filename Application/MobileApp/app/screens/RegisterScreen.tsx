@@ -3,14 +3,7 @@ import { observer } from "mobx-react-lite"
 import { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
 // eslint-disable-next-line no-restricted-imports
 import { TextInput, TextStyle, ViewStyle } from "react-native"
-import {
-  Button,
-  PressableIcon,
-  Screen,
-  Text,
-  TextField,
-  TextFieldAccessoryProps,
-} from "../components"
+import { Button, PressableIcon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import type { ThemedStyle } from "@/theme"

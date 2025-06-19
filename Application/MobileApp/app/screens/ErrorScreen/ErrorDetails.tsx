@@ -18,35 +18,19 @@ export interface ErrorDetailsProps {
 export function ErrorDetails(props: ErrorDetailsProps) {
   const { themed } = useAppTheme()
   return (
-    <Screen
-      preset="fixed"
-      safeAreaEdges={["top", "bottom"]}
-      contentContainerStyle={themed($contentContainer)}
-    >
+    <Screen preset="fixed" safeAreaEdges={["top", "bottom"]} contentContainerStyle={themed($contentContainer)}>
       <View style={$topSection}>
         <Icon icon="ladybug" size={64} />
         <Text style={themed($heading)} preset="subheading" tx="errorScreen:title" />
         <Text tx="errorScreen:friendlySubtitle" />
       </View>
 
-      <ScrollView
-        style={themed($errorSection)}
-        contentContainerStyle={themed($errorSectionContentContainer)}
-      >
+      <ScrollView style={themed($errorSection)} contentContainerStyle={themed($errorSectionContentContainer)}>
         <Text style={themed($errorContent)} weight="bold" text={`${props.error}`.trim()} />
-        <Text
-          selectable
-          style={themed($errorBacktrace)}
-          text={`${props.errorInfo?.componentStack ?? ""}`.trim()}
-        />
+        <Text selectable style={themed($errorBacktrace)} text={`${props.errorInfo?.componentStack ?? ""}`.trim()} />
       </ScrollView>
 
-      <Button
-        preset="reversed"
-        style={themed($resetButton)}
-        onPress={props.onReset}
-        tx="errorScreen:reset"
-      />
+      <Button preset="reversed" style={themed($resetButton)} onPress={props.onReset} tx="errorScreen:reset" />
     </Screen>
   )
 }
