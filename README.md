@@ -218,3 +218,38 @@ pnpm run test:maestro
 ---
 For more details, see [Application/MobileApp/README.md](Application/MobileApp/README.md).
 
+### NO EMULATOR FIX:
+Pertama coba ini dulu: https://docs.expo.dev/workflow/android-studio-emulator/
+
+Kalau masih gk bisa:<br>
+1. Cek path AVD dari Android Studio ==> Buka Android Studio -> Klik titik tiga di pojok kanan atas -> Virtual Device Manager -> Klik titik tiga salah satu device emulatornya -> Show on Disk. Copy file path sebelum folder devicenya (contoh: "C:\Users\\%USER%\\.config\\.android\avd\\")
+2. Tambah Variable "ANDROID_AVD_HOME" dengan path yang sudah dicopy sebelumnya.
+3. Ok semua window
+4. Restart terminal / VS Code
+5. jalanin command:
+```bat
+pnpm run prebuild:clean
+pnpm run android
+```
+
+### MAX PATH ERROR FIX:
+
+1. Buka Command Prompt (bukan PowerShell)
+2. Buat link dari %DirectoryRepo%\Application\MobileApp ke "C:\link":
+```bat
+mklink /J "%DirectoryRepo%\Application\MobileApp\" "C:\link\"
+```
+3. Buat directory "C:\link\"
+```bat
+mkdir "C:\link\"
+```
+4. Cek link bisa atau nggaknya ==> Buka directory C:\link -> Klik Kanan -> New -> Text Document. Cek di directory repo \Application\MobileApp, kalau ada Text Document yang baru dibuat == berhasil
+5. git pull ulang reponya
+6. jalanin command:
+```bat
+cd "C:\link\"
+pnpm install
+npx expo install
+pnpm run prebuild:clean
+pnpm run android
+```

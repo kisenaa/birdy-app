@@ -1,2 +1,5 @@
 onlyBuiltDependencies:
+  - gl
+  - nitro-codegen
+  - react-native-nitro-modules
   - unrs-resolver
