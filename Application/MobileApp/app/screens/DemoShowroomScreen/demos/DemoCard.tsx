@@ -9,12 +9,24 @@ export const DemoCard: Demo = {
   description: "demoCard:description",
   data: ({ theme }) => [
     <DemoUseCase name="demoCard:useCase.presets.name" description="demoCard:useCase.presets.description">
-      <Card headingTx="demoCard:useCase.presets.default.heading" contentTx="demoCard:useCase.presets.default.content" footerTx="demoCard:useCase.presets.default.footer" />
+      <Card
+        headingTx="demoCard:useCase.presets.default.heading"
+        contentTx="demoCard:useCase.presets.default.content"
+        footerTx="demoCard:useCase.presets.default.footer"
+      />
       <DemoDivider />
-      <Card headingTx="demoCard:useCase.presets.reversed.heading" contentTx="demoCard:useCase.presets.reversed.content" footerTx="demoCard:useCase.presets.reversed.footer" preset="reversed" />
+      <Card
+        headingTx="demoCard:useCase.presets.reversed.heading"
+        contentTx="demoCard:useCase.presets.reversed.content"
+        footerTx="demoCard:useCase.presets.reversed.footer"
+        preset="reversed"
+      />
     </DemoUseCase>,
 
-    <DemoUseCase name="demoCard:useCase.verticalAlignment.name" description="demoCard:useCase.verticalAlignment.description">
+    <DemoUseCase
+      name="demoCard:useCase.verticalAlignment.name"
+      description="demoCard:useCase.verticalAlignment.description"
+    >
       <Card
         headingTx="demoCard:useCase.verticalAlignment.top.heading"
         contentTx="demoCard:useCase.verticalAlignment.top.content"
@@ -49,8 +61,15 @@ export const DemoCard: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase name="demoCard:useCase.passingContent.name" description="demoCard:useCase.passingContent.description">
-      <Card headingTx="demoCard:useCase.passingContent.heading" contentTx="demoCard:useCase.passingContent.content" footerTx="demoCard:useCase.passingContent.footer" />
+    <DemoUseCase
+      name="demoCard:useCase.passingContent.name"
+      description="demoCard:useCase.passingContent.description"
+    >
+      <Card
+        headingTx="demoCard:useCase.passingContent.heading"
+        contentTx="demoCard:useCase.passingContent.content"
+        footerTx="demoCard:useCase.passingContent.footer"
+      />
       <DemoDivider />
       <Card
         preset="reversed"
@@ -63,11 +82,32 @@ export const DemoCard: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase name="demoCard:useCase.customComponent.name" description="demoCard:useCase.customComponent.description">
+    <DemoUseCase
+      name="demoCard:useCase.customComponent.name"
+      description="demoCard:useCase.customComponent.description"
+    >
       <Card
-        HeadingComponent={<Button preset="reversed" text="HeadingComponent" LeftAccessory={(props) => <Icon style={props.style} icon="ladybug" />} />}
-        ContentComponent={<Button style={{ marginVertical: theme.spacing.sm }} text="ContentComponent" LeftAccessory={(props) => <Icon style={props.style} icon="ladybug" />} />}
-        FooterComponent={<Button preset="reversed" text="FooterComponent" LeftAccessory={(props) => <Icon style={props.style} icon="ladybug" />} />}
+        HeadingComponent={
+          <Button
+            preset="reversed"
+            text="HeadingComponent"
+            LeftAccessory={(props) => <Icon style={props.style} icon="ladybug" />}
+          />
+        }
+        ContentComponent={
+          <Button
+            style={{ marginVertical: theme.spacing.sm }}
+            text="ContentComponent"
+            LeftAccessory={(props) => <Icon style={props.style} icon="ladybug" />}
+          />
+        }
+        FooterComponent={
+          <Button
+            preset="reversed"
+            text="FooterComponent"
+            LeftAccessory={(props) => <Icon style={props.style} icon="ladybug" />}
+          />
+        }
       />
       <DemoDivider />
       <Card

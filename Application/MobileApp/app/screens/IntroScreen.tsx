@@ -30,14 +30,33 @@ export const IntroScreen: FC<IntroScreenProps> = observer(function IntroScreen({
       <View style={themed($contentWrapper)}>
         {/* Text Section */}
         <View style={themed($textContainer)}>
-          <Text testID="welcome-heading" style={themed($welcomeHeading)} text="Welcome to Birdy Birds" preset="heading" weight="bold" />
+          <Text
+            testID="welcome-heading"
+            style={themed($welcomeHeading)}
+            text="Welcome to Birdy Birds"
+            preset="heading"
+            weight="bold"
+          />
           <Text style={themed($subText)} preset="subheading" text="Discover, learn, and track birds with ease!" />
         </View>
 
         {/* Bottom Buttons */}
         <View style={themed([$bottomContainer, bottomInsets])}>
-          <Button testID="next-screen-button" preset="filled" text="Login" onPress={goLogin} style={themed($button)} textStyle={themed($boldText)} />
-          <Button testID="intro-register-button" preset="reversed" text="Register" onPress={goRegister} style={themed($button)} />
+          <Button
+            testID="next-screen-button"
+            preset="filled"
+            text="Login"
+            onPress={goLogin}
+            style={themed($button)}
+            textStyle={themed($boldText)}
+          />
+          <Button
+            testID="intro-register-button"
+            preset="reversed"
+            text="Register"
+            onPress={goRegister}
+            style={themed($button)}
+          />
         </View>
       </View>
     </Screen>

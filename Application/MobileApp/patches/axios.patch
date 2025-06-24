@@ -1,0 +1,15 @@
+diff --git a/package.json b/package.json
+index 521a676a8fdca56e38b9870843bb101f7d09e095..9f1d28291db7677c5fd9e9c116f81dd23a6fe2cf 100644
+--- a/package.json
++++ b/package.json
+@@ -13,6 +13,10 @@
+         "require": "./dist/browser/axios.cjs",
+         "default": "./index.js"
+       },
++      "react-native": {
++        "require": "./dist/browser/axios.cjs",
++        "default": "./dist/esm/axios.js"
++      },
+       "default": {
+         "require": "./dist/node/axios.cjs",
+         "default": "./index.js"

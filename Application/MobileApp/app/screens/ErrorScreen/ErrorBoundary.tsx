@@ -53,11 +53,19 @@ export class ErrorBoundary extends Component<Props, State> {
 
   // Only enable if we're catching errors in the right environment
   isEnabled(): boolean {
-    return this.props.catchErrors === "always" || (this.props.catchErrors === "dev" && __DEV__) || (this.props.catchErrors === "prod" && !__DEV__)
+    return (
+      this.props.catchErrors === "always" ||
+      (this.props.catchErrors === "dev" && __DEV__) ||
+      (this.props.catchErrors === "prod" && !__DEV__)
+    )
   }
 
   // Render an error UI if there's an error; otherwise, render children
   render() {
-    return this.isEnabled() && this.state.error ? <ErrorDetails onReset={this.resetError} error={this.state.error} errorInfo={this.state.errorInfo} /> : this.props.children
+    return this.isEnabled() && this.state.error ? (
+      <ErrorDetails onReset={this.resetError} error={this.state.error} errorInfo={this.state.errorInfo} />
+    ) : (
+      this.props.children
+    )
   }
 }

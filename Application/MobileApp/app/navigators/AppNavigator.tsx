@@ -13,7 +13,10 @@ import { useStores } from "../models"
 import { DashboardNavigator, DashboardTabParamList } from "./DashboardNavigator"
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { useAppTheme, useThemeProvider } from "@/utils/useAppTheme"
+import { GestureHandlerRootView } from "react-native-gesture-handler"
+import { $styles } from "@/theme/styles"
 import { ComponentProps } from "react"
+import { PaperProvider } from "react-native-paper"
 
 /**
  * This type allows TypeScript to know what routes are defined in this navigator
@@ -98,12 +101,16 @@ export const AppNavigator = observer(function AppNavigator(props: NavigationProp
   useBackButtonHandler((routeName) => exitRoutes.includes(routeName))
 
   return (
-    <ThemeProvider value={{ themeScheme, setThemeContextOverride }}>
-      <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
-        <Screens.ErrorBoundary catchErrors={Config.catchErrors}>
-          <AppStack />
-        </Screens.ErrorBoundary>
-      </NavigationContainer>
-    </ThemeProvider>
+    <PaperProvider theme={navigationTheme}>
+      <ThemeProvider value={{ themeScheme, setThemeContextOverride }}>
+        <GestureHandlerRootView style={$styles.flex1}>
+          <NavigationContainer ref={navigationRef} theme={navigationTheme} {...props}>
+            <Screens.ErrorBoundary catchErrors={Config.catchErrors}>
+              <AppStack />
+            </Screens.ErrorBoundary>
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </ThemeProvider>
+    </PaperProvider>
   )
 })

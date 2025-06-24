@@ -48,7 +48,11 @@ const WebListItem: FC<DemoListItem> = ({ item, sectionIndex }) => {
         const itemSlug = slugify(u)
 
         return (
-          <Link key={`section${sectionIndex}-${u}`} screen="DemoShowroom" params={{ queryIndex: sectionSlug, itemIndex: itemSlug }}>
+          <Link
+            key={`section${sectionIndex}-${u}`}
+            screen="DemoShowroom"
+            params={{ queryIndex: sectionSlug, itemIndex: itemSlug }}
+          >
             <Text>{u}</Text>
           </Link>
         )
@@ -65,7 +69,12 @@ const NativeListItem: FC<DemoListItem> = ({ item, sectionIndex, handleScroll }) 
         {item.name}
       </Text>
       {item.useCases.map((u, index) => (
-        <ListItem key={`section${sectionIndex}-${u}`} onPress={() => handleScroll?.(sectionIndex, index)} text={u} rightIcon={isRTL ? "caretLeft" : "caretRight"} />
+        <ListItem
+          key={`section${sectionIndex}-${u}`}
+          onPress={() => handleScroll?.(sectionIndex, index)}
+          text={u}
+          rightIcon={isRTL ? "caretLeft" : "caretRight"}
+        />
       ))}
     </View>
   )
@@ -74,7 +83,9 @@ const NativeListItem: FC<DemoListItem> = ({ item, sectionIndex, handleScroll }) 
 const ShowroomListItem = Platform.select({ web: WebListItem, default: NativeListItem })
 const isAndroid = Platform.OS === "android"
 
-export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = function DemoShowroomScreen(_props) {
+export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = function DemoShowroomScreen(
+  _props,
+) {
   const [open, setOpen] = useState(false)
   const timeout = useRef<ReturnType<typeof setTimeout>>()
   const listRef = useRef<SectionList>(null)
@@ -113,7 +124,9 @@ export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = f
       let findItemIndex = 0
       if (params.itemIndex) {
         try {
-          findItemIndex = demoValues[findSectionIndex].data({ themed, theme }).findIndex((u) => slugify(translate(u.props.name)) === params.itemIndex)
+          findItemIndex = demoValues[findSectionIndex]
+            .data({ themed, theme })
+            .findIndex((u) => slugify(translate(u.props.name)) === params.itemIndex)
         } catch (err) {
           console.error(err)
         }
@@ -122,7 +135,11 @@ export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = f
     }
   }, [handleScroll, params, theme, themed])
 
-  const scrollToIndexFailed = (info: { index: number; highestMeasuredFrameIndex: number; averageItemLength: number }) => {
+  const scrollToIndexFailed = (info: {
+    index: number
+    highestMeasuredFrameIndex: number
+    averageItemLength: number
+  }) => {
     listRef.current?.getScrollResponder()?.scrollToEnd()
     timeout.current = setTimeout(
       () =>
@@ -162,12 +179,19 @@ export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = f
               useCases: d.data({ theme, themed }).map((u) => translate(u.props.name)),
             }))}
             keyExtractor={(item) => item.name}
-            renderItem={({ item, index: sectionIndex }) => <ShowroomListItem {...{ item, sectionIndex, handleScroll }} />}
+            renderItem={({ item, index: sectionIndex }) => (
+              <ShowroomListItem {...{ item, sectionIndex, handleScroll }} />
+            )}
           />
         </View>
       )}
     >
-      <Screen preset="fixed" safeAreaEdges={["top"]} contentContainerStyle={$styles.flex1} {...(isAndroid ? { KeyboardAvoidingViewProps: { behavior: undefined } } : {})}>
+      <Screen
+        preset="fixed"
+        safeAreaEdges={["top"]}
+        contentContainerStyle={$styles.flex1}
+        {...(isAndroid ? { KeyboardAvoidingViewProps: { behavior: undefined } } : {})}
+      >
         <DrawerIconButton onPress={toggleDrawer} />
 
         <SectionListWithKeyboardAwareScrollView

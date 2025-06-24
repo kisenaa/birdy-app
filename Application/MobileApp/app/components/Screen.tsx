@@ -1,7 +1,17 @@
 import { useScrollToTop } from "@react-navigation/native"
 import { SystemBars, SystemBarsProps, SystemBarStyle } from "react-native-edge-to-edge"
 import { ReactNode, useRef, useState } from "react"
-import { KeyboardAvoidingView, KeyboardAvoidingViewProps, LayoutChangeEvent, Platform, ScrollView, ScrollViewProps, StyleProp, View, ViewStyle } from "react-native"
+import {
+  KeyboardAvoidingView,
+  KeyboardAvoidingViewProps,
+  LayoutChangeEvent,
+  Platform,
+  ScrollView,
+  ScrollViewProps,
+  StyleProp,
+  View,
+  ViewStyle,
+} from "react-native"
 import { $styles } from "../theme"
 import { ExtendedEdge, useSafeAreaInsetsStyle } from "../utils/useSafeAreaInsetsStyle"
 import { KeyboardAwareScrollView } from "react-native-keyboard-controller"
@@ -177,7 +187,14 @@ function ScreenWithoutScrolling(props: ScreenProps) {
  * @returns {JSX.Element} - The rendered `ScreenWithScrolling` component.
  */
 function ScreenWithScrolling(props: ScreenProps) {
-  const { children, keyboardShouldPersistTaps = "handled", keyboardBottomOffset = DEFAULT_BOTTOM_OFFSET, contentContainerStyle, ScrollViewProps, style } = props as ScrollScreenProps
+  const {
+    children,
+    keyboardShouldPersistTaps = "handled",
+    keyboardBottomOffset = DEFAULT_BOTTOM_OFFSET,
+    contentContainerStyle,
+    ScrollViewProps,
+    style,
+  } = props as ScrollScreenProps
 
   const localRef = useRef<ScrollView>(null)
   const ref = props.scrollRef ?? localRef
@@ -222,7 +239,14 @@ export function Screen(props: ScreenProps) {
     theme: { colors },
     themeContext,
   } = useAppTheme()
-  const { backgroundColor, KeyboardAvoidingViewProps, keyboardOffset = 0, safeAreaEdges, systemBarsProps, systemBarStyle } = props
+  const {
+    backgroundColor,
+    KeyboardAvoidingViewProps,
+    keyboardOffset = 0,
+    safeAreaEdges,
+    systemBarsProps,
+    systemBarStyle,
+  } = props
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
 
@@ -230,7 +254,12 @@ export function Screen(props: ScreenProps) {
     <View style={[$containerStyle, { backgroundColor: backgroundColor || colors.background }, $containerInsets]}>
       <SystemBars style={systemBarStyle || (themeContext === "dark" ? "light" : "dark")} {...systemBarsProps} />
 
-      <KeyboardAvoidingView behavior={isIos ? "padding" : "height"} keyboardVerticalOffset={keyboardOffset} {...KeyboardAvoidingViewProps} style={[$styles.flex1, KeyboardAvoidingViewProps?.style]}>
+      <KeyboardAvoidingView
+        behavior={isIos ? "padding" : "height"}
+        keyboardVerticalOffset={keyboardOffset}
+        {...KeyboardAvoidingViewProps}
+        style={[$styles.flex1, KeyboardAvoidingViewProps?.style]}
+      >
         {isNonScrolling(props.preset) ? <ScreenWithoutScrolling {...props} /> : <ScreenWithScrolling {...props} />}
       </KeyboardAvoidingView>
     </View>

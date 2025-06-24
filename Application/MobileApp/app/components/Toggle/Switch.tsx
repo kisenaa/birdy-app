@@ -31,12 +31,22 @@ interface SwitchInputProps extends BaseToggleInputProps<SwitchToggleProps> {
  */
 export function Switch(props: SwitchToggleProps) {
   const { accessibilityMode, ...rest } = props
-  const switchInput = useCallback((toggleProps: SwitchInputProps) => <SwitchInput {...toggleProps} accessibilityMode={accessibilityMode} />, [accessibilityMode])
+  const switchInput = useCallback(
+    (toggleProps: SwitchInputProps) => <SwitchInput {...toggleProps} accessibilityMode={accessibilityMode} />,
+    [accessibilityMode],
+  )
   return <Toggle accessibilityRole="switch" {...rest} ToggleInput={switchInput} />
 }
 
 function SwitchInput(props: SwitchInputProps) {
-  const { on, status, disabled, outerStyle: $outerStyleOverride, innerStyle: $innerStyleOverride, detailStyle: $detailStyleOverride } = props
+  const {
+    on,
+    status,
+    disabled,
+    outerStyle: $outerStyleOverride,
+    innerStyle: $innerStyleOverride,
+    detailStyle: $detailStyleOverride,
+  } = props
 
   const {
     theme: { colors },
@@ -64,28 +74,58 @@ function SwitchInput(props: SwitchInputProps) {
 
   const knobSizeFallback = 2
 
-  const knobWidth = [$detailStyleOverride?.width, $switchDetail?.width, knobSizeFallback].find((v) => typeof v === "number")
+  const knobWidth = [$detailStyleOverride?.width, $switchDetail?.width, knobSizeFallback].find(
+    (v) => typeof v === "number",
+  )
 
-  const knobHeight = [$detailStyleOverride?.height, $switchDetail?.height, knobSizeFallback].find((v) => typeof v === "number")
+  const knobHeight = [$detailStyleOverride?.height, $switchDetail?.height, knobSizeFallback].find(
+    (v) => typeof v === "number",
+  )
 
-  const offBackgroundColor = [disabled && colors.palette.neutral400, status === "error" && colors.errorBackground, colors.palette.neutral300].filter(Boolean)[0]
+  const offBackgroundColor = [
+    disabled && colors.palette.neutral400,
+    status === "error" && colors.errorBackground,
+    colors.palette.neutral300,
+  ].filter(Boolean)[0]
 
-  const onBackgroundColor = [disabled && colors.transparent, status === "error" && colors.errorBackground, colors.palette.secondary500].filter(Boolean)[0]
+  const onBackgroundColor = [
+    disabled && colors.transparent,
+    status === "error" && colors.errorBackground,
+    colors.palette.secondary500,
+  ].filter(Boolean)[0]
 
   const knobBackgroundColor = (function () {
     if (on) {
-      return [$detailStyleOverride?.backgroundColor, status === "error" && colors.error, disabled && colors.palette.neutral600, colors.palette.neutral100].filter(Boolean)[0]
+      return [
+        $detailStyleOverride?.backgroundColor,
+        status === "error" && colors.error,
+        disabled && colors.palette.neutral600,
+        colors.palette.neutral100,
+      ].filter(Boolean)[0]
     } else {
-      return [$innerStyleOverride?.backgroundColor, disabled && colors.palette.neutral600, status === "error" && colors.error, colors.palette.neutral200].filter(Boolean)[0]
+      return [
+        $innerStyleOverride?.backgroundColor,
+        disabled && colors.palette.neutral600,
+        status === "error" && colors.error,
+        colors.palette.neutral200,
+      ].filter(Boolean)[0]
     }
   })()
 
   const rtlAdjustment = isRTL ? -1 : 1
   const $themedSwitchInner = useMemo(() => themed([$styles.toggleInner, $switchInner]), [themed])
 
-  const offsetLeft = ($innerStyleOverride?.paddingStart || $innerStyleOverride?.paddingLeft || $themedSwitchInner?.paddingStart || $themedSwitchInner?.paddingLeft || 0) as number
+  const offsetLeft = ($innerStyleOverride?.paddingStart ||
+    $innerStyleOverride?.paddingLeft ||
+    $themedSwitchInner?.paddingStart ||
+    $themedSwitchInner?.paddingLeft ||
+    0) as number
 
-  const offsetRight = ($innerStyleOverride?.paddingEnd || $innerStyleOverride?.paddingRight || $themedSwitchInner?.paddingEnd || $themedSwitchInner?.paddingRight || 0) as number
+  const offsetRight = ($innerStyleOverride?.paddingEnd ||
+    $innerStyleOverride?.paddingRight ||
+    $themedSwitchInner?.paddingEnd ||
+    $themedSwitchInner?.paddingRight ||
+    0) as number
 
   const outputRange =
     Platform.OS === "web"
@@ -101,13 +141,26 @@ function SwitchInput(props: SwitchInputProps) {
 
   return (
     <View style={[$inputOuter, { backgroundColor: offBackgroundColor }, $outerStyleOverride]}>
-      <Animated.View style={[$themedSwitchInner, { backgroundColor: onBackgroundColor }, $innerStyleOverride, { opacity: opacity.current }]} />
+      <Animated.View
+        style={[
+          $themedSwitchInner,
+          { backgroundColor: onBackgroundColor },
+          $innerStyleOverride,
+          { opacity: opacity.current },
+        ]}
+      />
 
       <SwitchAccessibilityLabel {...props} role="on" />
       <SwitchAccessibilityLabel {...props} role="off" />
 
       <Animated.View
-        style={[$switchDetail, $detailStyleOverride, { transform: [{ translateX: $animatedSwitchKnob }] }, { width: knobWidth, height: knobHeight }, { backgroundColor: knobBackgroundColor }]}
+        style={[
+          $switchDetail,
+          $detailStyleOverride,
+          { transform: [{ translateX: $animatedSwitchKnob }] },
+          { width: knobWidth, height: knobHeight },
+          { backgroundColor: knobBackgroundColor },
+        ]}
       />
     </View>
   )
@@ -128,7 +181,11 @@ function SwitchAccessibilityLabel(props: SwitchInputProps & { role: "on" | "off"
 
   const shouldLabelBeVisible = (on && role === "on") || (!on && role === "off")
 
-  const $switchAccessibilityStyle: StyleProp<ViewStyle> = [$switchAccessibility, role === "off" && { end: "5%" }, role === "on" && { left: "5%" }]
+  const $switchAccessibilityStyle: StyleProp<ViewStyle> = [
+    $switchAccessibility,
+    role === "off" && { end: "5%" },
+    role === "on" && { left: "5%" },
+  ]
 
   const color = (function () {
     if (disabled) return colors.palette.neutral600
@@ -141,16 +198,29 @@ function SwitchAccessibilityLabel(props: SwitchInputProps & { role: "on" | "off"
     <View style={$switchAccessibilityStyle}>
       {accessibilityMode === "text" && shouldLabelBeVisible && (
         <View
-          style={[role === "on" && $switchAccessibilityLine, role === "on" && { backgroundColor: color }, role === "off" && $switchAccessibilityCircle, role === "off" && { borderColor: color }]}
+          style={[
+            role === "on" && $switchAccessibilityLine,
+            role === "on" && { backgroundColor: color },
+            role === "off" && $switchAccessibilityCircle,
+            role === "off" && { borderColor: color },
+          ]}
         />
       )}
 
-      {accessibilityMode === "icon" && shouldLabelBeVisible && <Image style={[$switchAccessibilityIcon, { tintColor: color }]} source={role === "off" ? iconRegistry.hidden : iconRegistry.view} />}
+      {accessibilityMode === "icon" && shouldLabelBeVisible && (
+        <Image
+          style={[$switchAccessibilityIcon, { tintColor: color }]}
+          source={role === "off" ? iconRegistry.hidden : iconRegistry.view}
+        />
+      )}
     </View>
   )
 }
 
-const $inputOuter: StyleProp<ViewStyle> = [$inputOuterBase, { height: 32, width: 56, borderRadius: 16, borderWidth: 0 }]
+const $inputOuter: StyleProp<ViewStyle> = [
+  $inputOuterBase,
+  { height: 32, width: 56, borderRadius: 16, borderWidth: 0 },
+]
 
 const $switchInner: ThemedStyle<ViewStyle> = ({ colors }) => ({
   borderColor: colors.transparent,

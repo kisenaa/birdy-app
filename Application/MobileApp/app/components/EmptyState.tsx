@@ -163,7 +163,12 @@ export function EmptyState(props: EmptyStateProps) {
   const isButtonPresent = !!(button || buttonTx)
 
   const $containerStyles = [$containerStyleOverride]
-  const $imageStyles = [$image, (isHeadingPresent || isContentPresent || isButtonPresent) && { marginBottom: spacing.xxxs }, $imageStyleOverride, ImageProps?.style]
+  const $imageStyles = [
+    $image,
+    (isHeadingPresent || isContentPresent || isButtonPresent) && { marginBottom: spacing.xxxs },
+    $imageStyleOverride,
+    ImageProps?.style,
+  ]
   const $headingStyles = [
     themed($heading),
     isImagePresent && { marginTop: spacing.xxxs },
@@ -178,17 +183,55 @@ export function EmptyState(props: EmptyStateProps) {
     $contentStyleOverride,
     ContentTextProps?.style,
   ]
-  const $buttonStyles = [(isImagePresent || isHeadingPresent || isContentPresent) && { marginTop: spacing.xl }, $buttonStyleOverride, ButtonProps?.style]
+  const $buttonStyles = [
+    (isImagePresent || isHeadingPresent || isContentPresent) && { marginTop: spacing.xl },
+    $buttonStyleOverride,
+    ButtonProps?.style,
+  ]
 
   return (
     <View style={$containerStyles}>
-      {isImagePresent && <Image source={imageSource} {...ImageProps} style={$imageStyles} tintColor={theme.colors.palette.neutral900} />}
+      {isImagePresent && (
+        <Image
+          source={imageSource}
+          {...ImageProps}
+          style={$imageStyles}
+          tintColor={theme.colors.palette.neutral900}
+        />
+      )}
 
-      {isHeadingPresent && <Text preset="subheading" text={heading} tx={headingTx} txOptions={headingTxOptions} {...HeadingTextProps} style={$headingStyles} />}
+      {isHeadingPresent && (
+        <Text
+          preset="subheading"
+          text={heading}
+          tx={headingTx}
+          txOptions={headingTxOptions}
+          {...HeadingTextProps}
+          style={$headingStyles}
+        />
+      )}
 
-      {isContentPresent && <Text text={content} tx={contentTx} txOptions={contentTxOptions} {...ContentTextProps} style={$contentStyles} />}
+      {isContentPresent && (
+        <Text
+          text={content}
+          tx={contentTx}
+          txOptions={contentTxOptions}
+          {...ContentTextProps}
+          style={$contentStyles}
+        />
+      )}
 
-      {isButtonPresent && <Button onPress={buttonOnPress} text={button} tx={buttonTx} txOptions={buttonTxOptions} textStyle={$buttonTextStyleOverride} {...ButtonProps} style={$buttonStyles} />}
+      {isButtonPresent && (
+        <Button
+          onPress={buttonOnPress}
+          text={button}
+          tx={buttonTx}
+          txOptions={buttonTxOptions}
+          textStyle={$buttonTextStyleOverride}
+          {...ButtonProps}
+          style={$buttonStyles}
+        />
+      )}
     </View>
   )
 }

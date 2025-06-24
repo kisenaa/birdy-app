@@ -34,7 +34,12 @@ export const DemoIcon: Demo = {
   name: "Icon",
   description: "demoIcon:description",
   data: ({ theme, themed }) => [
-    <DemoUseCase name="demoIcon:useCase.icons.name" description="demoIcon:useCase.icons.description" layout="row" itemStyle={$styles.flexWrap}>
+    <DemoUseCase
+      name="demoIcon:useCase.icons.name"
+      description="demoIcon:useCase.icons.description"
+      layout="row"
+      itemStyle={$styles.flexWrap}
+    >
       {Object.keys(iconRegistry).map((icon) => (
         <View key={icon} style={themed($iconTile)}>
           <Icon icon={icon as IconTypes} color={theme.colors.tint} size={35} />
@@ -61,7 +66,11 @@ export const DemoIcon: Demo = {
       <Icon icon="ladybug" color={theme.colors.palette.angry500} containerStyle={themed($demoIconContainer)} />
     </DemoUseCase>,
 
-    <DemoUseCase name="demoIcon:useCase.styling.name" description="demoIcon:useCase.styling.description" layout="row">
+    <DemoUseCase
+      name="demoIcon:useCase.styling.name"
+      description="demoIcon:useCase.styling.description"
+      layout="row"
+    >
       <Icon icon="ladybug" style={themed($customIcon)} size={40} containerStyle={themed($customIconContainer)} />
     </DemoUseCase>,
   ],

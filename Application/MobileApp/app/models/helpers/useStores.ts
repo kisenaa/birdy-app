@@ -84,3 +84,17 @@ export const useInitialRootStore = (callback?: () => void | Promise<void>) => {
 
   return { rootStore, rehydrated }
 }
+
+/**
+ * A singleton instance of the application's root store.
+ *
+ * This export provides a globally accessible reference to the root store,
+ * ensuring that only one instance exists throughout the application's lifecycle.
+ * Use this singleton to access and interact with the application's state management.
+ *
+ * @remarks
+ * The underlying `_rootStore` should be initialized before accessing this singleton.
+ *
+ * @see _rootStore
+ */
+export const rootStoreSingleton = _rootStore

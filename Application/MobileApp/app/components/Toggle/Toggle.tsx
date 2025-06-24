@@ -1,5 +1,17 @@
 import { ComponentType, FC, useMemo } from "react"
-import { GestureResponderEvent, ImageStyle, StyleProp, SwitchProps, TextInputProps, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewProps, ViewStyle } from "react-native"
+import {
+  GestureResponderEvent,
+  ImageStyle,
+  StyleProp,
+  SwitchProps,
+  TextInputProps,
+  TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewProps,
+  ViewStyle,
+} from "react-native"
 import { $styles } from "../../theme"
 import { Text, TextProps } from "../Text"
 import { useAppTheme } from "@/utils/useAppTheme"
@@ -135,7 +147,10 @@ export function Toggle<T>(props: ToggleProps<T>) {
 
   const disabled = editable === false || status === "disabled" || props.disabled
 
-  const Wrapper = useMemo(() => (disabled ? View : TouchableOpacity) as ComponentType<TouchableOpacityProps | ViewProps>, [disabled])
+  const Wrapper = useMemo(
+    () => (disabled ? View : TouchableOpacity) as ComponentType<TouchableOpacityProps | ViewProps>,
+    [disabled],
+  )
 
   const $containerStyles = [$containerStyleOverride]
   const $inputWrapperStyles = [$styles.row, $inputWrapper, $inputWrapperStyleOverride]
@@ -151,16 +166,39 @@ export function Toggle<T>(props: ToggleProps<T>) {
   }
 
   return (
-    <Wrapper activeOpacity={1} accessibilityRole={accessibilityRole} accessibilityState={{ checked: value, disabled }} {...WrapperProps} style={$containerStyles} onPress={handlePress}>
+    <Wrapper
+      activeOpacity={1}
+      accessibilityRole={accessibilityRole}
+      accessibilityState={{ checked: value, disabled }}
+      {...WrapperProps}
+      style={$containerStyles}
+      onPress={handlePress}
+    >
       <View style={$inputWrapperStyles}>
         {labelPosition === "left" && <FieldLabel<T> {...props} labelPosition={labelPosition} />}
 
-        <ToggleInput on={!!value} disabled={!!disabled} status={status} outerStyle={props.inputOuterStyle ?? {}} innerStyle={props.inputInnerStyle ?? {}} detailStyle={props.inputDetailStyle ?? {}} />
+        <ToggleInput
+          on={!!value}
+          disabled={!!disabled}
+          status={status}
+          outerStyle={props.inputOuterStyle ?? {}}
+          innerStyle={props.inputInnerStyle ?? {}}
+          detailStyle={props.inputDetailStyle ?? {}}
+        />
 
         {labelPosition === "right" && <FieldLabel<T> {...props} labelPosition={labelPosition} />}
       </View>
 
-      {!!(helper || helperTx) && <Text preset="formHelper" text={helper} tx={helperTx} txOptions={helperTxOptions} {...HelperTextProps} style={$helperStyles} />}
+      {!!(helper || helperTx) && (
+        <Text
+          preset="formHelper"
+          text={helper}
+          tx={helperTx}
+          txOptions={helperTxOptions}
+          {...HelperTextProps}
+          style={$helperStyles}
+        />
+      )}
     </Wrapper>
   )
 }
@@ -170,7 +208,15 @@ export function Toggle<T>(props: ToggleProps<T>) {
  * @returns {JSX.Element} The rendered `FieldLabel` component.
  */
 function FieldLabel<T>(props: ToggleProps<T>) {
-  const { status, label, labelTx, labelTxOptions, LabelTextProps, labelPosition, labelStyle: $labelStyleOverride } = props
+  const {
+    status,
+    label,
+    labelTx,
+    labelTxOptions,
+    LabelTextProps,
+    labelPosition,
+    labelStyle: $labelStyleOverride,
+  } = props
 
   const {
     theme: { colors },
@@ -188,7 +234,16 @@ function FieldLabel<T>(props: ToggleProps<T>) {
     LabelTextProps?.style,
   ])
 
-  return <Text preset="formLabel" text={label} tx={labelTx} txOptions={labelTxOptions} {...LabelTextProps} style={$labelStyle} />
+  return (
+    <Text
+      preset="formLabel"
+      text={label}
+      tx={labelTx}
+      txOptions={labelTxOptions}
+      {...LabelTextProps}
+      style={$labelStyle}
+    />
+  )
 }
 
 const $inputWrapper: ViewStyle = {
