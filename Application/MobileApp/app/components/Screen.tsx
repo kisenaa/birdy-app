@@ -239,14 +239,7 @@ export function Screen(props: ScreenProps) {
     theme: { colors },
     themeContext,
   } = useAppTheme()
-  const {
-    backgroundColor,
-    KeyboardAvoidingViewProps,
-    keyboardOffset = 0,
-    safeAreaEdges,
-    systemBarsProps,
-    systemBarStyle,
-  } = props
+  const { backgroundColor, KeyboardAvoidingViewProps, keyboardOffset = 0, safeAreaEdges, systemBarsProps, systemBarStyle } = props
 
   const $containerInsets = useSafeAreaInsetsStyle(safeAreaEdges)
 

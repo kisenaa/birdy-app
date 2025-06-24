@@ -3,14 +3,7 @@ import { Tensor, InferenceSession } from "onnxruntime-react-native"
 import { Asset } from "expo-asset"
 import performance from "react-native-performance"
 import { readAsStringAsync, EncodingType } from "expo-file-system"
-import {
-  Skia,
-  ColorType,
-  AlphaType,
-  CatmullRomCubicSampling,
-  SkSurface,
-  SkPaint,
-} from "@shopify/react-native-skia"
+import { Skia, ColorType, AlphaType, CatmullRomCubicSampling, SkSurface, SkPaint } from "@shopify/react-native-skia"
 import { BirdDetector } from "modules/bird-inference-native"
 
 const inputSize = 640
@@ -63,9 +56,7 @@ export const preProcessImage_YOLO_NHWC_SKIA = async (imageUri: string) => {
   // Pad to 640×640
   paddedSurf!.getCanvas().clear(Skia.Color("black"))
   paddedSurf!.flush()
-  paddedSurf!
-    .getCanvas()
-    .drawImageCubic(resizedImage, dx, dy, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
+  paddedSurf!.getCanvas().drawImageCubic(resizedImage, dx, dy, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
   paddedSurf!.flush()
   const finalImage = paddedSurf!.makeImageSnapshot()
 

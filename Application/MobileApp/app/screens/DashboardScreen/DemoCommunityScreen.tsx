@@ -13,9 +13,7 @@ const reactNativeLiveLogo = require("../../../assets/images/demo/rnl-logo.png")
 const reactNativeRadioLogo = require("../../../assets/images/demo/rnr-logo.png")
 const reactNativeNewsletterLogo = require("../../../assets/images/demo/rnn-logo.png")
 
-export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> = function DemoCommunityScreen(
-  _props,
-) {
+export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> = function DemoCommunityScreen(_props) {
   const { themed } = useAppTheme()
   return (
     <Screen preset="scroll" contentContainerStyle={$styles.container} safeAreaEdges={["top"]}>
@@ -39,11 +37,7 @@ export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> =
         onPress={() => openLinkInBrowser("https://github.com/infinitered/ignite")}
       />
 
-      <Text
-        preset="subheading"
-        tx="demoCommunityScreen:theLatestInReactNativeTitle"
-        style={themed($sectionTitle)}
-      />
+      <Text preset="subheading" tx="demoCommunityScreen:theLatestInReactNativeTitle" style={themed($sectionTitle)} />
       <Text tx="demoCommunityScreen:theLatestInReactNative" style={themed($description)} />
       <ListItem
         tx="demoCommunityScreen:reactNativeRadioLink"

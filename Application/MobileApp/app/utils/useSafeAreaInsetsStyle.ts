@@ -30,10 +30,7 @@ export type SafeAreaInsetsStyle<
  * @param {"padding" | "margin"} property - The property to apply the safe area insets to.
  * @returns {SafeAreaInsetsStyle<Property, Edges>} - The style object with the safe area insets applied.
  */
-export function useSafeAreaInsetsStyle<
-  Property extends "padding" | "margin" = "padding",
-  Edges extends Array<ExtendedEdge> = [],
->(
+export function useSafeAreaInsetsStyle<Property extends "padding" | "margin" = "padding", Edges extends Array<ExtendedEdge> = []>(
   safeAreaEdges: Edges = [] as unknown as Edges,
   property: Property = "padding" as Property,
 ): SafeAreaInsetsStyle<Property, Edges> {

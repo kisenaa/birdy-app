@@ -1,19 +1,6 @@
 import { FC, useEffect, useRef, useState } from "react"
-import {
-  FlatList,
-  TextInput,
-  TextInput as RNTextInput,
-  View,
-  ViewStyle,
-  TextStyle,
-  StyleSheet,
-} from "react-native"
-import Animated, {
-  useAnimatedKeyboard,
-  useAnimatedStyle,
-  useDerivedValue,
-  withTiming,
-} from "react-native-reanimated"
+import { FlatList, TextInput, TextInput as RNTextInput, View, ViewStyle, TextStyle, StyleSheet } from "react-native"
+import Animated, { useAnimatedKeyboard, useAnimatedStyle, useDerivedValue, withTiming } from "react-native-reanimated"
 import { Screen, Text, Button } from "../../components"
 import { DashboardTabScreenProps } from "../../navigators/DashboardNavigator"
 import { $styles } from "../../theme"
@@ -63,9 +50,7 @@ export const History: FC<DashboardTabScreenProps<"History">> = function History(
     } catch (error) {
       console.log("Error fetching chatbot response:", error)
       setMessages((prev) =>
-        prev.map((msg) =>
-          msg.id === loadingMessage.id ? { ...msg, text: "Sorry, I couldn't get a response." } : msg,
-        ),
+        prev.map((msg) => (msg.id === loadingMessage.id ? { ...msg, text: "Sorry, I couldn't get a response." } : msg)),
       )
     }
   }
@@ -108,13 +93,7 @@ export const History: FC<DashboardTabScreenProps<"History">> = function History(
           blurOnSubmit={false}
           returnKeyType="send"
         />
-        <Button
-          text="Send"
-          onPress={handleSendMessage}
-          preset="reversed"
-          style={themed($button)}
-          textStyle={themed($boldText)}
-        />
+        <Button text="Send" onPress={handleSendMessage} preset="reversed" style={themed($button)} textStyle={themed($boldText)} />
       </Animated.View>
     </View>
   )

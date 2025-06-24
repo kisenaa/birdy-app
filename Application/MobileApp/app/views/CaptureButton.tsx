@@ -3,10 +3,7 @@
 import { useCallback, useRef, FC, memo, useEffect } from "react"
 import type { ViewProps } from "react-native"
 import { StyleSheet, View } from "react-native"
-import type {
-  PanGestureHandlerGestureEvent,
-  TapGestureHandlerStateChangeEvent,
-} from "react-native-gesture-handler"
+import type { PanGestureHandlerGestureEvent, TapGestureHandlerStateChangeEvent } from "react-native-gesture-handler"
 import { PanGestureHandler, State, TapGestureHandler } from "react-native-gesture-handler"
 import Reanimated, {
   Easing,
@@ -147,34 +144,21 @@ const _CaptureButton: FC<Props> = observer(
     //#region Pan handler
 
     const panHandler = useRef<PanGestureHandler>(null)
-    const onPanGestureEvent = useAnimatedGestureHandler<
-      PanGestureHandlerGestureEvent,
-      { offsetY?: number; startY?: number }
-    >({
+    const onPanGestureEvent = useAnimatedGestureHandler<PanGestureHandlerGestureEvent, { offsetY?: number; startY?: number }>({
       onStart: (event, context) => {
         context.startY = event.absoluteY
         const yForFullZoom = context.startY * 0.7
         const offsetYForFullZoom = context.startY - yForFullZoom
 
         // extrapolate [0 ... 1] zoom -> [0 ... Y_FOR_FULL_ZOOM] finger position
-        context.offsetY = interpolate(
-          cameraZoom.value,
-          [minZoom, maxZoom],
-          [0, offsetYForFullZoom],
-          Extrapolate.CLAMP,
-        )
+        context.offsetY = interpolate(cameraZoom.value, [minZoom, maxZoom], [0, offsetYForFullZoom], Extrapolate.CLAMP)
       },
       onActive: (event, context) => {
         const offset = context.offsetY ?? 0
         const startY = context.startY ?? SCREEN_HEIGHT
         const yForFullZoom = startY * 0.7
 
-        cameraZoom.value = interpolate(
-          event.absoluteY - offset,
-          [yForFullZoom, startY],
-          [maxZoom, minZoom],
-          Extrapolate.CLAMP,
-        )
+        cameraZoom.value = interpolate(event.absoluteY - offset, [yForFullZoom, startY], [maxZoom, minZoom], Extrapolate.CLAMP)
       },
     })
     //#endregion

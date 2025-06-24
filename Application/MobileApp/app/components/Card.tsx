@@ -1,13 +1,5 @@
 import { ComponentType, Fragment, ReactElement } from "react"
-import {
-  StyleProp,
-  TextStyle,
-  TouchableOpacity,
-  TouchableOpacityProps,
-  View,
-  ViewProps,
-  ViewStyle,
-} from "react-native"
+import { StyleProp, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewProps, ViewStyle } from "react-native"
 import type { ThemedStyle, ThemedStyleArray } from "@/theme"
 import { $styles } from "../theme"
 import { Text, TextProps } from "./Text"
@@ -194,12 +186,7 @@ export function Card(props: CardProps) {
   ]
 
   return (
-    <Wrapper
-      style={$containerStyle}
-      activeOpacity={0.8}
-      accessibilityRole={isPressable ? "button" : undefined}
-      {...WrapperProps}
-    >
+    <Wrapper style={$containerStyle} activeOpacity={0.8} accessibilityRole={isPressable ? "button" : undefined} {...WrapperProps}>
       {LeftComponent}
 
       <View style={$alignmentWrapperStyle}>

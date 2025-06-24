@@ -23,10 +23,7 @@ export const DemoCard: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoCard:useCase.verticalAlignment.name"
-      description="demoCard:useCase.verticalAlignment.description"
-    >
+    <DemoUseCase name="demoCard:useCase.verticalAlignment.name" description="demoCard:useCase.verticalAlignment.description">
       <Card
         headingTx="demoCard:useCase.verticalAlignment.top.heading"
         contentTx="demoCard:useCase.verticalAlignment.top.content"
@@ -61,10 +58,7 @@ export const DemoCard: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoCard:useCase.passingContent.name"
-      description="demoCard:useCase.passingContent.description"
-    >
+    <DemoUseCase name="demoCard:useCase.passingContent.name" description="demoCard:useCase.passingContent.description">
       <Card
         headingTx="demoCard:useCase.passingContent.heading"
         contentTx="demoCard:useCase.passingContent.content"
@@ -82,10 +76,7 @@ export const DemoCard: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoCard:useCase.customComponent.name"
-      description="demoCard:useCase.customComponent.description"
-    >
+    <DemoUseCase name="demoCard:useCase.customComponent.name" description="demoCard:useCase.customComponent.description">
       <Card
         HeadingComponent={
           <Button

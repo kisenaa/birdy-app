@@ -5,14 +5,7 @@ import {
   DefaultTheme as NavigationDefaultTheme,
   useTheme as useNavTheme,
 } from "@react-navigation/native"
-import {
-  type Theme,
-  type ThemeContexts,
-  type ThemedStyle,
-  type ThemedStyleArray,
-  lightTheme,
-  darkTheme,
-} from "@/theme"
+import { type Theme, type ThemeContexts, type ThemedStyle, type ThemedStyleArray, lightTheme, darkTheme } from "@/theme"
 import * as SystemUI from "expo-system-ui"
 import { adaptNavigationTheme, MD3DarkTheme, MD3LightTheme } from "react-native-paper"
 import merge from "deepmerge"
@@ -38,8 +31,7 @@ const { LightTheme, DarkTheme } = adaptNavigationTheme({
 const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme)
 const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme)
 
-const themeContextToTheme = (themeContext: ThemeContexts): Theme =>
-  themeContext === "dark" ? darkTheme : lightTheme
+const themeContextToTheme = (themeContext: ThemeContexts): Theme => (themeContext === "dark" ? darkTheme : lightTheme)
 
 const setImperativeTheming = (theme: Theme) => {
   SystemUI.setBackgroundColorAsync(theme.colors.background)

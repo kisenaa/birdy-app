@@ -31,10 +31,7 @@ import { customFontsToLoad } from "./theme"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { loadDateFnsLocale } from "./utils/formatDate"
 import { ActionSheetProvider } from "@expo/react-native-action-sheet"
-import {
-  createInferenceSession,
-  initSkia as classificationInitSkia,
-} from "./services/onnx/ClassificationInference"
+import { createInferenceSession, initSkia as classificationInitSkia } from "./services/onnx/ClassificationInference"
 import {
   createInferenceSession as CreateDetectioninferenceSession,
   createTFLiteInferenceSession,
@@ -199,11 +196,7 @@ export function App() {
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <KeyboardProvider>
         <ActionSheetProvider>
-          <AppNavigator
-            linking={linking}
-            initialState={initialNavigationState}
-            onStateChange={onNavigationStateChange}
-          />
+          <AppNavigator linking={linking} initialState={initialNavigationState} onStateChange={onNavigationStateChange} />
         </ActionSheetProvider>
       </KeyboardProvider>
     </SafeAreaProvider>

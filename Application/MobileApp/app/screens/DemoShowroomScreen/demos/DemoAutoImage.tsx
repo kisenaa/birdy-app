@@ -122,12 +122,7 @@ export const DemoAutoImage: Demo = {
         <View style={$aspectRatioHeightExampleContainer}>
           <Text text="<View />" size="xxs" weight="bold" style={{ color: theme.colors.palette.secondary400 }} />
           <Text text="<Image />" size="xxs" weight="bold" style={{ color: theme.colors.palette.secondary400 }} />
-          <Text
-            text="<AutoImage />"
-            size="xxs"
-            weight="bold"
-            style={{ color: theme.colors.palette.secondary400 }}
-          />
+          <Text text="<AutoImage />" size="xxs" weight="bold" style={{ color: theme.colors.palette.secondary400 }} />
         </View>
 
         <View style={[$aspectRatioHeightExampleContainer, { flex: 1, marginStart: theme.spacing.sm }]}>

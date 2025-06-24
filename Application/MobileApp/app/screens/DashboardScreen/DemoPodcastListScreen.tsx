@@ -13,13 +13,7 @@ import {
   ViewStyle,
 } from "react-native"
 import { type ContentStyle } from "@shopify/flash-list"
-import Animated, {
-  Extrapolation,
-  interpolate,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring,
-} from "react-native-reanimated"
+import Animated, { Extrapolation, interpolate, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated"
 import { Button, ButtonAccessoryProps, Card, EmptyState, Icon, ListView, Screen, Switch, Text } from "@/components"
 import { isRTL, translate } from "@/i18n"
 import { useStores } from "../../models"
@@ -78,12 +72,8 @@ export const DemoPodcastListScreen: FC<DashboardTabScreenProps<"DemoPodcastList"
               <EmptyState
                 preset="generic"
                 style={themed($emptyState)}
-                headingTx={
-                  episodeStore.favoritesOnly ? "demoPodcastListScreen:noFavoritesEmptyState.heading" : undefined
-                }
-                contentTx={
-                  episodeStore.favoritesOnly ? "demoPodcastListScreen:noFavoritesEmptyState.content" : undefined
-                }
+                headingTx={episodeStore.favoritesOnly ? "demoPodcastListScreen:noFavoritesEmptyState.heading" : undefined}
+                contentTx={episodeStore.favoritesOnly ? "demoPodcastListScreen:noFavoritesEmptyState.content" : undefined}
                 button={episodeStore.favoritesOnly ? "" : undefined}
                 buttonOnPress={manualRefresh}
                 imageStyle={$emptyStateImage}
@@ -209,9 +199,7 @@ const EpisodeCard = observer(function EpisodeCard({
       function ButtonLeftAccessory() {
         return (
           <View>
-            <Animated.View
-              style={[$styles.row, themed($iconContainer), StyleSheet.absoluteFill, animatedLikeButtonStyles]}
-            >
+            <Animated.View style={[$styles.row, themed($iconContainer), StyleSheet.absoluteFill, animatedLikeButtonStyles]}>
               <Icon
                 icon="heart"
                 size={ICON_SIZE}
@@ -239,11 +227,7 @@ const EpisodeCard = observer(function EpisodeCard({
       onLongPress={handlePressFavorite}
       HeadingComponent={
         <View style={[$styles.row, themed($metadata)]}>
-          <Text
-            style={themed($metadataText)}
-            size="xxs"
-            accessibilityLabel={episode.datePublished.accessibilityLabel}
-          >
+          <Text style={themed($metadataText)} size="xxs" accessibilityLabel={episode.datePublished.accessibilityLabel}>
             {episode.datePublished.textLabel}
           </Text>
           <Text style={themed($metadataText)} size="xxs" accessibilityLabel={episode.duration.accessibilityLabel}>
@@ -271,9 +255,7 @@ const EpisodeCard = observer(function EpisodeCard({
             accessibilityLabel={episode.duration.accessibilityLabel}
             weight="medium"
             text={
-              isFavorite
-                ? translate("demoPodcastListScreen:unfavoriteButton")
-                : translate("demoPodcastListScreen:favoriteButton")
+              isFavorite ? translate("demoPodcastListScreen:unfavoriteButton") : translate("demoPodcastListScreen:favoriteButton")
             }
           />
         </Button>

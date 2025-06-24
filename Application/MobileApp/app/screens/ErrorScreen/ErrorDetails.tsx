@@ -27,11 +27,7 @@ export function ErrorDetails(props: ErrorDetailsProps) {
 
       <ScrollView style={themed($errorSection)} contentContainerStyle={themed($errorSectionContentContainer)}>
         <Text style={themed($errorContent)} weight="bold" text={`${props.error}`.trim()} />
-        <Text
-          selectable
-          style={themed($errorBacktrace)}
-          text={`${props.errorInfo?.componentStack ?? ""}`.trim()}
-        />
+        <Text selectable style={themed($errorBacktrace)} text={`${props.errorInfo?.componentStack ?? ""}`.trim()} />
       </ScrollView>
 
       <Button preset="reversed" style={themed($resetButton)} onPress={props.onReset} tx="errorScreen:reset" />

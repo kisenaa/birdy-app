@@ -118,11 +118,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         <View style={themed($registerPromptContainer)}>
           <Text style={themed($registerPromptText)}>
             Not registered?{" "}
-            <Text
-              style={themed($registerPromptLink)}
-              onPress={() => _props.navigation.navigate("Register")}
-              weight="bold"
-            >
+            <Text style={themed($registerPromptLink)} onPress={() => _props.navigation.navigate("Register")} weight="bold">
               Register now!
             </Text>
           </Text>

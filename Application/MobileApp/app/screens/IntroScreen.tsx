@@ -50,13 +50,7 @@ export const IntroScreen: FC<IntroScreenProps> = observer(function IntroScreen({
             style={themed($button)}
             textStyle={themed($boldText)}
           />
-          <Button
-            testID="intro-register-button"
-            preset="reversed"
-            text="Register"
-            onPress={goRegister}
-            style={themed($button)}
-          />
+          <Button testID="intro-register-button" preset="reversed" text="Register" onPress={goRegister} style={themed($button)} />
         </View>
       </View>
     </Screen>

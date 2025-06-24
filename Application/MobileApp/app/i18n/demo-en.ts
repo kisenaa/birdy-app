@@ -270,8 +270,7 @@ export const demoEn = {
       },
       verticalAlignment: {
         name: "Vertical Alignment",
-        description:
-          "Depending on what's required, the card comes preconfigured with different alignment strategies.",
+        description: "Depending on what's required, the card comes preconfigured with different alignment strategies.",
         top: {
           heading: "Top (default)",
           content: "All content is automatically aligned to the top.",
@@ -302,8 +301,7 @@ export const demoEn = {
       },
       customComponent: {
         name: "Custom Components",
-        description:
-          "Any of the preconfigured components can be replaced with your own. You can also add additional ones.",
+        description: "Any of the preconfigured components can be replaced with your own. You can also add additional ones.",
         rightComponent: "RightComponent",
         leftComponent: "LeftComponent",
       },
@@ -403,8 +401,7 @@ export const demoEn = {
       },
       customActionComponents: {
         name: "Custom Action Components",
-        description:
-          "If the icon or text options are not enough, you can pass in your own custom action component.",
+        description: "If the icon or text options are not enough, you can pass in your own custom action component.",
         customLeftActionTitle: "Custom Left Action",
       },
       titleModes: {
@@ -424,8 +421,7 @@ export const demoEn = {
     },
   },
   demoEmptyState: {
-    description:
-      "A component to use when there is no data to display. It can be utilized to direct the user what to do next",
+    description: "A component to use when there is no data to display. It can be utilized to direct the user what to do next",
     useCase: {
       presets: {
         name: "Presets",

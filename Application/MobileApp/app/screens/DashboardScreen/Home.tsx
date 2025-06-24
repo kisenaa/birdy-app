@@ -109,10 +109,14 @@ export const Home: FC<DashboardTabScreenProps<"Home">> = observer(function Home(
       setIsLoading(true)
       const uploadedPath = await uploadImageToSpaceClassification(imageURI)
       const result = await predictBirdClassification(uploadedPath)
-      setInferResult({
-        conf: result[0].confidences[0].confidence,
-        label: result[0].confidences[0].label,
-      })
+      if (Number(result[0].confidences[0].confidence) < 0.2) {
+        setInferResult({ conf: result[0].confidences[0].confidence, label: "Unknown Species" })
+      } else {
+        setInferResult({
+          conf: result[0].confidences[0].confidence,
+          label: result[0].confidences[0].label,
+        })
+      }
       setShouldScroll(true)
       const uploadedPathDet = await uploadImageToSpaceDetection(imageURI)
       const resultDet = await predictBirdDetection(uploadedPathDet)
@@ -141,10 +145,14 @@ export const Home: FC<DashboardTabScreenProps<"Home">> = observer(function Home(
       setIsLoading(true)
       const result = await predictImageClassification(imageURI)
       console.log("Local inference result:", result)
-      setInferResult({
-        conf: result.confidence,
-        label: birdLabelName[result.maxIndex],
-      })
+      if (Number(result.confidence) < 0.2) {
+        setInferResult({ conf: result.confidence, label: "Unknown Species" })
+      } else {
+        setInferResult({
+          conf: result.confidence,
+          label: birdLabelName[result.maxIndex],
+        })
+      }
       setShouldScroll(true)
       const resultDet = await predictBirdDetectionYolo(imageURI)
       setYoloResult({
@@ -242,12 +250,7 @@ export const Home: FC<DashboardTabScreenProps<"Home">> = observer(function Home(
           <CameraPage />
         </View>
       ) : (
-        <Screen
-          preset="scroll"
-          scrollRef={scrollRef}
-          contentContainerStyle={$styles.container}
-          safeAreaEdges={["top"]}
-        >
+        <Screen preset="scroll" scrollRef={scrollRef} contentContainerStyle={$styles.container} safeAreaEdges={["top"]}>
           <Text preset="heading" text="Birds Detection" style={themed($title)} />
           <ListItem
             bottomSeparator={true}
@@ -256,11 +259,7 @@ export const Home: FC<DashboardTabScreenProps<"Home">> = observer(function Home(
               marginBottom: 20,
             }}
           >
-            <Text
-              preset="subheading"
-              text="Find and Classify birds using your camera or gallery"
-              style={themed($title)}
-            />
+            <Text preset="subheading" text="Find and Classify birds using your camera or gallery" style={themed($title)} />
           </ListItem>
 
           <Text
@@ -404,9 +403,7 @@ export const Home: FC<DashboardTabScreenProps<"Home">> = observer(function Home(
                   Inference Result :
                 </Text>
                 {yoloResult ? (
-                  <View
-                    style={{ alignItems: "center", justifyContent: "center", paddingHorizontal: 4, width: "100%" }}
-                  >
+                  <View style={{ alignItems: "center", justifyContent: "center", paddingHorizontal: 4, width: "100%" }}>
                     <YoloDetectionCanvas
                       imageUri={yoloResult.imageUri}
                       detections={yoloResult.detections}

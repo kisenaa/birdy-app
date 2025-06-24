@@ -69,10 +69,7 @@ export const DemoText: Demo = {
       <Text weight="bold">{translate("demoText:useCase.weights.bold")}</Text>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoText:useCase.passingContent.name"
-      description="demoText:useCase.passingContent.description"
-    >
+    <DemoUseCase name="demoText:useCase.passingContent.name" description="demoText:useCase.passingContent.description">
       <Text text={translate("demoText:useCase.passingContent.viaText")} />
 
       <DemoDivider />

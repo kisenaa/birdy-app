@@ -128,11 +128,7 @@ export const ListItem = forwardRef<View, ListItemProps>(function ListItem(props:
 
   const $textStyles = [$textStyle, $textStyleOverride, TextProps?.style]
 
-  const $containerStyles = [
-    topSeparator && $separatorTop,
-    bottomSeparator && $separatorBottom,
-    $containerStyleOverride,
-  ]
+  const $containerStyles = [topSeparator && $separatorTop, bottomSeparator && $separatorBottom, $containerStyleOverride]
 
   const $touchableStyles = [$styles.row, $touchableStyle, { minHeight: height }, style]
 
@@ -141,25 +137,13 @@ export const ListItem = forwardRef<View, ListItemProps>(function ListItem(props:
   return (
     <View ref={ref} style={themed($containerStyles)}>
       <Wrapper {...TouchableOpacityProps} style={$touchableStyles}>
-        <ListItemAction
-          side="left"
-          size={height}
-          icon={leftIcon}
-          iconColor={leftIconColor}
-          Component={LeftComponent}
-        />
+        <ListItemAction side="left" size={height} icon={leftIcon} iconColor={leftIconColor} Component={LeftComponent} />
 
         <Text {...TextProps} tx={tx} text={text} txOptions={txOptions} style={themed($textStyles)}>
           {children}
         </Text>
 
-        <ListItemAction
-          side="right"
-          size={height}
-          icon={rightIcon}
-          iconColor={rightIconColor}
-          Component={RightComponent}
-        />
+        <ListItemAction side="right" size={height} icon={rightIcon} iconColor={rightIconColor} Component={RightComponent} />
       </Wrapper>
     </View>
   )

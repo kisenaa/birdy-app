@@ -8,10 +8,7 @@ export const DemoEmptyState: Demo = {
   name: "EmptyState",
   description: "demoEmptyState:description",
   data: ({ theme }) => [
-    <DemoUseCase
-      name="demoEmptyState:useCase.presets.name"
-      description="demoEmptyState:useCase.presets.description"
-    >
+    <DemoUseCase name="demoEmptyState:useCase.presets.name" description="demoEmptyState:useCase.presets.description">
       <EmptyState preset="generic" />
     </DemoUseCase>,
 
@@ -45,10 +42,7 @@ export const DemoEmptyState: Demo = {
       />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoEmptyState:useCase.styling.name"
-      description="demoEmptyState:useCase.styling.description"
-    >
+    <DemoUseCase name="demoEmptyState:useCase.styling.name" description="demoEmptyState:useCase.styling.description">
       <EmptyState
         preset="generic"
         style={{ backgroundColor: theme.colors.error, paddingVertical: 20 }}

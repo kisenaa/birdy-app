@@ -26,10 +26,7 @@ interface CheckboxInputProps extends BaseToggleInputProps<CheckboxToggleProps> {
  */
 export function Checkbox(props: CheckboxToggleProps) {
   const { icon, ...rest } = props
-  const checkboxInput = useCallback(
-    (toggleProps: CheckboxInputProps) => <CheckboxInput {...toggleProps} icon={icon} />,
-    [icon],
-  )
+  const checkboxInput = useCallback((toggleProps: CheckboxInputProps) => <CheckboxInput {...toggleProps} icon={icon} />, [icon])
   return <Toggle accessibilityRole="checkbox" {...rest} ToggleInput={checkboxInput} />
 }
 
@@ -84,20 +81,9 @@ function CheckboxInput(props: CheckboxInputProps) {
   ].filter(Boolean)[0]
 
   return (
-    <View
-      style={[
-        $inputOuter,
-        { backgroundColor: offBackgroundColor, borderColor: outerBorderColor },
-        $outerStyleOverride,
-      ]}
-    >
+    <View style={[$inputOuter, { backgroundColor: offBackgroundColor, borderColor: outerBorderColor }, $outerStyleOverride]}>
       <Animated.View
-        style={[
-          $styles.toggleInner,
-          { backgroundColor: onBackgroundColor },
-          $innerStyleOverride,
-          { opacity: opacity.current },
-        ]}
+        style={[$styles.toggleInner, { backgroundColor: onBackgroundColor }, $innerStyleOverride, { opacity: opacity.current }]}
       >
         <Image
           source={icon ? iconRegistry[icon] : iconRegistry.check}

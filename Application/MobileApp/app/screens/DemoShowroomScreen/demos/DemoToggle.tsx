@@ -1,15 +1,7 @@
 /* eslint-disable react/jsx-key, react-native/no-inline-styles */
 import { useState } from "react"
 import { TextStyle, View, ViewStyle } from "react-native"
-import {
-  Checkbox,
-  CheckboxToggleProps,
-  Radio,
-  RadioToggleProps,
-  Switch,
-  SwitchToggleProps,
-  Text,
-} from "@/components"
+import { Checkbox, CheckboxToggleProps, Radio, RadioToggleProps, Switch, SwitchToggleProps, Text } from "@/components"
 import { Demo } from "../DemoShowroomScreen"
 import { DemoDivider } from "../DemoDivider"
 import { DemoUseCase } from "../DemoUseCase"
@@ -52,15 +44,9 @@ export const DemoToggle: Demo = {
         helperTx="demoToggle:useCase.variants.checkbox.helper"
       />
       <DemoDivider size={24} />
-      <ControlledRadio
-        labelTx="demoToggle:useCase.variants.radio.label"
-        helperTx="demoToggle:useCase.variants.radio.helper"
-      />
+      <ControlledRadio labelTx="demoToggle:useCase.variants.radio.label" helperTx="demoToggle:useCase.variants.radio.helper" />
       <DemoDivider size={24} />
-      <ControlledSwitch
-        labelTx="demoToggle:useCase.variants.switch.label"
-        helperTx="demoToggle:useCase.variants.switch.helper"
-      />
+      <ControlledSwitch labelTx="demoToggle:useCase.variants.switch.label" helperTx="demoToggle:useCase.variants.switch.helper" />
     </DemoUseCase>,
 
     <DemoUseCase
@@ -107,10 +93,7 @@ export const DemoToggle: Demo = {
       </Text>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoToggle:useCase.passingContent.name"
-      description="demoToggle:useCase.passingContent.description"
-    >
+    <DemoUseCase name="demoToggle:useCase.passingContent.name" description="demoToggle:useCase.passingContent.description">
       <ControlledCheckbox
         value
         labelTx="demoToggle:useCase.passingContent.useCase.checkBox.label"
@@ -125,17 +108,9 @@ export const DemoToggle: Demo = {
         helperTxOptions={{ prop: "helper" }}
       />
       <DemoDivider size={24} />
-      <ControlledCheckbox
-        value
-        labelTx="demoToggle:useCase.passingContent.useCase.checkBoxMultiLine.helper"
-        editable={false}
-      />
+      <ControlledCheckbox value labelTx="demoToggle:useCase.passingContent.useCase.checkBoxMultiLine.helper" editable={false} />
       <DemoDivider size={24} />
-      <ControlledRadio
-        value
-        labelTx="demoToggle:useCase.passingContent.useCase.radioChangeSides.helper"
-        labelPosition="left"
-      />
+      <ControlledRadio value labelTx="demoToggle:useCase.passingContent.useCase.radioChangeSides.helper" labelPosition="left" />
       <DemoDivider size={24} />
       <ControlledCheckbox
         value

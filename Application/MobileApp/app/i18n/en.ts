@@ -51,8 +51,7 @@ const en = {
   },
   demoCommunityScreen: {
     title: "Connect with the community",
-    tagLine:
-      "Plug in to Infinite Red's community of React Native engineers and level up your app development with us!",
+    tagLine: "Plug in to Infinite Red's community of React Native engineers and level up your app development with us!",
     joinUsOnSlackTitle: "Join us on Slack",
     joinUsOnSlack:
       "Wish there was a place to connect with React Native engineers around the world? Join the conversation in the Infinite Red Community Slack! Our growing community is a safe space to ask questions, learn from others, and grow your network.",
@@ -83,8 +82,7 @@ const en = {
   demoDebugScreen: {
     howTo: "HOW TO",
     title: "Debug",
-    tagLine:
-      "Congratulations, you've got a very advanced React Native app template here.  Take advantage of this boilerplate!",
+    tagLine: "Congratulations, you've got a very advanced React Native app template here.  Take advantage of this boilerplate!",
     reactotron: "Send to Reactotron",
     reportBugs: "Report Bugs",
     demoList: "Demo List",

@@ -3,14 +3,7 @@ import { Tensor, InferenceSession } from "onnxruntime-react-native"
 import { Asset } from "expo-asset"
 import performance from "react-native-performance"
 import { readAsStringAsync, EncodingType } from "expo-file-system"
-import {
-  Skia,
-  ColorType,
-  AlphaType,
-  CatmullRomCubicSampling,
-  SkSurface,
-  SkPaint,
-} from "@shopify/react-native-skia"
+import { Skia, ColorType, AlphaType, CatmullRomCubicSampling, SkSurface, SkPaint } from "@shopify/react-native-skia"
 
 let cropSurf: SkSurface | null = null
 let paint: SkPaint | null = null

@@ -66,11 +66,7 @@ export const DemoIcon: Demo = {
       <Icon icon="ladybug" color={theme.colors.palette.angry500} containerStyle={themed($demoIconContainer)} />
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoIcon:useCase.styling.name"
-      description="demoIcon:useCase.styling.description"
-      layout="row"
-    >
+    <DemoUseCase name="demoIcon:useCase.styling.name" description="demoIcon:useCase.styling.description" layout="row">
       <Icon icon="ladybug" style={themed($customIcon)} size={40} containerStyle={themed($customIconContainer)} />
     </DemoUseCase>,
   ],

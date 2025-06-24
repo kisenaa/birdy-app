@@ -41,20 +41,14 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
     <Screen preset="fixed" contentContainerStyle={$styles.flex1}>
       <View style={themed($topContainer)}>
         <Image style={themed($welcomeLogo)} source={welcomeLogo} resizeMode="contain" />
-        <Text
-          testID="welcome-heading"
-          style={themed($welcomeHeading)}
-          tx="welcomeScreen:readyForLaunch"
-          preset="heading"
-        />
+        <Text testID="welcome-heading" style={themed($welcomeHeading)} tx="welcomeScreen:readyForLaunch" preset="heading" />
       </View>
 
       <View style={themed([$bottomContainer, $bottomContainerInsets])}>
         <View style={{ gap: theme.spacing.md }}>
           <Text size="md">
-            Please read the following terms carefully before using the app. By accessing or using any part of the
-            service, you agree to be bound by these{" "}
-            <Text size="md" style={themed($link)} text="Terms of Service" />
+            Please read the following terms carefully before using the app. By accessing or using any part of the service, you
+            agree to be bound by these <Text size="md" style={themed($link)} text="Terms of Service" />
           </Text>
           <Checkbox
             label="I accept the Terms of Service"

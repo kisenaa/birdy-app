@@ -48,10 +48,7 @@ export function getScaledImageSize(
 
   if (maxWidth && maxHeight) {
     const scale = Math.min(maxWidth / originalWidth, maxHeight / originalHeight)
-    return [
-      PixelRatio.roundToNearestPixel(originalWidth * scale),
-      PixelRatio.roundToNearestPixel(originalHeight * scale),
-    ]
+    return [PixelRatio.roundToNearestPixel(originalWidth * scale), PixelRatio.roundToNearestPixel(originalHeight * scale)]
   } else if (maxWidth) {
     return [maxWidth, PixelRatio.roundToNearestPixel(maxWidth / aspectRatio)]
   } else if (maxHeight) {

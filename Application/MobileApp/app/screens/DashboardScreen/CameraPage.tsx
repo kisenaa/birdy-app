@@ -167,12 +167,7 @@ export function CameraPage(): ReactElement {
     onActive: (event, context) => {
       // we're trying to map the scale gesture to a linear zoom here
       const startZoom = context.startZoom ?? 0
-      const scale = interpolate(
-        event.scale,
-        [1 - 1 / SCALE_FULL_ZOOM, 1, SCALE_FULL_ZOOM],
-        [-1, 0, 1],
-        Extrapolate.CLAMP,
-      )
+      const scale = interpolate(event.scale, [1 - 1 / SCALE_FULL_ZOOM, 1, SCALE_FULL_ZOOM], [-1, 0, 1], Extrapolate.CLAMP)
       zoom.value = interpolate(scale, [-1, 0, 1], [minZoom, startZoom, maxZoom], Extrapolate.CLAMP)
     },
   })
@@ -279,11 +274,7 @@ export function CameraPage(): ReactElement {
           </PressableOpacity>
         )}
         {canToggleNightMode && (
-          <PressableOpacity
-            style={styles.button}
-            onPress={() => setEnableNightMode(!enableNightMode)}
-            disabledOpacity={0.4}
-          >
+          <PressableOpacity style={styles.button} onPress={() => setEnableNightMode(!enableNightMode)} disabledOpacity={0.4}>
             <IonIcon name={enableNightMode ? "moon" : "moon-outline"} color="white" size={24} />
           </PressableOpacity>
         )}

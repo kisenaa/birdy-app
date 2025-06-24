@@ -56,10 +56,7 @@ export const DemoButton: Demo = {
       <Button preset="reversed">Reversed - Ad Ipsum</Button>
     </DemoUseCase>,
 
-    <DemoUseCase
-      name="demoButton:useCase.passingContent.name"
-      description="demoButton:useCase.passingContent.description"
-    >
+    <DemoUseCase name="demoButton:useCase.passingContent.name" description="demoButton:useCase.passingContent.description">
       <Button text={translate("demoButton:useCase.passingContent.viaTextProps")} />
       <DemoDivider />
 
@@ -69,18 +66,12 @@ export const DemoButton: Demo = {
       <Button>{translate("demoButton:useCase.passingContent.children")}</Button>
       <DemoDivider />
 
-      <Button
-        preset="filled"
-        RightAccessory={(props) => <Icon containerStyle={props.style} style={$iconStyle} icon="ladybug" />}
-      >
+      <Button preset="filled" RightAccessory={(props) => <Icon containerStyle={props.style} style={$iconStyle} icon="ladybug" />}>
         {translate("demoButton:useCase.passingContent.rightAccessory")}
       </Button>
       <DemoDivider />
 
-      <Button
-        preset="filled"
-        LeftAccessory={(props) => <Icon containerStyle={props.style} style={$iconStyle} icon="ladybug" />}
-      >
+      <Button preset="filled" LeftAccessory={(props) => <Icon containerStyle={props.style} style={$iconStyle} icon="ladybug" />}>
         {translate("demoButton:useCase.passingContent.leftAccessory")}
       </Button>
       <DemoDivider />

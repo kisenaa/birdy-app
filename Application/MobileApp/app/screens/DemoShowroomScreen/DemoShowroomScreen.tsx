@@ -83,9 +83,7 @@ const NativeListItem: FC<DemoListItem> = ({ item, sectionIndex, handleScroll }) 
 const ShowroomListItem = Platform.select({ web: WebListItem, default: NativeListItem })
 const isAndroid = Platform.OS === "android"
 
-export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = function DemoShowroomScreen(
-  _props,
-) {
+export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = function DemoShowroomScreen(_props) {
   const [open, setOpen] = useState(false)
   const timeout = useRef<ReturnType<typeof setTimeout>>()
   const listRef = useRef<SectionList>(null)
@@ -135,11 +133,7 @@ export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = f
     }
   }, [handleScroll, params, theme, themed])
 
-  const scrollToIndexFailed = (info: {
-    index: number
-    highestMeasuredFrameIndex: number
-    averageItemLength: number
-  }) => {
+  const scrollToIndexFailed = (info: { index: number; highestMeasuredFrameIndex: number; averageItemLength: number }) => {
     listRef.current?.getScrollResponder()?.scrollToEnd()
     timeout.current = setTimeout(
       () =>
@@ -179,9 +173,7 @@ export const DemoShowroomScreen: FC<DashboardTabScreenProps<"DemoShowroom">> = f
               useCases: d.data({ theme, themed }).map((u) => translate(u.props.name)),
             }))}
             keyExtractor={(item) => item.name}
-            renderItem={({ item, index: sectionIndex }) => (
-              <ShowroomListItem {...{ item, sectionIndex, handleScroll }} />
-            )}
+            renderItem={({ item, index: sectionIndex }) => <ShowroomListItem {...{ item, sectionIndex, handleScroll }} />}
           />
         </View>
       )}

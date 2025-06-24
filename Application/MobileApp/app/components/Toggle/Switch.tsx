@@ -74,13 +74,9 @@ function SwitchInput(props: SwitchInputProps) {
 
   const knobSizeFallback = 2
 
-  const knobWidth = [$detailStyleOverride?.width, $switchDetail?.width, knobSizeFallback].find(
-    (v) => typeof v === "number",
-  )
+  const knobWidth = [$detailStyleOverride?.width, $switchDetail?.width, knobSizeFallback].find((v) => typeof v === "number")
 
-  const knobHeight = [$detailStyleOverride?.height, $switchDetail?.height, knobSizeFallback].find(
-    (v) => typeof v === "number",
-  )
+  const knobHeight = [$detailStyleOverride?.height, $switchDetail?.height, knobSizeFallback].find((v) => typeof v === "number")
 
   const offBackgroundColor = [
     disabled && colors.palette.neutral400,
@@ -142,12 +138,7 @@ function SwitchInput(props: SwitchInputProps) {
   return (
     <View style={[$inputOuter, { backgroundColor: offBackgroundColor }, $outerStyleOverride]}>
       <Animated.View
-        style={[
-          $themedSwitchInner,
-          { backgroundColor: onBackgroundColor },
-          $innerStyleOverride,
-          { opacity: opacity.current },
-        ]}
+        style={[$themedSwitchInner, { backgroundColor: onBackgroundColor }, $innerStyleOverride, { opacity: opacity.current }]}
       />
 
       <SwitchAccessibilityLabel {...props} role="on" />
@@ -217,10 +208,7 @@ function SwitchAccessibilityLabel(props: SwitchInputProps & { role: "on" | "off"
   )
 }
 
-const $inputOuter: StyleProp<ViewStyle> = [
-  $inputOuterBase,
-  { height: 32, width: 56, borderRadius: 16, borderWidth: 0 },
-]
+const $inputOuter: StyleProp<ViewStyle> = [$inputOuterBase, { height: 32, width: 56, borderRadius: 16, borderWidth: 0 }]
 
 const $switchInner: ThemedStyle<ViewStyle> = ({ colors }) => ({
   borderColor: colors.transparent,
