@@ -1,5 +1,13 @@
 import { ComponentType, Fragment, ReactElement } from "react"
-import { StyleProp, TextStyle, TouchableOpacity, TouchableOpacityProps, View, ViewProps, ViewStyle } from "react-native"
+import {
+  StyleProp,
+  TextStyle,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+  ViewProps,
+  ViewStyle,
+} from "react-native"
 import type { ThemedStyle, ThemedStyleArray } from "@/theme"
 import { $styles } from "../theme"
 import { Text, TextProps } from "./Text"
@@ -159,7 +167,12 @@ export function Card(props: CardProps) {
   const HeaderContentWrapper = verticalAlignment === "force-footer-bottom" ? View : Fragment
 
   const $containerStyle: StyleProp<ViewStyle> = [themed($containerPresets[preset]), $containerStyleOverride]
-  const $headingStyle = [themed($headingPresets[preset]), (isFooterPresent || isContentPresent) && { marginBottom: spacing.xxxs }, $headingStyleOverride, HeadingTextProps?.style]
+  const $headingStyle = [
+    themed($headingPresets[preset]),
+    (isFooterPresent || isContentPresent) && { marginBottom: spacing.xxxs },
+    $headingStyleOverride,
+    HeadingTextProps?.style,
+  ]
   const $contentStyle = [
     themed($contentPresets[preset]),
     isHeadingPresent && { marginTop: spacing.xxxs },
@@ -167,7 +180,12 @@ export function Card(props: CardProps) {
     $contentStyleOverride,
     ContentTextProps?.style,
   ]
-  const $footerStyle = [themed($footerPresets[preset]), (isHeadingPresent || isContentPresent) && { marginTop: spacing.xxxs }, $footerStyleOverride, FooterTextProps?.style]
+  const $footerStyle = [
+    themed($footerPresets[preset]),
+    (isHeadingPresent || isContentPresent) && { marginTop: spacing.xxxs },
+    $footerStyleOverride,
+    FooterTextProps?.style,
+  ]
   const $alignmentWrapperStyle = [
     $alignmentWrapper,
     { justifyContent: $alignmentWrapperFlexOptions[verticalAlignment] },
@@ -176,17 +194,53 @@ export function Card(props: CardProps) {
   ]
 
   return (
-    <Wrapper style={$containerStyle} activeOpacity={0.8} accessibilityRole={isPressable ? "button" : undefined} {...WrapperProps}>
+    <Wrapper
+      style={$containerStyle}
+      activeOpacity={0.8}
+      accessibilityRole={isPressable ? "button" : undefined}
+      {...WrapperProps}
+    >
       {LeftComponent}
 
       <View style={$alignmentWrapperStyle}>
         <HeaderContentWrapper>
-          {HeadingComponent || (isHeadingPresent && <Text weight="bold" text={heading} tx={headingTx} txOptions={headingTxOptions} {...HeadingTextProps} style={$headingStyle} />)}
+          {HeadingComponent ||
+            (isHeadingPresent && (
+              <Text
+                weight="bold"
+                text={heading}
+                tx={headingTx}
+                txOptions={headingTxOptions}
+                {...HeadingTextProps}
+                style={$headingStyle}
+              />
+            ))}
 
-          {ContentComponent || (isContentPresent && <Text weight="normal" text={content} tx={contentTx} txOptions={contentTxOptions} {...ContentTextProps} style={$contentStyle} />)}
+          {ContentComponent ||
+            (isContentPresent && (
+              <Text
+                weight="normal"
+                text={content}
+                tx={contentTx}
+                txOptions={contentTxOptions}
+                {...ContentTextProps}
+                style={$contentStyle}
+              />
+            ))}
         </HeaderContentWrapper>
 
-        {FooterComponent || (isFooterPresent && <Text weight="normal" size="xs" text={footer} tx={footerTx} txOptions={footerTxOptions} {...FooterTextProps} style={$footerStyle} />)}
+        {FooterComponent ||
+          (isFooterPresent && (
+            <Text
+              weight="normal"
+              size="xs"
+              text={footer}
+              tx={footerTx}
+              txOptions={footerTxOptions}
+              {...FooterTextProps}
+              style={$footerStyle}
+            />
+          ))}
       </View>
 
       {RightComponent}

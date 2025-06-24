@@ -13,7 +13,9 @@ const reactNativeLiveLogo = require("../../../assets/images/demo/rnl-logo.png")
 const reactNativeRadioLogo = require("../../../assets/images/demo/rnr-logo.png")
 const reactNativeNewsletterLogo = require("../../../assets/images/demo/rnn-logo.png")
 
-export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> = function DemoCommunityScreen(_props) {
+export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> = function DemoCommunityScreen(
+  _props,
+) {
   const { themed } = useAppTheme()
   return (
     <Screen preset="scroll" contentContainerStyle={$styles.container} safeAreaEdges={["top"]}>
@@ -22,7 +24,12 @@ export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> =
 
       <Text preset="subheading" tx="demoCommunityScreen:joinUsOnSlackTitle" />
       <Text tx="demoCommunityScreen:joinUsOnSlack" style={themed($description)} />
-      <ListItem tx="demoCommunityScreen:joinSlackLink" leftIcon="slack" rightIcon={isRTL ? "caretLeft" : "caretRight"} onPress={() => openLinkInBrowser("https://community.infinite.red/")} />
+      <ListItem
+        tx="demoCommunityScreen:joinSlackLink"
+        leftIcon="slack"
+        rightIcon={isRTL ? "caretLeft" : "caretRight"}
+        onPress={() => openLinkInBrowser("https://community.infinite.red/")}
+      />
       <Text preset="subheading" tx="demoCommunityScreen:makeIgniteEvenBetterTitle" style={themed($sectionTitle)} />
       <Text tx="demoCommunityScreen:makeIgniteEvenBetter" style={themed($description)} />
       <ListItem
@@ -32,7 +39,11 @@ export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> =
         onPress={() => openLinkInBrowser("https://github.com/infinitered/ignite")}
       />
 
-      <Text preset="subheading" tx="demoCommunityScreen:theLatestInReactNativeTitle" style={themed($sectionTitle)} />
+      <Text
+        preset="subheading"
+        tx="demoCommunityScreen:theLatestInReactNativeTitle"
+        style={themed($sectionTitle)}
+      />
       <Text tx="demoCommunityScreen:theLatestInReactNative" style={themed($description)} />
       <ListItem
         tx="demoCommunityScreen:reactNativeRadioLink"
@@ -79,7 +90,12 @@ export const DemoCommunityScreen: FC<DashboardTabScreenProps<"DemoCommunity">> =
       />
       <Text preset="subheading" tx="demoCommunityScreen:hireUsTitle" style={themed($sectionTitle)} />
       <Text tx="demoCommunityScreen:hireUs" style={themed($description)} />
-      <ListItem tx="demoCommunityScreen:hireUsLink" leftIcon="clap" rightIcon={isRTL ? "caretLeft" : "caretRight"} onPress={() => openLinkInBrowser("https://infinite.red/contact")} />
+      <ListItem
+        tx="demoCommunityScreen:hireUsLink"
+        leftIcon="clap"
+        rightIcon={isRTL ? "caretLeft" : "caretRight"}
+        onPress={() => openLinkInBrowser("https://infinite.red/contact")}
+      />
     </Screen>
   )
 }

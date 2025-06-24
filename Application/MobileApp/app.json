@@ -58,6 +58,7 @@
         "expo-build-properties",
         {
           "android": {
+            "minSdkVersion": 26,
             "build": {
               "architectures": ["armeabi-v7a", "x86_64"]
             }

@@ -121,11 +121,18 @@ export const ListItem = forwardRef<View, ListItemProps>(function ListItem(props:
   const { themed } = useAppTheme()
 
   const isTouchable =
-    TouchableOpacityProps.onPress !== undefined || TouchableOpacityProps.onPressIn !== undefined || TouchableOpacityProps.onPressOut !== undefined || TouchableOpacityProps.onLongPress !== undefined
+    TouchableOpacityProps.onPress !== undefined ||
+    TouchableOpacityProps.onPressIn !== undefined ||
+    TouchableOpacityProps.onPressOut !== undefined ||
+    TouchableOpacityProps.onLongPress !== undefined
 
   const $textStyles = [$textStyle, $textStyleOverride, TextProps?.style]
 
-  const $containerStyles = [topSeparator && $separatorTop, bottomSeparator && $separatorBottom, $containerStyleOverride]
+  const $containerStyles = [
+    topSeparator && $separatorTop,
+    bottomSeparator && $separatorBottom,
+    $containerStyleOverride,
+  ]
 
   const $touchableStyles = [$styles.row, $touchableStyle, { minHeight: height }, style]
 
@@ -134,13 +141,25 @@ export const ListItem = forwardRef<View, ListItemProps>(function ListItem(props:
   return (
     <View ref={ref} style={themed($containerStyles)}>
       <Wrapper {...TouchableOpacityProps} style={$touchableStyles}>
-        <ListItemAction side="left" size={height} icon={leftIcon} iconColor={leftIconColor} Component={LeftComponent} />
+        <ListItemAction
+          side="left"
+          size={height}
+          icon={leftIcon}
+          iconColor={leftIconColor}
+          Component={LeftComponent}
+        />
 
         <Text {...TextProps} tx={tx} text={text} txOptions={txOptions} style={themed($textStyles)}>
           {children}
         </Text>
 
-        <ListItemAction side="right" size={height} icon={rightIcon} iconColor={rightIconColor} Component={RightComponent} />
+        <ListItemAction
+          side="right"
+          size={height}
+          icon={rightIcon}
+          iconColor={rightIconColor}
+          Component={RightComponent}
+        />
       </Wrapper>
     </View>
   )
@@ -160,7 +179,17 @@ function ListItemAction(props: ListItemActionProps) {
 
   if (icon !== undefined) {
     return (
-      <Icon size={24} icon={icon} color={iconColor} containerStyle={themed([$iconContainerStyles, side === "left" && $iconContainerLeft, side === "right" && $iconContainerRight, { height: size }])} />
+      <Icon
+        size={24}
+        icon={icon}
+        color={iconColor}
+        containerStyle={themed([
+          $iconContainerStyles,
+          side === "left" && $iconContainerLeft,
+          side === "right" && $iconContainerRight,
+          { height: size },
+        ])}
+      />
     )
   }
 

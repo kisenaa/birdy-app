@@ -3,7 +3,14 @@ import { Tensor, InferenceSession } from "onnxruntime-react-native"
 import { Asset } from "expo-asset"
 import performance from "react-native-performance"
 import { readAsStringAsync, EncodingType } from "expo-file-system"
-import { Skia, ColorType, AlphaType, CatmullRomCubicSampling, SkSurface, SkPaint } from "@shopify/react-native-skia"
+import {
+  Skia,
+  ColorType,
+  AlphaType,
+  CatmullRomCubicSampling,
+  SkSurface,
+  SkPaint,
+} from "@shopify/react-native-skia"
 
 let cropSurf: SkSurface | null = null
 let paint: SkPaint | null = null
@@ -34,7 +41,16 @@ export const preProcessImage_NCHW_Skia = async (imageUri: string) => {
 
   console.log(h256, w256)
   const surf = Skia.Surface.MakeOffscreen(w256, h256)!
-  surf.getCanvas().drawImageRectCubic(image, { x: 0, y: 0, width: ow, height: oh }, { x: 0, y: 0, width: w256, height: h256 }, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
+  surf
+    .getCanvas()
+    .drawImageRectCubic(
+      image,
+      { x: 0, y: 0, width: ow, height: oh },
+      { x: 0, y: 0, width: w256, height: h256 },
+      CatmullRomCubicSampling.B,
+      CatmullRomCubicSampling.C,
+      paint,
+    )
   surf.flush()
   const resized = surf.makeImageSnapshot()
 
@@ -44,7 +60,16 @@ export const preProcessImage_NCHW_Skia = async (imageUri: string) => {
 
   cropSurf!.getCanvas().clear(Skia.Color("transparent")) // Clear the canvas to avoid artifacts
   cropSurf!.flush()
-  cropSurf!.getCanvas().drawImageRectCubic(resized, { x: cx, y: cy, width: 224, height: 224 }, { x: 0, y: 0, width: 224, height: 224 }, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
+  cropSurf!
+    .getCanvas()
+    .drawImageRectCubic(
+      resized,
+      { x: cx, y: cy, width: 224, height: 224 },
+      { x: 0, y: 0, width: 224, height: 224 },
+      CatmullRomCubicSampling.B,
+      CatmullRomCubicSampling.C,
+      paint,
+    )
   cropSurf!.flush()
   const cropped = cropSurf!.makeImageSnapshot()
 
@@ -92,7 +117,16 @@ export const preProcessImage_NHWC_SKIA = async (imageUri: string) => {
 
   console.log(h256, w256)
   const surf = Skia.Surface.MakeOffscreen(w256, h256)!
-  surf.getCanvas().drawImageRectCubic(image, { x: 0, y: 0, width: ow, height: oh }, { x: 0, y: 0, width: w256, height: h256 }, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
+  surf
+    .getCanvas()
+    .drawImageRectCubic(
+      image,
+      { x: 0, y: 0, width: ow, height: oh },
+      { x: 0, y: 0, width: w256, height: h256 },
+      CatmullRomCubicSampling.B,
+      CatmullRomCubicSampling.C,
+      paint,
+    )
   surf.flush()
   const resized = surf.makeImageSnapshot()
 
@@ -102,7 +136,16 @@ export const preProcessImage_NHWC_SKIA = async (imageUri: string) => {
 
   cropSurf!.getCanvas().clear(Skia.Color("transparent")) // Clear the canvas to avoid artifacts
   cropSurf!.flush()
-  cropSurf!.getCanvas().drawImageRectCubic(resized, { x: cx, y: cy, width: 224, height: 224 }, { x: 0, y: 0, width: 224, height: 224 }, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
+  cropSurf!
+    .getCanvas()
+    .drawImageRectCubic(
+      resized,
+      { x: cx, y: cy, width: 224, height: 224 },
+      { x: 0, y: 0, width: 224, height: 224 },
+      CatmullRomCubicSampling.B,
+      CatmullRomCubicSampling.C,
+      paint,
+    )
   cropSurf!.flush()
   const cropped = cropSurf!.makeImageSnapshot()
 

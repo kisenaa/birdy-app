@@ -102,7 +102,7 @@ export const preProcessImage_NHWC = async (imageUri: string) => {
   return new Tensor("float32", float32Data, shape)
 }
 
-let localUri: string | null = null
+const localUri: string | null = null
 let session: InferenceSession | null = null
 
 /*

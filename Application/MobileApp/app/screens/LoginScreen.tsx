@@ -1,20 +1,11 @@
 import { observer } from "mobx-react-lite"
 import { ComponentType, FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle, ImageStyle, View } from "react-native"
-import {
-  AutoImage,
-  Button,
-  PressableIcon,
-  Screen,
-  Text,
-  TextField,
-  TextFieldAccessoryProps,
-} from "../components"
+import { TextInput, TextStyle, ViewStyle, ImageStyle, View, Platform } from "react-native"
+import { AutoImage, Button, PressableIcon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import type { ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
-import { Image } from "react-native"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -35,12 +26,8 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   } = useAppTheme()
 
   useEffect(() => {
-    // Here is where you could fetch credentials from keychain or storage
-    // and pre-fill the form fields.
     setAuthEmail("")
     setAuthPassword("")
-
-    // Return a "cleanup" function that React will run when the component unmounts
     return () => {
       setAuthPassword("")
       setAuthEmail("")
@@ -52,16 +39,10 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   function login() {
     setIsSubmitted(true)
     setAttemptsCount(attemptsCount + 1)
-
     if (validationError) return
-
-    // Make a request to your server to get an authentication token.
-    // If successful, reset the fields and set the token.
     setIsSubmitted(false)
     setAuthPassword("")
     setAuthEmail("")
-
-    // We'll mock this with a fake token.
     setAuthToken(String(Date.now()))
   }
 
@@ -84,77 +65,84 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   return (
     <Screen
       preset="auto"
+      keyboardOffset={Platform.select({ ios: 64, android: 0 })}
       contentContainerStyle={themed($screenContentContainer)}
-      safeAreaEdges={["bottom"]}
+      safeAreaEdges={["top", "bottom"]}
     >
-      <AutoImage
-        source={require("../../assets/images/intro-logo.png")}
-        maxWidth={280}
-        maxHeight={280}
-        style={themed($logoStyle)}
-      />
-      <Text testID="login-heading" tx="loginScreen:logIn" preset="heading" style={themed($logIn)} />
-      {attemptsCount > 2 && (
-        <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />
-      )}
-      <View style={themed($fieldsContainer)}>
-        <TextField
-          value={authEmail}
-          onChangeText={setAuthEmail}
-          containerStyle={themed($textField)}
-          autoCapitalize="none"
-          autoComplete="email"
-          autoCorrect={false}
-          keyboardType="email-address"
-          labelTx="loginScreen:emailFieldLabel"
-          placeholderTx="loginScreen:emailFieldPlaceholder"
-          helper={error}
-          status={error ? "error" : undefined}
-          onSubmitEditing={() => authPasswordInput.current?.focus()}
+      <View style={themed($contentWrapper)}>
+        <AutoImage
+          source={require("../../assets/images/intro-logo.png")}
+          maxWidth={280}
+          maxHeight={280}
+          style={themed($logoStyle)}
         />
-        <TextField
-          ref={authPasswordInput}
-          value={authPassword}
-          onChangeText={setAuthPassword}
-          containerStyle={themed($textField)}
-          autoCapitalize="none"
-          autoComplete="password"
-          autoCorrect={false}
-          secureTextEntry={isAuthPasswordHidden}
-          labelTx="loginScreen:passwordFieldLabel"
-          placeholderTx="loginScreen:passwordFieldPlaceholder"
-          onSubmitEditing={login}
-          RightAccessory={PasswordRightAccessory}
-        />
-        <Button
-          testID="login-button"
-          tx="loginScreen:tapToLogIn"
-          style={themed($tapButton)}
-          preset="reversed"
-          onPress={login}
-        />
-      </View>
-      <View style={themed($registerPromptContainer)}>
-        <Text style={themed($registerPromptText)}>
-          Not registered?{" "}
-          <Text
-            style={themed($registerPromptLink)}
-            onPress={() => _props.navigation.navigate("Register")}
-            weight="bold"
-          >
-            Register now!
+        <Text testID="login-heading" tx="loginScreen:logIn" preset="heading" style={themed($logIn)} />
+        {attemptsCount > 2 && <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />}
+        <View style={themed($fieldsContainer)}>
+          <TextField
+            value={authEmail}
+            onChangeText={setAuthEmail}
+            containerStyle={themed($textField)}
+            autoCapitalize="none"
+            autoComplete="email"
+            autoCorrect={false}
+            keyboardType="email-address"
+            labelTx="loginScreen:emailFieldLabel"
+            placeholderTx="loginScreen:emailFieldPlaceholder"
+            helper={error}
+            status={error ? "error" : undefined}
+            onSubmitEditing={() => authPasswordInput.current?.focus()}
+          />
+          <TextField
+            ref={authPasswordInput}
+            value={authPassword}
+            onChangeText={setAuthPassword}
+            containerStyle={themed($textField)}
+            autoCapitalize="none"
+            autoComplete="password"
+            autoCorrect={false}
+            secureTextEntry={isAuthPasswordHidden}
+            labelTx="loginScreen:passwordFieldLabel"
+            placeholderTx="loginScreen:passwordFieldPlaceholder"
+            onSubmitEditing={login}
+            RightAccessory={PasswordRightAccessory}
+          />
+          <Button
+            testID="login-button"
+            tx="loginScreen:tapToLogIn"
+            style={themed($tapButton)}
+            preset="reversed"
+            onPress={login}
+          />
+        </View>
+        <View style={themed($registerPromptContainer)}>
+          <Text style={themed($registerPromptText)}>
+            Not registered?{" "}
+            <Text
+              style={themed($registerPromptLink)}
+              onPress={() => _props.navigation.navigate("Register")}
+              weight="bold"
+            >
+              Register now!
+            </Text>
           </Text>
-        </Text>
+        </View>
       </View>
     </Screen>
   )
 })
 
 const $screenContentContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  flex: 1,
+  flexGrow: 1,
+  paddingVertical: spacing.xxl,
   justifyContent: "center",
   alignItems: "center",
-  paddingVertical: spacing.xxl,
+})
+
+const $contentWrapper: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  justifyContent: "center",
+  alignItems: "center",
+  paddingVertical: spacing.xl,
 })
 
 const $logIn: ThemedStyle<TextStyle> = ({ spacing }) => ({

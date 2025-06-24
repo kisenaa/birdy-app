@@ -3,7 +3,14 @@ import { Tensor, InferenceSession } from "onnxruntime-react-native"
 import { Asset } from "expo-asset"
 import performance from "react-native-performance"
 import { readAsStringAsync, EncodingType } from "expo-file-system"
-import { Skia, ColorType, AlphaType, CatmullRomCubicSampling, SkSurface, SkPaint } from "@shopify/react-native-skia"
+import {
+  Skia,
+  ColorType,
+  AlphaType,
+  CatmullRomCubicSampling,
+  SkSurface,
+  SkPaint,
+} from "@shopify/react-native-skia"
 import { BirdDetector } from "modules/bird-inference-native"
 
 const inputSize = 640
@@ -40,14 +47,25 @@ export const preProcessImage_YOLO_NHWC_SKIA = async (imageUri: string) => {
 
   // Resize first
   const resizedSurf = Skia.Surface.MakeOffscreen(nw, nh)!
-  resizedSurf.getCanvas().drawImageRectCubic(image, { x: 0, y: 0, width: ow, height: oh }, { x: 0, y: 0, width: nw, height: nh }, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
+  resizedSurf
+    .getCanvas()
+    .drawImageRectCubic(
+      image,
+      { x: 0, y: 0, width: ow, height: oh },
+      { x: 0, y: 0, width: nw, height: nh },
+      CatmullRomCubicSampling.B,
+      CatmullRomCubicSampling.C,
+      paint,
+    )
   resizedSurf.flush()
   const resizedImage = resizedSurf.makeImageSnapshot()
 
   // Pad to 640×640
   paddedSurf!.getCanvas().clear(Skia.Color("black"))
   paddedSurf!.flush()
-  paddedSurf!.getCanvas().drawImageCubic(resizedImage, dx, dy, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
+  paddedSurf!
+    .getCanvas()
+    .drawImageCubic(resizedImage, dx, dy, CatmullRomCubicSampling.B, CatmullRomCubicSampling.C, paint)
   paddedSurf!.flush()
   const finalImage = paddedSurf!.makeImageSnapshot()
 
@@ -73,7 +91,11 @@ export const preProcessImage_YOLO_NHWC_SKIA = async (imageUri: string) => {
   }
 
   // Return NHWC tensor
-  return { tensor: new Tensor("float32", float32Data, [1, inputSize, inputSize, 3]), originalWidth: ow, originalHeight: oh }
+  return {
+    tensor: new Tensor("float32", float32Data, [1, inputSize, inputSize, 3]),
+    originalWidth: ow,
+    originalHeight: oh,
+  }
 }
 
 let session: InferenceSession | null = null
@@ -159,7 +181,6 @@ export async function createTFLiteInferenceSession() {
     console.log("TFLite inference session created successfully.")
   } catch (e) {
     console.error("Error creating TFLite inference session:", e)
-    throw new Error("Failed to create TFLite inference session")
   }
 }
 
@@ -186,7 +207,7 @@ type YoloDetectionResult = {
   originalHeight: number
 }
 
-type DetectionBox = {
+export type DetectionBox = {
   x1: number
   y1: number
   x2: number

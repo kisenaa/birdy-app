@@ -2,7 +2,14 @@
 /* eslint-disable react-native/no-color-literals */
 import { useEffect } from "react"
 import { View } from "react-native"
-import Animated, { useSharedValue, useAnimatedStyle, withRepeat, withTiming, Easing, cancelAnimation } from "react-native-reanimated"
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  Easing,
+  cancelAnimation,
+} from "react-native-reanimated"
 
 type InfiniteProgressBarProps = {
   width?: number
@@ -12,7 +19,13 @@ type InfiniteProgressBarProps = {
   isLoading: boolean
 }
 
-export function InfiniteProgressBar({ width = 300, height = 8, barWidth = 0.3, color = "#3498db", isLoading }: InfiniteProgressBarProps) {
+export function InfiniteProgressBar({
+  width = 300,
+  height = 8,
+  barWidth = 0.3,
+  color = "#3498db",
+  isLoading,
+}: InfiniteProgressBarProps) {
   const progress = useSharedValue(0)
   const barPx = width * barWidth
 

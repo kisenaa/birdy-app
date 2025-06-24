@@ -1,8 +1,21 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { StyleProp, useColorScheme } from "react-native"
-import { DarkTheme, DefaultTheme, useTheme as useNavTheme } from "@react-navigation/native"
-import { type Theme, type ThemeContexts, type ThemedStyle, type ThemedStyleArray, lightTheme, darkTheme } from "@/theme"
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+  useTheme as useNavTheme,
+} from "@react-navigation/native"
+import {
+  type Theme,
+  type ThemeContexts,
+  type ThemedStyle,
+  type ThemedStyleArray,
+  lightTheme,
+  darkTheme,
+} from "@/theme"
 import * as SystemUI from "expo-system-ui"
+import { adaptNavigationTheme, MD3DarkTheme, MD3LightTheme } from "react-native-paper"
+import merge from "deepmerge"
 
 type ThemeContextType = {
   themeScheme: ThemeContexts
@@ -17,7 +30,16 @@ export const ThemeContext = createContext<ThemeContextType>({
   },
 })
 
-const themeContextToTheme = (themeContext: ThemeContexts): Theme => (themeContext === "dark" ? darkTheme : lightTheme)
+const { LightTheme, DarkTheme } = adaptNavigationTheme({
+  reactNavigationLight: NavigationDefaultTheme,
+  reactNavigationDark: NavigationDarkTheme,
+})
+
+const CombinedDefaultTheme = merge(MD3LightTheme, LightTheme)
+const CombinedDarkTheme = merge(MD3DarkTheme, DarkTheme)
+
+const themeContextToTheme = (themeContext: ThemeContexts): Theme =>
+  themeContext === "dark" ? darkTheme : lightTheme
 
 const setImperativeTheming = (theme: Theme) => {
   SystemUI.setBackgroundColorAsync(theme.colors.background)
@@ -32,7 +54,7 @@ export const useThemeProvider = (initialTheme: ThemeContexts = undefined) => {
   }, [])
 
   const themeScheme = overrideTheme || colorScheme || "light"
-  const navigationTheme = themeScheme === "dark" ? DarkTheme : DefaultTheme
+  const navigationTheme = themeScheme === "dark" ? CombinedDarkTheme : CombinedDefaultTheme
 
   useEffect(() => {
     setImperativeTheming(themeContextToTheme(themeScheme))
@@ -48,7 +70,7 @@ export const useThemeProvider = (initialTheme: ThemeContexts = undefined) => {
 
 interface UseAppThemeValue {
   // The theme object from react-navigation
-  navTheme: typeof DefaultTheme
+  navTheme: typeof NavigationDefaultTheme
   // A function to set the theme context override (for switching modes)
   setThemeContextOverride: (newTheme: ThemeContexts) => void
   // The current theme object
@@ -76,7 +98,10 @@ export const useAppTheme = (): UseAppThemeValue => {
 
   const { themeScheme: overrideTheme, setThemeContextOverride } = context
 
-  const themeContext: ThemeContexts = useMemo(() => overrideTheme || (navTheme.dark ? "dark" : "light"), [overrideTheme, navTheme])
+  const themeContext: ThemeContexts = useMemo(
+    () => overrideTheme || (navTheme.dark ? "dark" : "light"),
+    [overrideTheme, navTheme],
+  )
 
   const themeVariant: Theme = useMemo(() => themeContextToTheme(themeContext), [themeContext])
 

@@ -8,7 +8,7 @@ export const $styles = {
   flexWrap: { flexWrap: "wrap" } as ViewStyle,
 
   container: {
-    paddingTop: spacing.lg + spacing.xl,
+    paddingTop: spacing.xl,
     paddingHorizontal: spacing.lg,
   } as ViewStyle,
 

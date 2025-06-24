@@ -89,28 +89,17 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
   )
 
   return (
-    <Screen
-      preset="auto"
-      contentContainerStyle={themed($screenContentContainer)}
-      safeAreaEdges={["bottom"]}
-    >
+    <Screen preset="auto" contentContainerStyle={themed($screenContentContainer)} safeAreaEdges={["bottom"]}>
       <AutoImage
         source={require("../../assets/images/intro-logo.png")}
         maxWidth={320}
         maxHeight={220}
         style={themed($logoStyle)}
       />
-      <Text
-        testID="register-heading"
-        text="Register an account"
-        preset="heading"
-        style={themed($logIn)}
-      />
+      <Text testID="register-heading" text="Register an account" preset="heading" style={themed($logIn)} />
       {/* Add space below heading */}
       <View style={{ height: themed(({ spacing }) => spacing.lg) }} />
-      {attemptsCount > 2 && (
-        <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />
-      )}
+      {attemptsCount > 2 && <Text tx="loginScreen:hint" size="sm" weight="light" style={themed($hint)} />}
       <View style={themed($fieldsContainer)}>
         <TextField
           value={username}
@@ -174,12 +163,8 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
       </View>
       <View style={themed($loginPromptContainer)}>
         <Text style={themed($loginPromptText)}>
-          Already have an account?{' '}
-          <Text
-            style={themed($loginPromptLink)}
-            onPress={() => navigation.navigate('Login')}
-            weight="bold"
-          >
+          Already have an account?{" "}
+          <Text style={themed($loginPromptLink)} onPress={() => navigation.navigate("Login")} weight="bold">
             Log in!
           </Text>
         </Text>
@@ -189,7 +174,7 @@ export const RegisterScreen: FC<RegisterScreenProps> = observer(function Registe
 })
 
 const $screenContentContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  flex: 1,
+  flexGrow: 1,
   justifyContent: "center",
   alignItems: "center",
   paddingVertical: spacing.xxl,
@@ -227,18 +212,18 @@ const $fieldsContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
 
 const $loginPromptContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
   marginTop: spacing.lg,
-  alignItems: 'center',
-  justifyContent: 'flex-end',
+  alignItems: "center",
+  justifyContent: "flex-end",
   flex: 0,
 })
 
 const $loginPromptText: ThemedStyle<TextStyle> = ({ colors, spacing }) => ({
   color: colors.text,
   fontSize: 15,
-  textAlign: 'center',
+  textAlign: "center",
 })
 
 const $loginPromptLink: ThemedStyle<TextStyle> = ({ colors }) => ({
   color: colors.palette.primary500,
-  textDecorationLine: 'underline',
+  textDecorationLine: "underline",
 })

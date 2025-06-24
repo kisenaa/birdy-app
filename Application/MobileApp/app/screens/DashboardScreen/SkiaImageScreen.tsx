@@ -38,12 +38,20 @@ export type YoloDetectionStateProps = {
   originalHeight: number
 }
 
-export function getScaledImageSize(originalWidth: number, originalHeight: number, maxWidth?: number, maxHeight?: number): [width: number, height: number] {
+export function getScaledImageSize(
+  originalWidth: number,
+  originalHeight: number,
+  maxWidth?: number,
+  maxHeight?: number,
+): [width: number, height: number] {
   const aspectRatio = originalWidth / originalHeight
 
   if (maxWidth && maxHeight) {
     const scale = Math.min(maxWidth / originalWidth, maxHeight / originalHeight)
-    return [PixelRatio.roundToNearestPixel(originalWidth * scale), PixelRatio.roundToNearestPixel(originalHeight * scale)]
+    return [
+      PixelRatio.roundToNearestPixel(originalWidth * scale),
+      PixelRatio.roundToNearestPixel(originalHeight * scale),
+    ]
   } else if (maxWidth) {
     return [maxWidth, PixelRatio.roundToNearestPixel(maxWidth / aspectRatio)]
   } else if (maxHeight) {
@@ -53,7 +61,15 @@ export function getScaledImageSize(originalWidth: number, originalHeight: number
   }
 }
 
-export function YoloDetectionCanvas({ imageUri, detections, classNames, originalWidth, originalHeight, maxWidth, maxHeight }: YoloDetectionCanvasProps) {
+export function YoloDetectionCanvas({
+  imageUri,
+  detections,
+  classNames,
+  originalWidth,
+  originalHeight,
+  maxWidth,
+  maxHeight,
+}: YoloDetectionCanvasProps) {
   const [scaledW, scaledH] = getScaledImageSize(originalWidth, originalHeight, maxWidth, maxHeight)
   const image = useImage(imageUri)
 
@@ -68,8 +84,22 @@ export function YoloDetectionCanvas({ imageUri, detections, classNames, original
         <SkiaImage image={image} x={0} y={0} width={scaledW} height={scaledH} />
         {detections.map((box, idx) => (
           <Fragment key={idx}>
-            <Rect x={box.x1 * scaleX} y={box.y1 * scaleY} width={(box.x2 - box.x1) * scaleX} height={(box.y2 - box.y1) * scaleY} color="lime" strokeWidth={3} style="stroke" />
-            <Text x={box.x1 * scaleX + 0} y={box.y1 * scaleY - 6} color="green" text={`${classNames[box.classId]} ${(box.score * 100).toFixed(1)}%`} font={font} />
+            <Rect
+              x={box.x1 * scaleX}
+              y={box.y1 * scaleY}
+              width={(box.x2 - box.x1) * scaleX}
+              height={(box.y2 - box.y1) * scaleY}
+              color="lime"
+              strokeWidth={3}
+              style="stroke"
+            />
+            <Text
+              x={box.x1 * scaleX + 0}
+              y={box.y1 * scaleY - 6}
+              color="green"
+              text={`${classNames[box.classId]} ${(box.score * 100).toFixed(1)}%`}
+              font={font}
+            />
           </Fragment>
         ))}
       </Canvas>

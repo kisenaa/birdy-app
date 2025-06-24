@@ -31,8 +31,15 @@ import { customFontsToLoad } from "./theme"
 import { KeyboardProvider } from "react-native-keyboard-controller"
 import { loadDateFnsLocale } from "./utils/formatDate"
 import { ActionSheetProvider } from "@expo/react-native-action-sheet"
-import { createInferenceSession, initSkia as classificationInitSkia } from "./services/onnx/ClassificationInference"
-import { createInferenceSession as CreateDetectioninferenceSession, createTFLiteInferenceSession, initSkia as detectionInitSkia } from "./services/onnx/DetectionInference"
+import {
+  createInferenceSession,
+  initSkia as classificationInitSkia,
+} from "./services/onnx/ClassificationInference"
+import {
+  createInferenceSession as CreateDetectioninferenceSession,
+  createTFLiteInferenceSession,
+  initSkia as detectionInitSkia,
+} from "./services/onnx/DetectionInference"
 
 export const NAVIGATION_PERSISTENCE_KEY = "NAVIGATION_STATE"
 
@@ -68,7 +75,11 @@ global.Buffer = Buffer
  * @returns {JSX.Element} The rendered `App` component.
  */
 export function App() {
-  const { initialNavigationState, onNavigationStateChange, isRestored: isNavigationStateRestored } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
+  const {
+    initialNavigationState,
+    onNavigationStateChange,
+    isRestored: isNavigationStateRestored,
+  } = useNavigationPersistence(storage, NAVIGATION_PERSISTENCE_KEY)
 
   const [areFontsLoaded, fontLoadError] = useFonts(customFontsToLoad)
   const [isI18nInitialized, setIsI18nInitialized] = useState(false)
@@ -135,8 +146,12 @@ export function App() {
     }
   }, [isSkiaLoaded])
 
+  /*
   useEffect(() => {
-    if (isDetectTFLiteInitialized) return
+    if (isDetectTFLiteInitialized) {
+      return
+    }
+    console.log("Initializing TFLite inference session...")
     createTFLiteInferenceSession()
       .then(() => {
         setIsDetectTFLiteInitialized(true)
@@ -147,7 +162,7 @@ export function App() {
         console.error("Error creating TFLite inference session:", e)
       })
   }, [isDetectTFLiteInitialized])
-
+  */
   const { rehydrated } = useInitialRootStore(() => {
     // This runs after the root store has been initialized and rehydrated.
 
@@ -169,8 +184,7 @@ export function App() {
     (!areFontsLoaded && !fontLoadError) ||
     !isSessionInitialized ||
     !isDetectedSessionInitialized ||
-    !isSkiaLoaded ||
-    !isDetectTFLiteInitialized
+    !isSkiaLoaded
   ) {
     return null
   }
@@ -185,7 +199,11 @@ export function App() {
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
       <KeyboardProvider>
         <ActionSheetProvider>
-          <AppNavigator linking={linking} initialState={initialNavigationState} onStateChange={onNavigationStateChange} />
+          <AppNavigator
+            linking={linking}
+            initialState={initialNavigationState}
+            onStateChange={onNavigationStateChange}
+          />
         </ActionSheetProvider>
       </KeyboardProvider>
     </SafeAreaProvider>

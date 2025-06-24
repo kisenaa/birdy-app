@@ -14,7 +14,8 @@ function addUsesNativeLibraryItemToMainApplication(
 
   if (mainApplication["uses-native-library"] !== undefined) {
     existingMetaDataItem = mainApplication["uses-native-library"].filter((e) => e.$["android:name"] === item.name)
-    if (existingMetaDataItem.length > 0 && existingMetaDataItem[0] !== undefined) existingMetaDataItem[0].$ = newItem.$
+    if (existingMetaDataItem.length > 0 && existingMetaDataItem[0] !== undefined)
+      existingMetaDataItem[0].$ = newItem.$
     else mainApplication["uses-native-library"].push(newItem)
   } else {
     mainApplication["uses-native-library"] = [newItem]

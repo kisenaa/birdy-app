@@ -18,7 +18,7 @@ module.exports = {
     "@typescript-eslint/ban-ts-comment": 0,
     "@typescript-eslint/no-explicit-any": 0,
     "@typescript-eslint/no-unused-vars": [
-      "error",
+      "warn",
       {
         argsIgnorePattern: "^_",
         varsIgnorePattern: "^_",
@@ -30,7 +30,7 @@ module.exports = {
     // eslint
     "no-use-before-define": 0,
     "no-restricted-imports": [
-      "error",
+      "warn",
       {
         paths: [
           // Prefer named exports from 'react' instead of importing `React`
@@ -56,6 +56,7 @@ module.exports = {
     "react/prop-types": 0,
     // react-native
     "react-native/no-raw-text": 0,
+    "react-native/no-inline-styles": "warn",
     // reactotron
     "reactotron/no-tron-in-production": "error",
     // eslint-config-standard overrides

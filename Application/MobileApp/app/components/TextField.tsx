@@ -175,11 +175,32 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
   useImperativeHandle(ref, () => input.current as TextInput)
 
   return (
-    <TouchableOpacity activeOpacity={1} style={$containerStyles} onPress={focusInput} accessibilityState={{ disabled }}>
-      {!!(label || labelTx) && <Text preset="formLabel" text={label} tx={labelTx} txOptions={labelTxOptions} {...LabelTextProps} style={themed($labelStyles)} />}
+    <TouchableOpacity
+      activeOpacity={1}
+      style={$containerStyles}
+      onPress={focusInput}
+      accessibilityState={{ disabled }}
+    >
+      {!!(label || labelTx) && (
+        <Text
+          preset="formLabel"
+          text={label}
+          tx={labelTx}
+          txOptions={labelTxOptions}
+          {...LabelTextProps}
+          style={themed($labelStyles)}
+        />
+      )}
 
       <View style={themed($inputWrapperStyles)}>
-        {!!LeftAccessory && <LeftAccessory style={themed($leftAccessoryStyle)} status={status} editable={!disabled} multiline={TextInputProps.multiline ?? false} />}
+        {!!LeftAccessory && (
+          <LeftAccessory
+            style={themed($leftAccessoryStyle)}
+            status={status}
+            editable={!disabled}
+            multiline={TextInputProps.multiline ?? false}
+          />
+        )}
 
         <TextInput
           ref={input}
@@ -192,10 +213,26 @@ export const TextField = forwardRef(function TextField(props: TextFieldProps, re
           style={themed($inputStyles)}
         />
 
-        {!!RightAccessory && <RightAccessory style={themed($rightAccessoryStyle)} status={status} editable={!disabled} multiline={TextInputProps.multiline ?? false} />}
+        {!!RightAccessory && (
+          <RightAccessory
+            style={themed($rightAccessoryStyle)}
+            status={status}
+            editable={!disabled}
+            multiline={TextInputProps.multiline ?? false}
+          />
+        )}
       </View>
 
-      {!!(helper || helperTx) && <Text preset="formHelper" text={helper} tx={helperTx} txOptions={helperTxOptions} {...HelperTextProps} style={themed($helperStyles)} />}
+      {!!(helper || helperTx) && (
+        <Text
+          preset="formHelper"
+          text={helper}
+          tx={helperTx}
+          txOptions={helperTxOptions}
+          {...HelperTextProps}
+          style={themed($helperStyles)}
+        />
+      )}
     </TouchableOpacity>
   )
 })

@@ -3,3 +3,5 @@ onlyBuiltDependencies:
   - nitro-codegen
   - react-native-nitro-modules
   - unrs-resolver
+patchedDependencies:
+  axios: patches/axios.patch

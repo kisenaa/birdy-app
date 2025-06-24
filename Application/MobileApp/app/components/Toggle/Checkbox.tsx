@@ -26,12 +26,23 @@ interface CheckboxInputProps extends BaseToggleInputProps<CheckboxToggleProps> {
  */
 export function Checkbox(props: CheckboxToggleProps) {
   const { icon, ...rest } = props
-  const checkboxInput = useCallback((toggleProps: CheckboxInputProps) => <CheckboxInput {...toggleProps} icon={icon} />, [icon])
+  const checkboxInput = useCallback(
+    (toggleProps: CheckboxInputProps) => <CheckboxInput {...toggleProps} icon={icon} />,
+    [icon],
+  )
   return <Toggle accessibilityRole="checkbox" {...rest} ToggleInput={checkboxInput} />
 }
 
 function CheckboxInput(props: CheckboxInputProps) {
-  const { on, status, disabled, icon = "check", outerStyle: $outerStyleOverride, innerStyle: $innerStyleOverride, detailStyle: $detailStyleOverride } = props
+  const {
+    on,
+    status,
+    disabled,
+    icon = "check",
+    outerStyle: $outerStyleOverride,
+    innerStyle: $innerStyleOverride,
+    detailStyle: $detailStyleOverride,
+  } = props
 
   const {
     theme: { colors },
@@ -47,18 +58,51 @@ function CheckboxInput(props: CheckboxInputProps) {
     }).start()
   }, [on])
 
-  const offBackgroundColor = [disabled && colors.palette.neutral400, status === "error" && colors.errorBackground, colors.palette.neutral200].filter(Boolean)[0]
+  const offBackgroundColor = [
+    disabled && colors.palette.neutral400,
+    status === "error" && colors.errorBackground,
+    colors.palette.neutral200,
+  ].filter(Boolean)[0]
 
-  const outerBorderColor = [disabled && colors.palette.neutral400, status === "error" && colors.error, !on && colors.palette.neutral800, colors.palette.secondary500].filter(Boolean)[0]
+  const outerBorderColor = [
+    disabled && colors.palette.neutral400,
+    status === "error" && colors.error,
+    !on && colors.palette.neutral800,
+    colors.palette.secondary500,
+  ].filter(Boolean)[0]
 
-  const onBackgroundColor = [disabled && colors.transparent, status === "error" && colors.errorBackground, colors.palette.secondary500].filter(Boolean)[0]
+  const onBackgroundColor = [
+    disabled && colors.transparent,
+    status === "error" && colors.errorBackground,
+    colors.palette.secondary500,
+  ].filter(Boolean)[0]
 
-  const iconTintColor = [disabled && colors.palette.neutral600, status === "error" && colors.error, colors.palette.accent100].filter(Boolean)[0]
+  const iconTintColor = [
+    disabled && colors.palette.neutral600,
+    status === "error" && colors.error,
+    colors.palette.accent100,
+  ].filter(Boolean)[0]
 
   return (
-    <View style={[$inputOuter, { backgroundColor: offBackgroundColor, borderColor: outerBorderColor }, $outerStyleOverride]}>
-      <Animated.View style={[$styles.toggleInner, { backgroundColor: onBackgroundColor }, $innerStyleOverride, { opacity: opacity.current }]}>
-        <Image source={icon ? iconRegistry[icon] : iconRegistry.check} style={[$checkboxDetail, !!iconTintColor && { tintColor: iconTintColor }, $detailStyleOverride]} />
+    <View
+      style={[
+        $inputOuter,
+        { backgroundColor: offBackgroundColor, borderColor: outerBorderColor },
+        $outerStyleOverride,
+      ]}
+    >
+      <Animated.View
+        style={[
+          $styles.toggleInner,
+          { backgroundColor: onBackgroundColor },
+          $innerStyleOverride,
+          { opacity: opacity.current },
+        ]}
+      >
+        <Image
+          source={icon ? iconRegistry[icon] : iconRegistry.check}
+          style={[$checkboxDetail, !!iconTintColor && { tintColor: iconTintColor }, $detailStyleOverride]}
+        />
       </Animated.View>
     </View>
   )

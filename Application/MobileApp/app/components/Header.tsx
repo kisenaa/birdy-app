@@ -189,7 +189,14 @@ export function Header(props: HeaderProps) {
         />
 
         {!!titleContent && (
-          <View style={[$titleWrapperPointerEvents, titleMode === "center" && themed($titleWrapperCenter), titleMode === "flex" && $titleWrapperFlex, $titleContainerStyleOverride]}>
+          <View
+            style={[
+              $titleWrapperPointerEvents,
+              titleMode === "center" && themed($titleWrapperCenter),
+              titleMode === "flex" && $titleWrapperFlex,
+              $titleContainerStyleOverride,
+            ]}
+          >
             <Text weight="medium" size="md" text={titleContent} style={[$title, $titleStyleOverride]} />
           </View>
         )}
@@ -223,7 +230,12 @@ function HeaderAction(props: HeaderActionProps) {
 
   if (content) {
     return (
-      <TouchableOpacity style={themed([$actionTextContainer, { backgroundColor }])} onPress={onPress} disabled={!onPress} activeOpacity={0.8}>
+      <TouchableOpacity
+        style={themed([$actionTextContainer, { backgroundColor }])}
+        onPress={onPress}
+        disabled={!onPress}
+        activeOpacity={0.8}
+      >
         <Text weight="medium" size="md" text={content} style={themed($actionText)} />
       </TouchableOpacity>
     )

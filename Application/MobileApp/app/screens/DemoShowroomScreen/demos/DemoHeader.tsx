@@ -35,21 +35,36 @@ export const DemoHeader: Demo = {
   name: "Header",
   description: "demoHeader:description",
   data: ({ theme, themed }) => [
-    <DemoUseCase name="demoHeader:useCase.actionIcons.name" description="demoHeader:useCase.actionIcons.description">
+    <DemoUseCase
+      name="demoHeader:useCase.actionIcons.name"
+      description="demoHeader:useCase.actionIcons.description"
+    >
       <Header titleTx="demoHeader:useCase.actionIcons.leftIconTitle" leftIcon="ladybug" safeAreaEdges={[]} />
       <DemoDivider size={24} />
       <Header titleTx="demoHeader:useCase.actionIcons.rightIconTitle" rightIcon="ladybug" safeAreaEdges={[]} />
       <DemoDivider size={24} />
-      <Header titleTx="demoHeader:useCase.actionIcons.bothIconsTitle" leftIcon="ladybug" rightIcon="ladybug" safeAreaEdges={[]} />
+      <Header
+        titleTx="demoHeader:useCase.actionIcons.bothIconsTitle"
+        leftIcon="ladybug"
+        rightIcon="ladybug"
+        safeAreaEdges={[]}
+      />
     </DemoUseCase>,
 
     <DemoUseCase name="demoHeader:useCase.actionText.name" description="demoHeader:useCase.actionText.description">
-      <Header titleTx="demoHeader:useCase.actionText.leftTxTitle" leftTx="demoShowroomScreen:demoHeaderTxExample" safeAreaEdges={[]} />
+      <Header
+        titleTx="demoHeader:useCase.actionText.leftTxTitle"
+        leftTx="demoShowroomScreen:demoHeaderTxExample"
+        safeAreaEdges={[]}
+      />
       <DemoDivider size={24} />
       <Header titleTx="demoHeader:useCase.actionText.rightTextTitle" rightText="Yay" safeAreaEdges={[]} />
     </DemoUseCase>,
 
-    <DemoUseCase name="demoHeader:useCase.customActionComponents.name" description="demoHeader:useCase.customActionComponents.description">
+    <DemoUseCase
+      name="demoHeader:useCase.customActionComponents.name"
+      description="demoHeader:useCase.customActionComponents.description"
+    >
       <Header
         titleTx="demoHeader:useCase.customActionComponents.customLeftActionTitle"
         titleMode="flex"
@@ -66,15 +81,36 @@ export const DemoHeader: Demo = {
     </DemoUseCase>,
 
     <DemoUseCase name="demoHeader:useCase.titleModes.name" description="demoHeader:useCase.titleModes.description">
-      <Header titleTx="demoHeader:useCase.titleModes.centeredTitle" leftIcon="ladybug" rightText="Hooray" safeAreaEdges={[]} />
+      <Header
+        titleTx="demoHeader:useCase.titleModes.centeredTitle"
+        leftIcon="ladybug"
+        rightText="Hooray"
+        safeAreaEdges={[]}
+      />
       <DemoDivider size={24} />
-      <Header titleTx="demoHeader:useCase.titleModes.flexTitle" titleMode="flex" leftIcon="ladybug" rightText="Hooray" safeAreaEdges={[]} />
+      <Header
+        titleTx="demoHeader:useCase.titleModes.flexTitle"
+        titleMode="flex"
+        leftIcon="ladybug"
+        rightText="Hooray"
+        safeAreaEdges={[]}
+      />
     </DemoUseCase>,
 
     <DemoUseCase name="demoHeader:useCase.styling.name" description="demoHeader:useCase.styling.description">
-      <Header titleTx="demoHeader:useCase.styling.styledTitle" titleStyle={themed($customTitle)} safeAreaEdges={[]} />
+      <Header
+        titleTx="demoHeader:useCase.styling.styledTitle"
+        titleStyle={themed($customTitle)}
+        safeAreaEdges={[]}
+      />
       <DemoDivider size={24} />
-      <Header titleTx="demoHeader:useCase.styling.styledWrapperTitle" titleStyle={themed($customWhiteTitle)} backgroundColor={theme.colors.error} style={{ height: 35 }} safeAreaEdges={[]} />
+      <Header
+        titleTx="demoHeader:useCase.styling.styledWrapperTitle"
+        titleStyle={themed($customWhiteTitle)}
+        backgroundColor={theme.colors.error}
+        style={{ height: 35 }}
+        safeAreaEdges={[]}
+      />
       <DemoDivider size={24} />
       <Header
         titleTx="demoHeader:useCase.styling.tintedIconsTitle"
