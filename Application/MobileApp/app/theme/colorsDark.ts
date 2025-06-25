@@ -47,4 +47,33 @@ export const colors = {
   separator: palette.neutral300,
   error: palette.angry500,
   errorBackground: palette.angry100,
+  // Add these missing Material Design colors
+  /**
+   * Primary color for main UI elements
+   */
+  primary: palette.primary500,
+  /**
+   * Text/content color on primary backgrounds
+   */
+  onPrimary: palette.neutral100,
+  /**
+   * Secondary color for supporting elements
+   */
+  secondary: palette.secondary500,
+  /**
+   * Text/content color on secondary backgrounds
+   */
+  onSecondary: palette.neutral100,
+  /**
+   * Surface color for cards, sheets, etc.
+   */
+  surface: palette.neutral100,
+  /**
+   * Text/content color on surface backgrounds
+   */
+  onSurface: palette.neutral800,
+  /**
+   * Outline color for borders and dividers
+   */
+  outline: palette.neutral400,
 } as const

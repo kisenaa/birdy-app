@@ -10,6 +10,7 @@ import { AppStackParamList, AppStackScreenProps } from "./AppNavigator"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { Home } from "@/screens/DashboardScreen/Home"
 import { History } from "@/screens/DashboardScreen/History"
+import { Icon as MdIcon } from "react-native-paper"
 
 export type DashboardTabParamList = {
   Home: undefined
@@ -72,15 +73,17 @@ export function DashboardNavigator() {
         component={History}
         options={{
           tabBarLabel: "Chatbot",
-          tabBarIcon: ({ focused }) => <Icon icon="history" color={focused ? colors.tint : colors.tintInactive} size={32} />,
+          tabBarIcon: ({ focused }) => <MdIcon source="robot" color={focused ? colors.tint : colors.tintInactive} size={32} />,
         }}
       />
       <Tab.Screen
         name="DemoCommunity"
         component={DemoCommunityScreen}
         options={{
-          tabBarLabel: translate("DashboardNavigator:communityTab"),
-          tabBarIcon: ({ focused }) => <Icon icon="community" color={focused ? colors.tint : colors.tintInactive} size={30} />,
+          tabBarLabel: "Encyclopedia",
+          tabBarIcon: ({ focused }) => (
+            <MdIcon source="book-open-variant" color={focused ? colors.tint : colors.tintInactive} size={30} />
+          ),
         }}
       />
       {/*

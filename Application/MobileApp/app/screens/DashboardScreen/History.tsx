@@ -7,13 +7,23 @@ import { $styles } from "../../theme"
 import type { ThemedStyle } from "@/theme"
 import { useAppTheme } from "@/utils/useAppTheme"
 import { fetchChatbotResponse } from "@/services/api/chatbotAPI"
+import { Avatar, Card, IconButton } from "react-native-paper"
+
+interface Message {
+  id: string
+  text: string
+  sender: "bot" | "user"
+  isTyping?: boolean
+}
 
 export const History: FC<DashboardTabScreenProps<"History">> = function History(_props) {
   const { themed, theme } = useAppTheme()
   const flatListRef = useRef<FlatList>(null)
   const inputRef = useRef<RNTextInput>(null)
   const [userInput, setUserInput] = useState("")
-  const [messages, setMessages] = useState([{ id: "1", text: "Hello, how can I help you?", sender: "bot" }])
+  const [messages, setMessages] = useState<Message[]>([
+    { id: "1", text: "Hello! I'm your AI assistant. How can I help you today? 😊", sender: "bot" },
+  ])
 
   const keyboard = useAnimatedKeyboard()
 
@@ -36,24 +46,50 @@ export const History: FC<DashboardTabScreenProps<"History">> = function History(
   const handleSendMessage = async () => {
     if (!userInput.trim()) return
 
-    const userMessage = { id: `${messages.length + 1}`, text: userInput, sender: "user" }
+    const userMessage: Message = { id: `${Date.now()}-user`, text: userInput, sender: "user" }
     setMessages((prev) => [...prev, userMessage])
     setUserInput("")
 
-    // Optionally show a loading message
-    const loadingMessage = { id: `${messages.length + 2}`, text: "Bot is typing...", sender: "bot" }
+    // Show typing indicator
+    const loadingMessage: Message = { id: `${Date.now()}-loading`, text: "Bot is typing...", sender: "bot", isTyping: true }
     setMessages((prev) => [...prev, loadingMessage])
 
     try {
       const botReply = await (await fetchChatbotResponse(userInput)).trim()
-      setMessages((prev) => prev.map((msg) => (msg.id === loadingMessage.id ? { ...msg, text: botReply } : msg)))
+      setMessages((prev) => prev.map((msg) => (msg.id === loadingMessage.id ? { ...msg, text: botReply, isTyping: false } : msg)))
     } catch (error) {
       console.log("Error fetching chatbot response:", error)
       setMessages((prev) =>
-        prev.map((msg) => (msg.id === loadingMessage.id ? { ...msg, text: "Sorry, I couldn't get a response." } : msg)),
+        prev.map((msg) =>
+          msg.id === loadingMessage.id
+            ? { ...msg, text: "Sorry, I couldn't get a response. Please try again! 😔", isTyping: false }
+            : msg,
+        ),
       )
     }
   }
+
+  const renderMessage = ({ item }: { item: Message }) => (
+    <View style={themed(item.sender === "bot" ? $botMessageContainer : $userMessageContainer)}>
+      {item.sender === "bot" && <Avatar.Icon size={36} icon="robot" style={themed($botAvatar)} />}
+
+      <Card style={themed(item.sender === "bot" ? $botCard : $userCard)}>
+        <Card.Content style={themed($cardContent)}>
+          {item.isTyping ? (
+            <View style={themed($typingIndicator)}>
+              <Text text="●" style={themed($typingDot)} />
+              <Text text="●" style={themed($typingDot)} />
+              <Text text="●" style={themed($typingDot)} />
+            </View>
+          ) : (
+            <Text text={item.text} style={themed(item.sender === "bot" ? $botText : $userText)} />
+          )}
+        </Card.Content>
+      </Card>
+
+      {item.sender === "user" && <Avatar.Icon size={36} icon="account" style={themed($userAvatar)} />}
+    </View>
+  )
 
   useEffect(() => {
     scrollToEnd()
@@ -62,38 +98,52 @@ export const History: FC<DashboardTabScreenProps<"History">> = function History(
   return (
     <View style={$styles.flex1}>
       <Screen preset="fixed" contentContainerStyle={[$styles.container, $styles.flex1]} safeAreaEdges={["top"]}>
-        <Text preset="heading" text="Chatbot" style={themed($title)} />
+        <View style={themed($header)}>
+          <Text preset="heading" text="AI Assistant" style={themed($title)} />
+          <View style={themed($statusIndicator)}>
+            <View style={themed($onlineDot)} />
+            <Text text="Online" style={themed($statusText)} />
+          </View>
+        </View>
 
         <FlatList
           ref={flatListRef}
           data={messages}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={themed(item.sender === "bot" ? $botBubble : $userBubble)}>
-              <Text text={item.text} style={themed($messageText)} />
-            </View>
-          )}
-          contentContainerStyle={[themed($chatContainer), { paddingBottom: 80 }]} // reserve space for input
+          renderItem={renderMessage}
+          contentContainerStyle={[themed($chatContainer), { paddingBottom: 100 }]}
           keyboardShouldPersistTaps="handled"
           keyboardDismissMode="none"
-          showsVerticalScrollIndicator
+          showsVerticalScrollIndicator={false}
           scrollEnabled
         />
       </Screen>
 
       <Animated.View style={[styles.inputBar, themed($inputContainer), inputBarStyle]}>
-        <TextInput
-          ref={inputRef}
-          value={userInput}
-          onChangeText={setUserInput}
-          onSubmitEditing={handleSendMessage}
-          placeholder="Type your message..."
-          style={themed($textInput)}
-          placeholderTextColor={theme.isDark ? "white" : "gray"}
-          blurOnSubmit={false}
-          returnKeyType="send"
-        />
-        <Button text="Send" onPress={handleSendMessage} preset="reversed" style={themed($button)} textStyle={themed($boldText)} />
+        <Card style={themed($inputCard)}>
+          <View style={themed($inputRow)}>
+            <TextInput
+              ref={inputRef}
+              value={userInput}
+              onChangeText={setUserInput}
+              onSubmitEditing={handleSendMessage}
+              placeholder="Type your message..."
+              style={themed($textInput)}
+              placeholderTextColor={theme.isDark ? "white" : "gray"}
+              returnKeyType="send"
+              multiline
+              maxLength={500}
+            />
+            <IconButton
+              icon="send"
+              size={20} // Slightly smaller
+              onPress={handleSendMessage}
+              disabled={!userInput.trim()}
+              iconColor={userInput.trim() ? theme.colors.tint : theme.colors.textDim}
+              style={themed($sendButton)}
+            />
+          </View>
+        </Card>
       </Animated.View>
     </View>
   )
@@ -109,63 +159,156 @@ const styles = StyleSheet.create({
 })
 
 // Themed styles
-const $title: ThemedStyle<TextStyle> = ({ spacing }) => ({
-  marginBottom: spacing.sm,
+const $header: ThemedStyle<ViewStyle> = ({ spacing, colors }) => ({
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  paddingHorizontal: spacing.md,
+  paddingVertical: spacing.sm,
+  backgroundColor: colors.surface,
+  borderBottomWidth: 1,
+  borderBottomColor: colors.outline + "20",
+  elevation: 2,
+  marginBottom: spacing.md,
+})
+
+const $headerAvatar: ThemedStyle<ViewStyle> = ({ colors }) => ({
+  backgroundColor: colors.primary,
+  marginRight: 8,
+})
+
+const $title: ThemedStyle<TextStyle> = ({ spacing, colors }) => ({
+  flex: 1,
   textAlign: "center",
+  color: colors.onSurface,
+  fontWeight: "600",
+})
+
+const $statusIndicator: ThemedStyle<ViewStyle> = () => ({
+  flexDirection: "row",
+  alignItems: "center",
+})
+
+const $onlineDot: ThemedStyle<ViewStyle> = () => ({
+  width: 8,
+  height: 8,
+  borderRadius: 4,
+  backgroundColor: "#4CAF50",
+  marginRight: 4,
+})
+
+const $statusText: ThemedStyle<TextStyle> = ({ colors }) => ({
+  fontSize: 12,
+  color: colors.onSurface + "80",
 })
 
 const $chatContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
-  paddingHorizontal: spacing.md,
-  paddingTop: spacing.md,
+  paddingHorizontal: spacing.xm,
+  paddingTop: spacing.sm,
 })
 
-const $botBubble: ThemedStyle<ViewStyle> = ({ spacing, colors }) => ({
-  backgroundColor: colors.palette.neutral300,
-  padding: spacing.md,
-  borderRadius: spacing.sm,
-  marginBottom: spacing.sm,
-  alignSelf: "flex-start",
+const $botMessageContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  flexDirection: "row",
+  alignItems: "flex-end",
+  marginBottom: spacing.md,
+  maxWidth: "85%",
 })
 
-const $userBubble: ThemedStyle<ViewStyle> = ({ spacing, colors }) => ({
-  backgroundColor: colors.palette.primary200,
-  padding: spacing.md,
-  borderRadius: spacing.sm,
-  marginBottom: spacing.sm,
+const $userMessageContainer: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  flexDirection: "row",
+  alignItems: "flex-end",
+  justifyContent: "flex-end",
+  marginBottom: spacing.md,
+  maxWidth: "80%",
   alignSelf: "flex-end",
 })
 
-const $messageText: ThemedStyle<TextStyle> = ({ colors }) => ({
-  color: colors.text,
+const $botAvatar: ThemedStyle<ViewStyle> = ({ colors, spacing }) => ({
+  backgroundColor: colors.primary,
+  marginRight: spacing.xs,
+})
+
+const $userAvatar: ThemedStyle<ViewStyle> = ({ colors, spacing }) => ({
+  backgroundColor: colors.secondary,
+  marginLeft: spacing.xs,
+})
+
+const $botCard: ThemedStyle<ViewStyle> = ({ colors }) => ({
+  backgroundColor: colors.surface,
+  elevation: 1,
+  flex: 1,
+})
+
+const $userCard: ThemedStyle<ViewStyle> = ({ colors }) => ({
+  backgroundColor: colors.primary,
+  elevation: 2,
+  flex: 1,
+})
+
+const $cardContent: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  paddingVertical: spacing.xs,
+  paddingHorizontal: spacing.sm,
+})
+
+const $botText: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.onSurface,
+  fontSize: 16,
+  lineHeight: 22,
+})
+
+const $userText: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.onPrimary,
+  fontSize: 16,
+  lineHeight: 22,
+})
+
+const $typingIndicator: ThemedStyle<ViewStyle> = () => ({
+  flexDirection: "row",
+  alignItems: "center",
+})
+
+const $typingDot: ThemedStyle<TextStyle> = ({ colors }) => ({
+  color: colors.onSurface + "60",
+  fontSize: 20,
+  marginHorizontal: 2,
 })
 
 const $inputContainer: ThemedStyle<ViewStyle> = ({ spacing, colors }) => ({
-  flexDirection: "row",
-  alignItems: "center",
-  paddingHorizontal: spacing.md,
+  paddingHorizontal: spacing.sm, // Reduced from spacing.md
   paddingVertical: spacing.sm,
   backgroundColor: colors.background,
-  borderTopWidth: 1,
+})
+
+const $inputCard: ThemedStyle<ViewStyle> = ({ colors }) => ({
+  backgroundColor: colors.palette.neutral100,
+  elevation: 0, // Remove elevation for cleaner look
+  borderRadius: 14, // More rounded like original
+  borderWidth: 1,
   borderColor: colors.palette.neutral300,
 })
 
-const $textInput: ThemedStyle<ViewStyle> = ({ colors, spacing }) => ({
+const $inputRow: ThemedStyle<ViewStyle> = ({ spacing }) => ({
+  flexDirection: "row",
+  alignItems: "center", // Changed from flex-end to center
+  paddingLeft: spacing.md, // More padding on left
+  paddingRight: spacing.xs, // Less padding on right for send button
+  paddingVertical: spacing.xs,
+  minHeight: 50, // Ensure consistent height
+})
+
+const $textInput: ThemedStyle<TextStyle> = ({ colors, spacing }) => ({
   flex: 1,
-  borderWidth: 1,
-  borderColor: colors.palette.neutral300,
-  borderRadius: spacing.sm,
-  padding: spacing.sm,
-  marginRight: spacing.sm,
   color: colors.text,
+  fontSize: 16,
+  lineHeight: 20,
+  maxHeight: 100,
+  paddingVertical: spacing.sm,
+  paddingHorizontal: 0, // Remove horizontal padding since container handles it
+  textAlignVertical: "center",
 })
 
-const $button: ThemedStyle<ViewStyle> = ({ colors, spacing }) => ({
-  borderWidth: 1,
-  borderColor: colors.palette.neutral300,
-  borderRadius: spacing.sm,
-  padding: spacing.sm,
-})
-
-const $boldText: ThemedStyle<TextStyle> = () => ({
-  fontWeight: "bold",
+const $sendButton: ThemedStyle<ViewStyle> = () => ({
+  margin: 0,
+  backgroundColor: "rgba(0,0,0,0.05)", // Subtle background
+  borderRadius: 20,
 })

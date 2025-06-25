@@ -45,6 +45,7 @@ wrapped.server = {
 }
 
 wrapped.resolver.sourceExts.push("cjs")
+wrapped.resolver.assetExts.push("png", "jpg", "jpeg")
 wrapped.resolver.assetExts.push("onnx", "ort", "tflite", "tfl")
 
 module.exports = wrapped
